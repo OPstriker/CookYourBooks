@@ -1,0 +1,337 @@
+{
+  "id": "0699c200-66ae-4cbb-bddb-1ed5ecc7e0e2",
+  "title": "Bulgogi",
+  "servings": {
+    "amount": 4,
+    "description": "servings"
+  },
+  "ingredients": [
+    {
+      "type": "measured",
+      "name": "beef sirloin",
+      "quantity": {
+        "type": "exact",
+        "amount": 1.0,
+        "unit": "POUND"
+      },
+      "preparation": "thinly sliced",
+      "notes": null
+    },
+    {
+      "type": "measured",
+      "name": "soy sauce",
+      "quantity": {
+        "type": "exact",
+        "amount": 4.0,
+        "unit": "TABLESPOON"
+      },
+      "preparation": null,
+      "notes": null
+    },
+    {
+      "type": "measured",
+      "name": "sugar",
+      "quantity": {
+        "type": "exact",
+        "amount": 2.0,
+        "unit": "TABLESPOON"
+      },
+      "preparation": null,
+      "notes": null
+    },
+    {
+      "type": "measured",
+      "name": "sesame oil",
+      "quantity": {
+        "type": "exact",
+        "amount": 2.0,
+        "unit": "TABLESPOON"
+      },
+      "preparation": null,
+      "notes": null
+    },
+    {
+      "type": "measured",
+      "name": "garlic",
+      "quantity": {
+        "type": "exact",
+        "amount": 4.0,
+        "unit": "WHOLE"
+      },
+      "preparation": "minced",
+      "notes": "cloves"
+    },
+    {
+      "type": "measured",
+      "name": "ginger",
+      "quantity": {
+        "type": "exact",
+        "amount": 1.0,
+        "unit": "TEASPOON"
+      },
+      "preparation": "grated",
+      "notes": null
+    },
+    {
+      "type": "measured",
+      "name": "Asian pear",
+      "quantity": {
+        "type": "fractional",
+        "whole": 0,
+        "numerator": 1,
+        "denominator": 2,
+        "unit": "WHOLE"
+      },
+      "preparation": "grated",
+      "notes": null
+    },
+    {
+      "type": "measured",
+      "name": "green onions",
+      "quantity": {
+        "type": "exact",
+        "amount": 3.0,
+        "unit": "WHOLE"
+      },
+      "preparation": "sliced",
+      "notes": null
+    },
+    {
+      "type": "vague",
+      "name": "sesame seeds",
+      "description": "for garnish",
+      "preparation": null,
+      "notes": null
+    },
+    {
+      "type": "vague",
+      "name": "black pepper",
+      "description": "to taste",
+      "preparation": null,
+      "notes": null
+    }
+  ],
+  "instructions": [
+    {
+      "stepNumber": 1,
+      "text": "Combine soy sauce, sugar, sesame oil, garlic, ginger, and grated pear in a large bowl to make the marinade",
+      "ingredientRefs": [
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "soy sauce",
+            "quantity": {
+              "type": "exact",
+              "amount": 4.0,
+              "unit": "TABLESPOON"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 4.0,
+            "unit": "TABLESPOON"
+          }
+        },
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "sugar",
+            "quantity": {
+              "type": "exact",
+              "amount": 2.0,
+              "unit": "TABLESPOON"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 2.0,
+            "unit": "TABLESPOON"
+          }
+        },
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "sesame oil",
+            "quantity": {
+              "type": "exact",
+              "amount": 2.0,
+              "unit": "TABLESPOON"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 2.0,
+            "unit": "TABLESPOON"
+          }
+        },
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "garlic",
+            "quantity": {
+              "type": "exact",
+              "amount": 4.0,
+              "unit": "WHOLE"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 4.0,
+            "unit": "WHOLE"
+          }
+        },
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "ginger",
+            "quantity": {
+              "type": "exact",
+              "amount": 1.0,
+              "unit": "TEASPOON"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 1.0,
+            "unit": "TEASPOON"
+          }
+        },
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "Asian pear",
+            "quantity": {
+              "type": "fractional",
+              "whole": 0,
+              "numerator": 1,
+              "denominator": 2,
+              "unit": "WHOLE"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "fractional",
+            "whole": 0,
+            "numerator": 1,
+            "denominator": 2,
+            "unit": "WHOLE"
+          }
+        }
+      ]
+    },
+    {
+      "stepNumber": 2,
+      "text": "Add sliced beef to the marinade, mix well and refrigerate for at least 30 minutes",
+      "ingredientRefs": [
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "beef sirloin",
+            "quantity": {
+              "type": "exact",
+              "amount": 1.0,
+              "unit": "POUND"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 1.0,
+            "unit": "POUND"
+          }
+        }
+      ]
+    },
+    {
+      "stepNumber": 3,
+      "text": "Heat a pan or grill over high heat until very hot",
+      "ingredientRefs": []
+    },
+    {
+      "stepNumber": 4,
+      "text": "Cook marinated beef for 3-4 minutes, stirring occasionally, until caramelized and cooked through",
+      "ingredientRefs": [
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "beef sirloin",
+            "quantity": {
+              "type": "exact",
+              "amount": 1.0,
+              "unit": "POUND"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 1.0,
+            "unit": "POUND"
+          }
+        }
+      ]
+    },
+    {
+      "stepNumber": 5,
+      "text": "Garnish with sliced green onions, sesame seeds, and black pepper",
+      "ingredientRefs": [
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "green onions",
+            "quantity": {
+              "type": "exact",
+              "amount": 3.0,
+              "unit": "WHOLE"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 3.0,
+            "unit": "WHOLE"
+          }
+        },
+        {
+          "ingredient": {
+            "type": "vague",
+            "name": "sesame seeds",
+            "description": null,
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": null
+        },
+        {
+          "ingredient": {
+            "type": "vague",
+            "name": "black pepper",
+            "description": null,
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": null
+        }
+      ]
+    },
+    {
+      "stepNumber": 6,
+      "text": "Serve hot with steamed rice",
+      "ingredientRefs": []
+    }
+  ],
+  "conversionRules": []
+}

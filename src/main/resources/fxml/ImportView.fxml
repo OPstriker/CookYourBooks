@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.layout.VBox?>
+
+<!--
+  ImportView.fxml — Import Interface for CookYourBooks
+
+  LAYOUT OVERVIEW
+  ───────────────
+  The root VBox stacks four "state panes" on top of each other. At any given time only one
+  pane is visible and managed — the controller binds both `visible` and `managed` on each
+  pane to the ViewModel's current state (via BooleanBindings in ImportViewController).
+
+  WHY BIND BOTH `visible` AND `managed`?
+  ───────────────────────────────────────
+  - visible=false   → hides the node but it still takes up layout space (blank gap remains)
+  - managed=false   → removes the node from layout entirely; sibling nodes fill the gap
+  Both must be set to false together. See ImportViewController.bindPaneVisibility() for the
+  Bindings.equal() calls that do this automatically whenever the ViewModel state changes.
+
+  PANES
+  ─────
+  1. idlePane       — user picks a target collection and an image file (IDLE state)
+  2. processingPane — spinner + Cancel while OCR runs in the background (PROCESSING state)
+  3. reviewPane     — embeds the full RecipeEditorView for pre-save editing (REVIEW state)
+  4. errorPane      — shows the OCR error message and a "Try Again" button (ERROR state)
+
+  REVIEW PANE — EMBEDDED RECIPE EDITOR
+  ─────────────────────────────────────
+  The reviewPane no longer contains inline title/ingredient editing widgets. Instead it holds
+  an empty VBox (editorContainer) into which ImportViewController programmatically inserts
+  the fully loaded RecipeEditorView.fxml node. This gives the user the complete Recipe Editor
+  experience (reorder ingredients, edit instructions, etc.) before saving. The embedded
+  editor's ViewModel (RecipeEditorViewModelImpl) is pre-populated via loadDraft() when the
+  Import VM transitions to REVIEW state. When the embedded editor saves successfully, its
+  statusMessage listener calls vm.acceptImport() to return Import to IDLE.
+
+  fx:id NAMING
+  ────────────
+  Every node that the controller needs to reference has an fx:id attribute. The controller
+  declares an @FXML field with the same name — FXMLLoader injects the node automatically.
+  Nodes that are purely cosmetic (e.g. the title Label, separator Labels) have no fx:id.
+
+  fx:controller
+  ─────────────
+  The fx:controller attribute tells FXMLLoader which class to instantiate as the controller.
+  However, CookYourBooksGuiApp overrides this with setControllerFactory so it can pass a
+  pre-constructed ImportViewController (which requires the ViewModel in its constructor).
+  FXMLLoader calls the factory instead of the default no-arg constructor.
+-->
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="app.cookyourbooks.gui.view.ImportViewController"
+      spacing="16"
+      maxWidth="Infinity"
+      maxHeight="Infinity">
+    <padding>
+        <Insets top="20" right="24" bottom="20" left="24"/>
+    </padding>
+
+    <!-- Screen title — purely cosmetic, no fx:id needed -->
+    <Label text="Import Recipe" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         IDLE PANE — shown when state == IDLE
+         The user selects a target collection and then picks an image file.
+         visibility/managed are bound in ImportViewController.bindPaneVisibility().
+         ═══════════════════════════════════════════════════════════════════ -->
+    <VBox fx:id="idlePane" spacing="12">
+        <Label text="Select an image to import a recipe via OCR."/>
+
+        <!-- Step 1: pick a collection FIRST — the file button stays disabled until this is set -->
+        <Label text="Step 1 — Choose a target collection:"/>
+        <ComboBox fx:id="collectionComboBox"
+                  promptText="Choose a collection..."
+                  maxWidth="Infinity"/>
+
+        <!-- Hint shown when no collection is selected yet.
+             Visibility is bound in ImportViewController.bindCollectionCombos(). -->
+        <Label fx:id="collectionHintLabel"
+               text="⚠  Please select a collection before choosing an image."
+               wrapText="true"
+               style="-fx-text-fill: #e67e22; -fx-font-size: 12;"/>
+
+        <!-- Step 2: choose the image file — disabled until a collection is selected.
+             The disableProperty binding is set in ImportViewController.bindButtons(). -->
+        <Label text="Step 2 — Choose a recipe image:"/>
+        <Button fx:id="selectFileButton"
+                text="Choose Image File..."
+                maxWidth="Infinity"/>
+    </VBox>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         PROCESSING PANE — shown when state == PROCESSING
+         Displays a spinner and the current status message while OCR runs
+         on the background thread. The Cancel button calls vm.cancelImport().
+         ═══════════════════════════════════════════════════════════════════ -->
+    <VBox fx:id="processingPane" spacing="12" alignment="CENTER">
+        <!-- Indeterminate spinner — animates automatically while visible -->
+        <ProgressIndicator fx:id="progressIndicator" maxWidth="60" maxHeight="60"/>
+        <!-- Bound to vm.statusMessageProperty() — shows "Extracting recipe..." -->
+        <Label fx:id="statusLabel" style="-fx-font-size: 14;"/>
+        <!-- Calls vm.cancelImport(); see ImportViewModelImpl.cancelImport() for why it
+             must manually set state instead of relying on the onFailure callback. -->
+        <Button fx:id="cancelButton" text="Cancel"/>
+    </VBox>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         REVIEW PANE — shown when state == REVIEW
+         Contains the embedded RecipeEditorView (added programmatically by
+         ImportViewController) and a Discard button.
+
+         WHY NO INLINE EDITOR WIDGETS?
+         The old reviewPane had its own titleField, ingredientListView, and
+         save button. They have been replaced by the full RecipeEditorView
+         embedded in editorContainer. This avoids duplicating editing logic
+         and gives the user the same editor they see in the Library view —
+         including ingredient reorder, instructions, and validation.
+
+         FLOW:
+         1. Import VM transitions to REVIEW → ImportViewController calls
+            editorVm.loadDraft(recipe, collectionId) to pre-populate the editor.
+         2. User edits in the embedded editor, then clicks "Save".
+         3. RecipeEditorViewModelImpl.saveDraft() calls
+            librarianService.saveRecipe() to persist the recipe in the repo
+            AND assign it to the selected collection.
+         4. statusMessage becomes "Saved successfully." → ImportViewController
+            listener calls vm.acceptImport() → state returns to IDLE.
+         ═══════════════════════════════════════════════════════════════════ -->
+    <VBox fx:id="reviewPane" spacing="12" VBox.vgrow="ALWAYS">
+        <Label text="Review &amp; Edit Recipe"
+               style="-fx-font-size: 16; -fx-font-weight: bold;"/>
+
+        <!-- The embedded RecipeEditorView node is inserted here at runtime by
+             ImportViewController.initialize(). Using an empty VBox as a named
+             container (editorContainer) keeps the FXML layout stable and lets
+             the controller add the view as a child without knowing FXML internals. -->
+        <VBox fx:id="editorContainer" VBox.vgrow="ALWAYS"/>
+    </VBox>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SUCCESS PANE — shown when state == SUCCESS
+         Displayed after the embedded Recipe Editor saves the recipe.
+         "Return to Library" navigates to the Library view and resets to IDLE.
+         "Import Another" stays on the Import view and resets to IDLE.
+         ═══════════════════════════════════════════════════════════════════ -->
+    <VBox fx:id="successPane" spacing="16" alignment="CENTER">
+        <!-- Green checkmark title to make the success state immediately recognisable -->
+        <Label text="✓ Recipe Imported Successfully!"
+               style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #2e7d32;"/>
+        <!-- Confirmation message — the Library view will auto-refresh when the user navigates there -->
+        <Label text="Your recipe has been saved to your collection."
+               wrapText="true"
+               style="-fx-font-size: 14; -fx-text-fill: #555555;"/>
+        <!-- Return to Library: calls vm.returnToLibrary() to reset state AND navigates to Library view -->
+        <Button fx:id="returnToLibraryButton"
+                text="Return to Library"
+                style="-fx-base: #4caf50;"
+                maxWidth="200"/>
+        <!-- Import Another: resets to IDLE and stays on the Import view for the next image -->
+        <Button fx:id="importAnotherButton"
+                text="Import Another Recipe"
+                maxWidth="200"/>
+    </VBox>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         ERROR PANE — shown when state == ERROR
+         Displays the exception message from the failed OCR call. The "Try
+         Again" button calls vm.resetToIdle() to return to IDLE state.
+         ═══════════════════════════════════════════════════════════════════ -->
+    <VBox fx:id="errorPane" spacing="12">
+        <Label text="Import Failed"
+               style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #c62828;"/>
+        <!-- Bound to vm.errorMessageProperty() — shows the OcrException message. -->
+        <Label fx:id="errorLabel"
+               wrapText="true"
+               style="-fx-text-fill: #b71c1c;"/>
+        <!-- Calls vm.resetToIdle() — clears errorMessage and returns to IDLE. -->
+        <Button fx:id="retryButton" text="Try Again"/>
+    </VBox>
+
+</VBox>

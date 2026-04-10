@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<!--
+  Library View — browse and manage recipe collections.
+
+  Layout (Apple HIG-inspired source-list pattern):
+    top    — filter bar + loading spinner
+    center — SplitPane: collection list (left) | recipe list (right)
+    bottom — undo notification bar (visible only after a delete)
+-->
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+    fx:controller="app.cookyourbooks.gui.view.LibraryViewController"
+    styleClass="library-root">
+
+    <!-- ── Top: filter bar ── -->
+    <top>
+        <HBox styleClass="library-toolbar" alignment="CENTER_LEFT" spacing="8">
+            <padding>
+                <Insets top="10" right="16" bottom="10" left="16" />
+            </padding>
+            <TextField fx:id="filterField"
+                id="filterField"
+                promptText="Filter collections…"
+                styleClass="library-filter"
+                HBox.hgrow="ALWAYS" />
+            <ProgressIndicator fx:id="loadingIndicator"
+                id="loadingIndicator"
+                prefWidth="20"
+                prefHeight="20" />
+        </HBox>
+    </top>
+
+    <!-- ── Center: split pane ── -->
+    <center>
+        <SplitPane dividerPositions="0.38" styleClass="library-split">
+
+            <!-- Left pane: collection list + action buttons -->
+            <VBox styleClass="library-pane" spacing="8" minWidth="180">
+                <padding>
+                    <Insets top="12" right="12" bottom="12" left="12" />
+                </padding>
+                <Label text="COLLECTIONS" styleClass="library-pane-title" />
+                <ListView fx:id="collectionListView"
+                    id="collectionListView"
+                    styleClass="library-list"
+                    VBox.vgrow="ALWAYS" />
+                <HBox spacing="8">
+                    <Button text="New Collection"
+                        styleClass="library-btn-primary"
+                        onAction="#onCreateCollection"
+                        HBox.hgrow="ALWAYS"
+                        maxWidth="Infinity" />
+                    <Button fx:id="deleteButton"
+                        id="deleteButton"
+                        text="Delete"
+                        styleClass="library-btn-danger"
+                        onAction="#onDeleteCollection" />
+                </HBox>
+            </VBox>
+
+            <!-- Right pane: recipe list -->
+            <VBox styleClass="library-pane" spacing="8">
+                <padding>
+                    <Insets top="12" right="12" bottom="12" left="12" />
+                </padding>
+                <Label text="RECIPES" styleClass="library-pane-title" />
+                <ListView fx:id="recipeListView"
+                    id="recipeListView"
+                    styleClass="library-list"
+                    VBox.vgrow="ALWAYS" />
+                <HBox spacing="8">
+                    <Button fx:id="openRecipeButton"
+                        id="openRecipeButton"
+                        text="Open Recipe"
+                        styleClass="library-btn-primary"
+                        onAction="#onOpenRecipe"
+                        HBox.hgrow="ALWAYS"
+                        maxWidth="Infinity" />
+                    <Button fx:id="deleteRecipeButton"
+                        id="deleteRecipeButton"
+                        text="Delete"
+                        styleClass="library-btn-danger"
+                        onAction="#onDeleteRecipe" />
+                </HBox>
+            </VBox>
+
+        </SplitPane>
+    </center>
+
+    <!-- ── Bottom: undo notification bar ── -->
+    <bottom>
+        <HBox fx:id="undoBar"
+            id="undoBar"
+            styleClass="library-undo-bar"
+            alignment="CENTER_LEFT"
+            spacing="12"
+            visible="false"
+            managed="false">
+            <padding>
+                <Insets top="10" right="16" bottom="10" left="16" />
+            </padding>
+            <Label fx:id="undoLabel"
+                id="undoLabel"
+                styleClass="library-undo-label"
+                HBox.hgrow="ALWAYS" />
+            <Button id="undoButton"
+                text="Undo"
+                styleClass="library-btn-undo"
+                onAction="#onUndo" />
+        </HBox>
+    </bottom>
+
+</BorderPane>

@@ -1,0 +1,1084 @@
+{
+  "collections" : [ {
+    "type" : "personal",
+    "id" : "537c4365-b108-436a-923c-65a19ece4fc4",
+    "title" : "test",
+    "recipes" : [ {
+      "id" : "aca340bc-4faf-4aef-8d6c-5c80b8a2f69f",
+      "title" : "Guacamole",
+      "servings" : null,
+      "ingredients" : [ {
+        "type" : "vague",
+        "name" : "avocados",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "limes",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "ground cumin",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "ripe plum tomatoes",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "red onion",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "garlic",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "jalapenos",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "fresh cilantro",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      } ],
+      "instructions" : [ ],
+      "conversionRules" : [ ]
+    }, {
+      "id" : "53c0310d-3d33-4ea9-aa32-2336cfbcadf0",
+      "title" : "Mapo Tofu",
+      "servings" : null,
+      "ingredients" : [ {
+        "type" : "vague",
+        "name" : "ground pork",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "soy sauce",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "Shaoxing cooking wine",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "cornstarch",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "white pepper powder",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "spicy doubanjiang (la doubanjiang)",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "dou-chi",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "chopped scallions white and green separated",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "garlic cloves",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "minced ginger",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "chicken broth",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "soft tofu",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "Sichuan peppercorns",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      } ],
+      "instructions" : [ ],
+      "conversionRules" : [ ]
+    }, {
+      "id" : "f192cf60-9192-45cc-aa43-b65460830733",
+      "title" : "Pumpkin Soup",
+      "servings" : null,
+      "ingredients" : [ {
+        "type" : "vague",
+        "name" : "Butter",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "Onions",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "Garlic",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "Pumpkin",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "Havy Cream",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "Salt",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "Pepper",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      } ],
+      "instructions" : [ ],
+      "conversionRules" : [ ]
+    }, {
+      "id" : "f53b8d5d-c3b6-40be-9de2-386faf4da61a",
+      "title" : "Amaretti Cookies",
+      "servings" : null,
+      "ingredients" : [ {
+        "type" : "vague",
+        "name" : "egg whites",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "almond flour",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "granulated sugar",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "salt",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "vanilla extract",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "almond extract",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "powdered sugar",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      } ],
+      "instructions" : [ ],
+      "conversionRules" : [ ]
+    }, {
+      "id" : "9a4c46c0-2ae5-4c88-b2e6-c5cddbafbbb9",
+      "title" : "Dumplings",
+      "servings" : null,
+      "ingredients" : [ {
+        "type" : "vague",
+        "name" : "ground pork",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "cloves garlic",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "large egg",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "finely chopped Chinese chives",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "soy sauce",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "sesame oil",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "fresh ginger",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "dumpling wrappers",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "vegetable oil for frying",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      } ],
+      "instructions" : [ ],
+      "conversionRules" : [ ]
+    }, {
+      "id" : "fee887d3-5af5-4a42-83ce-7083ca3b626f",
+      "title" : "Dumplings",
+      "servings" : null,
+      "ingredients" : [ {
+        "type" : "vague",
+        "name" : "ground pork",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "garlic",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "egg",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "Chinese chives",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "soy sauce",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "sesame oil",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "fresh ginger",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "dumpling wrappers",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "vegetable oil",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      } ],
+      "instructions" : [ ],
+      "conversionRules" : [ ]
+    }, {
+      "id" : "9821e8a1-8740-45db-9812-54b6b71f2df4",
+      "title" : "Avocado Toast",
+      "servings" : null,
+      "ingredients" : [ {
+        "type" : "vague",
+        "name" : "milk",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "butter",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "pumpkin",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "sugar",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "cinnamon",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "salt",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "thyme",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "oat milk",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "ground cinnamon",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "salt",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      } ],
+      "instructions" : [ ],
+      "conversionRules" : [ ]
+    }, {
+      "id" : "8f6b586d-9ed9-463c-aff3-92897286cc31",
+      "title" : "Scrambled Eggs",
+      "servings" : null,
+      "ingredients" : [ {
+        "type" : "vague",
+        "name" : "egg",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "butter",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      } ],
+      "instructions" : [ ],
+      "conversionRules" : [ ]
+    }, {
+      "id" : "b4f05bad-2d88-4813-9cd3-78d2c03e97c0",
+      "title" : "Best Buttermilk Pancakes",
+      "servings" : null,
+      "ingredients" : [ {
+        "type" : "vague",
+        "name" : "all-purpose flour",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "sugar",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "baking powder",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "baking soda",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "salt",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "buttermilk",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "eggs",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "vanilla extract",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "unsalted butter",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      } ],
+      "instructions" : [ ],
+      "conversionRules" : [ ]
+    }, {
+      "id" : "f2f5357e-ca5d-4371-b1c0-dc3fcc6dd455",
+      "title" : "Best Buttermilk Pancakes (with instructions)",
+      "servings" : null,
+      "ingredients" : [ {
+        "type" : "vague",
+        "name" : "all-purpose flour",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "sugar",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "baking powder",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "baking soda",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "salt",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "buttermilk",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "eggs",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "vanilla extract",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "unsalted butter",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      } ],
+      "instructions" : [ {
+        "stepNumber" : 1,
+        "text" : "In a large bowl, whisk together flour, sugar, baking powder, baking soda, and salt, until well-combined.",
+        "ingredientRefs" : [ {
+          "ingredient" : {
+            "type" : "measured",
+            "name" : "all-purpose flour",
+            "quantity" : {
+              "type" : "exact",
+              "amount" : 2.0,
+              "unit" : "CUP"
+            },
+            "preparation" : null,
+            "notes" : null
+          },
+          "quantity" : {
+            "type" : "exact",
+            "amount" : 2.0,
+            "unit" : "CUP"
+          }
+        }, {
+          "ingredient" : {
+            "type" : "measured",
+            "name" : "sugar",
+            "quantity" : {
+              "type" : "exact",
+              "amount" : 3.0,
+              "unit" : "TABLESPOON"
+            },
+            "preparation" : null,
+            "notes" : null
+          },
+          "quantity" : {
+            "type" : "exact",
+            "amount" : 3.0,
+            "unit" : "TABLESPOON"
+          }
+        }, {
+          "ingredient" : {
+            "type" : "measured",
+            "name" : "baking powder",
+            "quantity" : {
+              "type" : "exact",
+              "amount" : 2.0,
+              "unit" : "TEASPOON"
+            },
+            "preparation" : null,
+            "notes" : null
+          },
+          "quantity" : {
+            "type" : "exact",
+            "amount" : 2.0,
+            "unit" : "TEASPOON"
+          }
+        }, {
+          "ingredient" : {
+            "type" : "measured",
+            "name" : "baking soda",
+            "quantity" : {
+              "type" : "fractional",
+              "whole" : 0,
+              "numerator" : 1,
+              "denominator" : 2,
+              "unit" : "TEASPOON"
+            },
+            "preparation" : null,
+            "notes" : null
+          },
+          "quantity" : {
+            "type" : "fractional",
+            "whole" : 0,
+            "numerator" : 1,
+            "denominator" : 2,
+            "unit" : "TEASPOON"
+          }
+        }, {
+          "ingredient" : {
+            "type" : "measured",
+            "name" : "salt",
+            "quantity" : {
+              "type" : "fractional",
+              "whole" : 0,
+              "numerator" : 1,
+              "denominator" : 2,
+              "unit" : "TEASPOON"
+            },
+            "preparation" : null,
+            "notes" : null
+          },
+          "quantity" : {
+            "type" : "fractional",
+            "whole" : 0,
+            "numerator" : 1,
+            "denominator" : 2,
+            "unit" : "TEASPOON"
+          }
+        } ]
+      }, {
+        "stepNumber" : 2,
+        "text" : "In a separate bowl, whisk together buttermilk, eggs, and vanilla.",
+        "ingredientRefs" : [ {
+          "ingredient" : {
+            "type" : "measured",
+            "name" : "buttermilk",
+            "quantity" : {
+              "type" : "fractional",
+              "whole" : 2,
+              "numerator" : 1,
+              "denominator" : 4,
+              "unit" : "CUP"
+            },
+            "preparation" : null,
+            "notes" : null
+          },
+          "quantity" : {
+            "type" : "fractional",
+            "whole" : 2,
+            "numerator" : 1,
+            "denominator" : 4,
+            "unit" : "CUP"
+          }
+        }, {
+          "ingredient" : {
+            "type" : "measured",
+            "name" : "eggs",
+            "quantity" : {
+              "type" : "exact",
+              "amount" : 2.0,
+              "unit" : "WHOLE"
+            },
+            "preparation" : null,
+            "notes" : null
+          },
+          "quantity" : {
+            "type" : "exact",
+            "amount" : 2.0,
+            "unit" : "WHOLE"
+          }
+        }, {
+          "ingredient" : {
+            "type" : "measured",
+            "name" : "vanilla extract",
+            "quantity" : {
+              "type" : "exact",
+              "amount" : 1.0,
+              "unit" : "TEASPOON"
+            },
+            "preparation" : null,
+            "notes" : null
+          },
+          "quantity" : {
+            "type" : "exact",
+            "amount" : 1.0,
+            "unit" : "TEASPOON"
+          }
+        } ]
+      } ],
+      "conversionRules" : [ ]
+    }, {
+      "id" : "dad60e39-f4a2-4e10-8d37-096503fc1d17",
+      "title" : "Chocolate Chip Cookies",
+      "servings" : null,
+      "ingredients" : [ {
+        "type" : "vague",
+        "name" : "granulated white sugar",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "brown sugar",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "butter",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "salt",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "vanilla extract",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "egg",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "all-purpose flour",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "baking soda",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "semi-sweet chocolate chips",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "sea salt",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      } ],
+      "instructions" : [ {
+        "stepNumber" : 1,
+        "text" : "Mix white and brown sugar, melted butter (heat in microwave for 20 sec) and salt until a paste forms.",
+        "ingredientRefs" : [ {
+          "ingredient" : {
+            "type" : "measured",
+            "name" : "granulated white sugar",
+            "quantity" : {
+              "type" : "fractional",
+              "whole" : 0,
+              "numerator" : 1,
+              "denominator" : 2,
+              "unit" : "CUP"
+            },
+            "preparation" : null,
+            "notes" : null
+          },
+          "quantity" : {
+            "type" : "fractional",
+            "whole" : 0,
+            "numerator" : 1,
+            "denominator" : 2,
+            "unit" : "CUP"
+          }
+        }, {
+          "ingredient" : {
+            "type" : "measured",
+            "name" : "brown sugar",
+            "quantity" : {
+              "type" : "fractional",
+              "whole" : 0,
+              "numerator" : 3,
+              "denominator" : 4,
+              "unit" : "CUP"
+            },
+            "preparation" : null,
+            "notes" : null
+          },
+          "quantity" : {
+            "type" : "fractional",
+            "whole" : 0,
+            "numerator" : 3,
+            "denominator" : 4,
+            "unit" : "CUP"
+          }
+        }, {
+          "ingredient" : {
+            "type" : "measured",
+            "name" : "butter",
+            "quantity" : {
+              "type" : "fractional",
+              "whole" : 0,
+              "numerator" : 1,
+              "denominator" : 2,
+              "unit" : "CUP"
+            },
+            "preparation" : null,
+            "notes" : null
+          },
+          "quantity" : {
+            "type" : "fractional",
+            "whole" : 0,
+            "numerator" : 1,
+            "denominator" : 2,
+            "unit" : "CUP"
+          }
+        }, {
+          "ingredient" : {
+            "type" : "measured",
+            "name" : "salt",
+            "quantity" : {
+              "type" : "exact",
+              "amount" : 1.0,
+              "unit" : "TEASPOON"
+            },
+            "preparation" : null,
+            "notes" : null
+          },
+          "quantity" : {
+            "type" : "exact",
+            "amount" : 1.0,
+            "unit" : "TEASPOON"
+          }
+        } ]
+      }, {
+        "stepNumber" : 2,
+        "text" : "Next, whisk in the egg & vanilla until it's all combined.",
+        "ingredientRefs" : [ {
+          "ingredient" : {
+            "type" : "measured",
+            "name" : "egg",
+            "quantity" : {
+              "type" : "exact",
+              "amount" : 1.0,
+              "unit" : "WHOLE"
+            },
+            "preparation" : null,
+            "notes" : null
+          },
+          "quantity" : {
+            "type" : "exact",
+            "amount" : 1.0,
+            "unit" : "WHOLE"
+          }
+        }, {
+          "ingredient" : {
+            "type" : "measured",
+            "name" : "vanilla extract",
+            "quantity" : {
+              "type" : "exact",
+              "amount" : 1.0,
+              "unit" : "TEASPOON"
+            },
+            "preparation" : null,
+            "notes" : null
+          },
+          "quantity" : {
+            "type" : "exact",
+            "amount" : 1.0,
+            "unit" : "TEASPOON"
+          }
+        } ]
+      }, {
+        "stepNumber" : 3,
+        "text" : "Take a strainer mesh and add the flour and baking soda into the bowl and mix",
+        "ingredientRefs" : [ {
+          "ingredient" : {
+            "type" : "measured",
+            "name" : "all-purpose flour",
+            "quantity" : {
+              "type" : "fractional",
+              "whole" : 1,
+              "numerator" : 1,
+              "denominator" : 2,
+              "unit" : "CUP"
+            },
+            "preparation" : null,
+            "notes" : null
+          },
+          "quantity" : {
+            "type" : "fractional",
+            "whole" : 1,
+            "numerator" : 1,
+            "denominator" : 2,
+            "unit" : "CUP"
+          }
+        }, {
+          "ingredient" : {
+            "type" : "measured",
+            "name" : "baking soda",
+            "quantity" : {
+              "type" : "fractional",
+              "whole" : 0,
+              "numerator" : 1,
+              "denominator" : 2,
+              "unit" : "TEASPOON"
+            },
+            "preparation" : null,
+            "notes" : null
+          },
+          "quantity" : {
+            "type" : "fractional",
+            "whole" : 0,
+            "numerator" : 1,
+            "denominator" : 2,
+            "unit" : "TEASPOON"
+          }
+        } ]
+      }, {
+        "stepNumber" : 4,
+        "text" : "Add chocolate chips. Use a spatula to mix the ingredients together. Do not over mix!",
+        "ingredientRefs" : [ {
+          "ingredient" : {
+            "type" : "measured",
+            "name" : "semi-sweet chocolate chips",
+            "quantity" : {
+              "type" : "fractional",
+              "whole" : 0,
+              "numerator" : 3,
+              "denominator" : 4,
+              "unit" : "CUP"
+            },
+            "preparation" : null,
+            "notes" : null
+          },
+          "quantity" : {
+            "type" : "fractional",
+            "whole" : 0,
+            "numerator" : 3,
+            "denominator" : 4,
+            "unit" : "CUP"
+          }
+        } ]
+      }, {
+        "stepNumber" : 5,
+        "text" : "Use saran wrap and pop the cookie dough in the fridge for at least 45 minutes.",
+        "ingredientRefs" : [ ]
+      }, {
+        "stepNumber" : 6,
+        "text" : "Scoop dough into even balls, sprinkle a bit of chunky sea salt and bake at 370 degrees F for 12-13 minutes.",
+        "ingredientRefs" : [ {
+          "ingredient" : {
+            "type" : "vague",
+            "name" : "sea salt",
+            "description" : null,
+            "preparation" : null,
+            "notes" : null
+          },
+          "quantity" : null
+        } ]
+      }, {
+        "stepNumber" : 7,
+        "text" : "Remove from cookie sheet immediately to cool on wire rack!",
+        "ingredientRefs" : [ ]
+      } ],
+      "conversionRules" : [ ]
+    }, {
+      "id" : "3e0d4d1f-e49d-4950-8cd3-8206e66f8d2f",
+      "title" : "Guacamole",
+      "servings" : null,
+      "ingredients" : [ {
+        "type" : "vague",
+        "name" : "avocados",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "limes",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "ground cumin",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "ripe plum tomatoes",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "red onion",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "garlic",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "jalapenos",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      }, {
+        "type" : "vague",
+        "name" : "fresh cilantro",
+        "description" : null,
+        "preparation" : null,
+        "notes" : null
+      } ],
+      "instructions" : [ {
+        "stepNumber" : 1,
+        "text" : "Put everything in a bowl and mix until you get a guacamole-type consistency. Serve with tortilla chips.",
+        "ingredientRefs" : [ ]
+      }, {
+        "stepNumber" : 2,
+        "text" : "Prepare to be everyone's best friend.",
+        "ingredientRefs" : [ ]
+      }, {
+        "stepNumber" : 3,
+        "text" : "The lime juice is what really makes this recipe stand out, so make sure not to skimp!",
+        "ingredientRefs" : [ ]
+      } ],
+      "conversionRules" : [ ]
+    } ],
+    "description" : null,
+    "notes" : null,
+    "sourceType" : "PERSONAL"
+  } ],
+  "houseConversions" : [ ]
+}

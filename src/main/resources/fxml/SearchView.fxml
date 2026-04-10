@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<!--
+  Search & Filter view.
+
+  Layout matches the Library View design language:
+    1. Toolbar  — "Find & Filter" heading + title search field + spinner
+    2. Filter   — ingredient filter input + Add / Clear buttons + active chip row
+    3. Results  — status label + result ListView (grows to fill remaining space)
+-->
+<VBox xmlns:fx="http://javafx.com/fxml"
+      styleClass="library-root"
+      spacing="0"
+      maxWidth="Infinity"
+      maxHeight="Infinity">
+
+    <!-- ── Toolbar: heading + title search ── -->
+    <HBox styleClass="library-toolbar" alignment="CENTER_LEFT" spacing="12">
+        <padding>
+            <Insets top="10" right="16" bottom="10" left="16"/>
+        </padding>
+        <Label text="Find &amp; Filter" styleClass="page-heading"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <TextField fx:id="searchField"
+                   promptText="Search recipes by title…"
+                   styleClass="library-filter"
+                   prefWidth="260"/>
+        <ProgressIndicator fx:id="searchSpinner"
+                           prefWidth="20"
+                           prefHeight="20"/>
+    </HBox>
+
+    <!-- ── Ingredient filter controls ── -->
+    <VBox styleClass="search-section" spacing="8">
+        <padding>
+            <Insets top="12" right="16" bottom="12" left="16"/>
+        </padding>
+        <Label text="FILTER BY INGREDIENT" styleClass="library-pane-title"/>
+        <HBox spacing="8" alignment="CENTER_LEFT">
+            <TextField fx:id="ingredientInput"
+                       promptText="Add ingredient…"
+                       styleClass="library-filter"
+                       HBox.hgrow="ALWAYS"/>
+            <Button fx:id="addFilterButton" text="Add Filter" styleClass="library-btn-primary"/>
+            <Button fx:id="clearAllButton"  text="Clear All"  styleClass="library-btn-secondary"/>
+        </HBox>
+        <!-- Active filter chips — rebuilt dynamically by the controller -->
+        <FlowPane fx:id="filterChipsPane" hgap="6" vgap="6"/>
+    </VBox>
+
+    <!-- ── Results list ── -->
+    <VBox styleClass="library-pane" spacing="8" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets top="12" right="16" bottom="12" left="16"/>
+        </padding>
+        <HBox alignment="CENTER_LEFT">
+            <Label text="RESULTS" styleClass="library-pane-title" HBox.hgrow="ALWAYS"/>
+            <Label fx:id="statusLabel" styleClass="status-label"/>
+        </HBox>
+        <ListView fx:id="resultsList" styleClass="library-list" VBox.vgrow="ALWAYS"/>
+    </VBox>
+
+</VBox>

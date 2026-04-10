@@ -1,0 +1,454 @@
+/*
+ * Shared styles for CookYourBooks.
+ *
+ * Extend this file with your team's theming. The provided styles cover
+ * the main layout (sidebar + content area). Add styles for your feature
+ * views as needed.
+ */
+
+/* ── Root ── */
+.root-pane {
+    -fx-background-color: white;
+}
+
+/* ── Home / Landing screen ── */
+.home-root {
+    -fx-background-color: white;
+}
+
+.home-icon {
+    -fx-font-size: 64;
+}
+
+.home-title {
+    -fx-font-size: 40;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1c1c1e;
+}
+
+.home-tagline {
+    -fx-font-size: 15;
+    -fx-text-fill: #8e8e93;
+}
+
+.home-btn {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-background-radius: 24;
+    -fx-padding: 14 40;
+    -fx-cursor: hand;
+}
+
+.home-btn:hover {
+    -fx-background-color: #5dade2;
+}
+
+.home-btn:pressed {
+    -fx-background-color: #2980b9;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+    -fx-background-color: #2c3e50;
+    -fx-pref-width: 180;
+    -fx-min-width: 180;
+}
+
+.sidebar-title {
+    -fx-text-fill: white;
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 12 4;
+}
+
+/* ── Navigation buttons ── */
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #bdc3c7;
+    -fx-font-size: 13;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 8 12;
+    -fx-cursor: hand;
+    -fx-background-radius: 4;
+}
+
+.nav-button:hover {
+    -fx-background-color: #34495e;
+    -fx-text-fill: white;
+}
+
+.nav-button.nav-active {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* ── Content area ── */
+.content-area {
+    -fx-background-color: white;
+}
+
+/* ── Library View ── */
+
+.library-root {
+    -fx-background-color: white;
+}
+
+.library-toolbar {
+    -fx-background-color: white;
+    -fx-border-color: #e0e0e5;
+    -fx-border-width: 0 0 1 0;
+}
+
+.library-filter {
+    -fx-background-color: #f2f2f7;
+    -fx-background-radius: 8;
+    -fx-border-width: 0;
+    -fx-padding: 6 10;
+    -fx-font-size: 13;
+}
+
+.library-filter:focused {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(gaussian, rgba(52, 152, 219, 0.35), 6, 0, 0, 0);
+}
+
+.library-split {
+    -fx-background-color: #e0e0e5;
+    -fx-padding: 0;
+    -fx-box-border: transparent;
+}
+
+.library-pane {
+    -fx-background-color: white;
+}
+
+.library-pane-title {
+    -fx-font-size: 11;
+    -fx-font-weight: bold;
+    -fx-text-fill: #8e8e93;
+    -fx-padding: 0 0 4 2;
+}
+
+.library-list {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-color: #e0e0e5;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-border-width: 1;
+}
+
+.library-list .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 9 12;
+    -fx-font-size: 13;
+    -fx-text-fill: #1c1c1e;
+}
+
+.library-list .list-cell:odd {
+    -fx-background-color: transparent;
+}
+
+.library-list .list-cell:filled:hover {
+    -fx-background-color: #f2f2f7;
+    -fx-background-radius: 6;
+}
+
+.library-list .list-cell:filled:selected {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+}
+
+.library-btn-primary {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-font-size: 13;
+    -fx-cursor: hand;
+    -fx-padding: 7 14;
+}
+
+.library-btn-primary:hover {
+    -fx-background-color: #5dade2;
+}
+
+.library-btn-primary:pressed {
+    -fx-background-color: #2980b9;
+}
+
+.library-btn-primary:disabled {
+    -fx-background-color: #3498db;
+    -fx-opacity: 0.4;
+}
+
+.library-btn-danger {
+    -fx-background-color: #ff3b30;
+    -fx-text-fill: white;
+    -fx-background-radius: 8;
+    -fx-font-size: 13;
+    -fx-cursor: hand;
+    -fx-padding: 7 14;
+}
+
+.library-btn-danger:hover {
+    -fx-background-color: #cc2a20;
+}
+
+.library-btn-danger:disabled {
+    -fx-background-color: #ffb3b0;
+    -fx-opacity: 0.5;
+}
+
+.library-undo-bar {
+    -fx-background-color: #1c1c1e;
+}
+
+.library-undo-label {
+    -fx-text-fill: white;
+    -fx-font-size: 13;
+}
+
+.library-btn-undo {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+    -fx-font-size: 12;
+    -fx-cursor: hand;
+    -fx-padding: 5 14;
+}
+
+.library-btn-undo:hover {
+    -fx-background-color: #5dade2;
+}
+
+.library-btn-undo:pressed {
+    -fx-background-color: #2980b9;
+}
+
+/* ── Top bar back button ("← Library") ── */
+/*
+ * Styled as a solid pill so it reads clearly as a navigation action, not a logo.
+ * Uses the same blue family as the rest of the top bar so it blends into the palette
+ * while still being visually distinct from the white background.
+ * Hidden when the user is already on the Library view (managed in MainViewController.showView).
+ */
+.top-bar-back {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-size: 13;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-padding: 6 14;
+    -fx-background-radius: 20;
+}
+
+.top-bar-back:hover {
+    -fx-background-color: #5dade2;
+}
+
+.top-bar-back:pressed {
+    -fx-background-color: #2980b9;
+}
+
+/* ── Top bar action buttons (Import Recipe, Search) ── */
+/*
+ * These buttons sit in the white content-area top bar, so the transparent nav-button
+ * style used in the dark sidebar would make them invisible here. A solid blue fill
+ * (matching the sidebar's active-state colour) keeps the palette consistent while
+ * giving the buttons clear contrast against white.
+ *
+ * :hover lightens the fill slightly so the user gets tactile feedback without the
+ * button flashing to a completely different hue.
+ */
+.top-bar-button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-size: 13;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-padding: 7 16;
+    -fx-cursor: hand;
+}
+
+.top-bar-button:hover {
+    -fx-background-color: #5dade2;
+    -fx-text-fill: white;
+}
+
+.top-bar-button:pressed {
+    -fx-background-color: #2980b9;
+}
+
+/* ── Recipe Editor buttons ── */
+/*
+ * These styles are used by the RecipeEditorView buttons (Edit/Done, Add Ingredient, Back)
+ * and the inline ingredient-row buttons (↑ ↓ X). Each role gets a distinct colour so
+ * the user can immediately identify primary actions vs destructive vs navigation.
+ */
+
+/* Edit / Done / Save — primary blue action */
+.editor-btn-primary {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-padding: 7 18;
+    -fx-cursor: hand;
+}
+
+.editor-btn-primary:hover {
+    -fx-background-color: #5dade2;
+}
+
+.editor-btn-primary:pressed {
+    -fx-background-color: #2980b9;
+}
+
+.editor-btn-primary:disabled {
+    -fx-background-color: #aed6f1;
+    -fx-opacity: 0.7;
+}
+
+/* Add Ingredient — green constructive action */
+.editor-btn-success {
+    -fx-background-color: #27ae60;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-padding: 7 14;
+    -fx-cursor: hand;
+}
+
+.editor-btn-success:hover {
+    -fx-background-color: #52be80;
+}
+
+.editor-btn-success:pressed {
+    -fx-background-color: #1e8449;
+}
+
+.editor-btn-success:disabled {
+    -fx-background-color: #a9dfbf;
+    -fx-opacity: 0.7;
+}
+
+/* Back — neutral secondary action */
+.editor-btn-secondary {
+    -fx-background-color: #bdc3c7;
+    -fx-text-fill: #2c3e50;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-padding: 7 18;
+    -fx-cursor: hand;
+}
+
+.editor-btn-secondary:hover {
+    -fx-background-color: #d5d8dc;
+}
+
+.editor-btn-secondary:pressed {
+    -fx-background-color: #a6acaf;
+}
+
+/* Remove ingredient (X) — compact red destructive */
+.editor-btn-danger-sm {
+    -fx-background-color: #e74c3c;
+    -fx-text-fill: white;
+    -fx-background-radius: 4;
+    -fx-padding: 2 7;
+    -fx-cursor: hand;
+    -fx-font-size: 11;
+}
+
+.editor-btn-danger-sm:hover {
+    -fx-background-color: #f1948a;
+}
+
+/* Reorder buttons (↑ ↓) — compact neutral */
+.editor-btn-icon-sm {
+    -fx-background-color: #85929e;
+    -fx-text-fill: white;
+    -fx-background-radius: 4;
+    -fx-padding: 2 6;
+    -fx-cursor: hand;
+    -fx-font-size: 11;
+}
+
+.editor-btn-icon-sm:hover {
+    -fx-background-color: #aab7b8;
+}
+
+/* ── Secondary library button (e.g. "Clear All" in Search) ── */
+.library-btn-secondary {
+    -fx-background-color: #e0e0e5;
+    -fx-text-fill: #2c3e50;
+    -fx-background-radius: 8;
+    -fx-font-size: 13;
+    -fx-cursor: hand;
+    -fx-padding: 7 14;
+}
+
+.library-btn-secondary:hover {
+    -fx-background-color: #c8c8d0;
+}
+
+.library-btn-secondary:disabled {
+    -fx-opacity: 0.5;
+}
+
+/* ── Page heading inside a toolbar (e.g. "Find & Filter") ── */
+.page-heading {
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1c1c1e;
+}
+
+/* ── Search filter section — white card between toolbar and results ── */
+.search-section {
+    -fx-background-color: white;
+    -fx-border-color: #e0e0e5;
+    -fx-border-width: 0 0 1 0;
+}
+
+/* ── Active ingredient filter chips ── */
+.search-chip {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-background-radius: 12;
+    -fx-padding: 3 10;
+    -fx-font-size: 12;
+    -fx-cursor: hand;
+}
+
+.search-chip:hover {
+    -fx-background-color: #5dade2;
+}
+
+.search-chip:pressed {
+    -fx-background-color: #2980b9;
+}
+
+/* ── Common controls (for feature views to use) ── */
+.section-title {
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+}
+
+.status-label {
+    -fx-text-fill: #7f8c8d;
+    -fx-font-size: 12;
+}
+
+.error-label {
+    -fx-text-fill: #e74c3c;
+    -fx-font-size: 12;
+}
+
+.success-label {
+    -fx-text-fill: #27ae60;
+    -fx-font-size: 12;
+}

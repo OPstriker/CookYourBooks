@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx"
+            stylesheets="@../css/cookyourbooks.css"
+            styleClass="root-pane">
+
+    <!-- No sidebar — navigation is handled by the top bar buttons only -->
+
+    <!-- Full-width content area -->
+    <center>
+        <BorderPane styleClass="content-area">
+            <!-- Top bar: home button on the left, Import + Search on the right -->
+            <top>
+                <HBox styleClass="top-bar" alignment="CENTER_LEFT" spacing="8">
+                    <padding>
+                        <Insets top="12" right="16" bottom="12" left="16"/>
+                    </padding>
+
+                    <!-- Back to Library — hidden on Home and Library views -->
+                    <Button fx:id="homeButton" text="← Library" styleClass="top-bar-back"/>
+
+                    <!-- Spacer pushes Import + Search to the right -->
+                    <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
+
+                    <!-- Only visible when in Library view -->
+                    <Button fx:id="topImportButton" text="Import Recipe" styleClass="top-bar-button"/>
+                    <Button fx:id="searchButton" text="Search" styleClass="top-bar-button"/>
+                </HBox>
+            </top>
+
+            <center>
+                <StackPane fx:id="contentArea">
+                    <padding>
+                        <Insets top="0" right="16" bottom="16" left="16"/>
+                    </padding>
+                </StackPane>
+            </center>
+        </BorderPane>
+    </center>
+
+</BorderPane>

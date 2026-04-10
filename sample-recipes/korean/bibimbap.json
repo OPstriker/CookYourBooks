@@ -1,0 +1,464 @@
+{
+  "id": "4d0cacb8-75d4-4adc-a512-b0fa58b27b16",
+  "title": "Bibimbap",
+  "servings": {
+    "amount": 2,
+    "description": "servings"
+  },
+  "ingredients": [
+    {
+      "type": "measured",
+      "name": "cooked white rice",
+      "quantity": {
+        "type": "exact",
+        "amount": 2.0,
+        "unit": "CUP"
+      },
+      "preparation": null,
+      "notes": null
+    },
+    {
+      "type": "measured",
+      "name": "spinach",
+      "quantity": {
+        "type": "exact",
+        "amount": 2.0,
+        "unit": "CUP"
+      },
+      "preparation": "blanched and squeezed dry",
+      "notes": null
+    },
+    {
+      "type": "measured",
+      "name": "bean sprouts",
+      "quantity": {
+        "type": "exact",
+        "amount": 1.0,
+        "unit": "CUP"
+      },
+      "preparation": "blanched",
+      "notes": null
+    },
+    {
+      "type": "measured",
+      "name": "carrot",
+      "quantity": {
+        "type": "exact",
+        "amount": 1.0,
+        "unit": "WHOLE"
+      },
+      "preparation": "julienned",
+      "notes": null
+    },
+    {
+      "type": "measured",
+      "name": "shiitake mushrooms",
+      "quantity": {
+        "type": "exact",
+        "amount": 4.0,
+        "unit": "WHOLE"
+      },
+      "preparation": "sliced",
+      "notes": null
+    },
+    {
+      "type": "measured",
+      "name": "egg",
+      "quantity": {
+        "type": "exact",
+        "amount": 1.0,
+        "unit": "WHOLE"
+      },
+      "preparation": null,
+      "notes": null
+    },
+    {
+      "type": "measured",
+      "name": "gochujang",
+      "quantity": {
+        "type": "exact",
+        "amount": 2.0,
+        "unit": "TABLESPOON"
+      },
+      "preparation": null,
+      "notes": "Korean red pepper paste"
+    },
+    {
+      "type": "measured",
+      "name": "sesame oil",
+      "quantity": {
+        "type": "exact",
+        "amount": 1.0,
+        "unit": "TABLESPOON"
+      },
+      "preparation": null,
+      "notes": null
+    },
+    {
+      "type": "measured",
+      "name": "soy sauce",
+      "quantity": {
+        "type": "exact",
+        "amount": 1.0,
+        "unit": "TABLESPOON"
+      },
+      "preparation": null,
+      "notes": null
+    },
+    {
+      "type": "measured",
+      "name": "garlic",
+      "quantity": {
+        "type": "exact",
+        "amount": 2.0,
+        "unit": "WHOLE"
+      },
+      "preparation": "minced",
+      "notes": "cloves"
+    },
+    {
+      "type": "vague",
+      "name": "salt",
+      "description": "to taste",
+      "preparation": null,
+      "notes": null
+    },
+    {
+      "type": "vague",
+      "name": "sesame seeds",
+      "description": "to taste",
+      "preparation": null,
+      "notes": null
+    }
+  ],
+  "instructions": [
+    {
+      "stepNumber": 1,
+      "text": "Blanch spinach in boiling salted water for 30 seconds, drain and squeeze dry, season with sesame oil and salt",
+      "ingredientRefs": [
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "spinach",
+            "quantity": {
+              "type": "exact",
+              "amount": 2.0,
+              "unit": "CUP"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 2.0,
+            "unit": "CUP"
+          }
+        },
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "sesame oil",
+            "quantity": {
+              "type": "exact",
+              "amount": 1.0,
+              "unit": "TABLESPOON"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 1.0,
+            "unit": "TABLESPOON"
+          }
+        },
+        {
+          "ingredient": {
+            "type": "vague",
+            "name": "salt",
+            "description": null,
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": null
+        }
+      ]
+    },
+    {
+      "stepNumber": 2,
+      "text": "Blanch bean sprouts for 1 minute, drain and season with sesame oil and salt",
+      "ingredientRefs": [
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "bean sprouts",
+            "quantity": {
+              "type": "exact",
+              "amount": 1.0,
+              "unit": "CUP"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 1.0,
+            "unit": "CUP"
+          }
+        },
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "sesame oil",
+            "quantity": {
+              "type": "exact",
+              "amount": 1.0,
+              "unit": "TABLESPOON"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 1.0,
+            "unit": "TABLESPOON"
+          }
+        },
+        {
+          "ingredient": {
+            "type": "vague",
+            "name": "salt",
+            "description": null,
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": null
+        }
+      ]
+    },
+    {
+      "stepNumber": 3,
+      "text": "Stir-fry carrot with a little oil over medium heat for 2 minutes until tender, season with salt",
+      "ingredientRefs": [
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "carrot",
+            "quantity": {
+              "type": "exact",
+              "amount": 1.0,
+              "unit": "WHOLE"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 1.0,
+            "unit": "WHOLE"
+          }
+        },
+        {
+          "ingredient": {
+            "type": "vague",
+            "name": "salt",
+            "description": null,
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": null
+        }
+      ]
+    },
+    {
+      "stepNumber": 4,
+      "text": "Saute mushrooms with soy sauce and garlic for 3 minutes until cooked through",
+      "ingredientRefs": [
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "shiitake mushrooms",
+            "quantity": {
+              "type": "exact",
+              "amount": 4.0,
+              "unit": "WHOLE"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 4.0,
+            "unit": "WHOLE"
+          }
+        },
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "soy sauce",
+            "quantity": {
+              "type": "exact",
+              "amount": 1.0,
+              "unit": "TABLESPOON"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 1.0,
+            "unit": "TABLESPOON"
+          }
+        },
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "garlic",
+            "quantity": {
+              "type": "exact",
+              "amount": 2.0,
+              "unit": "WHOLE"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 2.0,
+            "unit": "WHOLE"
+          }
+        }
+      ]
+    },
+    {
+      "stepNumber": 5,
+      "text": "Fry egg sunny-side up in a lightly oiled pan",
+      "ingredientRefs": [
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "egg",
+            "quantity": {
+              "type": "exact",
+              "amount": 1.0,
+              "unit": "WHOLE"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 1.0,
+            "unit": "WHOLE"
+          }
+        }
+      ]
+    },
+    {
+      "stepNumber": 6,
+      "text": "Divide rice into bowls and arrange the prepared vegetables in sections on top",
+      "ingredientRefs": [
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "cooked white rice",
+            "quantity": {
+              "type": "exact",
+              "amount": 2.0,
+              "unit": "CUP"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 2.0,
+            "unit": "CUP"
+          }
+        }
+      ]
+    },
+    {
+      "stepNumber": 7,
+      "text": "Place the fried egg on top and add gochujang to the center",
+      "ingredientRefs": [
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "egg",
+            "quantity": {
+              "type": "exact",
+              "amount": 1.0,
+              "unit": "WHOLE"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 1.0,
+            "unit": "WHOLE"
+          }
+        },
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "gochujang",
+            "quantity": {
+              "type": "exact",
+              "amount": 2.0,
+              "unit": "TABLESPOON"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 2.0,
+            "unit": "TABLESPOON"
+          }
+        }
+      ]
+    },
+    {
+      "stepNumber": 8,
+      "text": "Drizzle with sesame oil and sprinkle sesame seeds over the bowl",
+      "ingredientRefs": [
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "sesame oil",
+            "quantity": {
+              "type": "exact",
+              "amount": 1.0,
+              "unit": "TABLESPOON"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 1.0,
+            "unit": "TABLESPOON"
+          }
+        },
+        {
+          "ingredient": {
+            "type": "vague",
+            "name": "sesame seeds",
+            "description": null,
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": null
+        }
+      ]
+    },
+    {
+      "stepNumber": 9,
+      "text": "Mix everything together well before eating",
+      "ingredientRefs": []
+    }
+  ],
+  "conversionRules": []
+}

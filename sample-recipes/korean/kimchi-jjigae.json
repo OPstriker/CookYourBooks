@@ -1,0 +1,356 @@
+{
+  "id": "eb614262-da01-4099-8f47-e7936d771424",
+  "title": "Kimchi Jjigae",
+  "servings": {
+    "amount": 2,
+    "description": "servings"
+  },
+  "ingredients": [
+    {
+      "type": "measured",
+      "name": "kimchi",
+      "quantity": {
+        "type": "exact",
+        "amount": 2.0,
+        "unit": "CUP"
+      },
+      "preparation": "chopped",
+      "notes": null
+    },
+    {
+      "type": "measured",
+      "name": "pork belly",
+      "quantity": {
+        "type": "fractional",
+        "whole": 0,
+        "numerator": 1,
+        "denominator": 2,
+        "unit": "POUND"
+      },
+      "preparation": "cut into bite-sized pieces",
+      "notes": null
+    },
+    {
+      "type": "measured",
+      "name": "firm tofu",
+      "quantity": {
+        "type": "exact",
+        "amount": 1.0,
+        "unit": "WHOLE"
+      },
+      "preparation": "cubed",
+      "notes": "1 block"
+    },
+    {
+      "type": "measured",
+      "name": "gochujang",
+      "quantity": {
+        "type": "exact",
+        "amount": 1.0,
+        "unit": "TABLESPOON"
+      },
+      "preparation": null,
+      "notes": "Korean red pepper paste"
+    },
+    {
+      "type": "measured",
+      "name": "gochugaru",
+      "quantity": {
+        "type": "exact",
+        "amount": 1.0,
+        "unit": "TABLESPOON"
+      },
+      "preparation": null,
+      "notes": "Korean red pepper flakes"
+    },
+    {
+      "type": "measured",
+      "name": "garlic",
+      "quantity": {
+        "type": "exact",
+        "amount": 3.0,
+        "unit": "WHOLE"
+      },
+      "preparation": "minced",
+      "notes": "cloves"
+    },
+    {
+      "type": "measured",
+      "name": "sesame oil",
+      "quantity": {
+        "type": "exact",
+        "amount": 1.0,
+        "unit": "TABLESPOON"
+      },
+      "preparation": null,
+      "notes": null
+    },
+    {
+      "type": "measured",
+      "name": "soy sauce",
+      "quantity": {
+        "type": "exact",
+        "amount": 1.0,
+        "unit": "TABLESPOON"
+      },
+      "preparation": null,
+      "notes": null
+    },
+    {
+      "type": "measured",
+      "name": "water",
+      "quantity": {
+        "type": "exact",
+        "amount": 2.0,
+        "unit": "CUP"
+      },
+      "preparation": null,
+      "notes": null
+    },
+    {
+      "type": "measured",
+      "name": "green onion",
+      "quantity": {
+        "type": "exact",
+        "amount": 2.0,
+        "unit": "WHOLE"
+      },
+      "preparation": "sliced",
+      "notes": "stalks"
+    }
+  ],
+  "instructions": [
+    {
+      "stepNumber": 1,
+      "text": "Heat sesame oil in a pot over medium-high heat",
+      "ingredientRefs": [
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "sesame oil",
+            "quantity": {
+              "type": "exact",
+              "amount": 1.0,
+              "unit": "TABLESPOON"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 1.0,
+            "unit": "TABLESPOON"
+          }
+        }
+      ]
+    },
+    {
+      "stepNumber": 2,
+      "text": "Add pork belly and cook until lightly browned, about 3 minutes",
+      "ingredientRefs": [
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "pork belly",
+            "quantity": {
+              "type": "fractional",
+              "whole": 0,
+              "numerator": 1,
+              "denominator": 2,
+              "unit": "POUND"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "fractional",
+            "whole": 0,
+            "numerator": 1,
+            "denominator": 2,
+            "unit": "POUND"
+          }
+        }
+      ]
+    },
+    {
+      "stepNumber": 3,
+      "text": "Add kimchi and stir-fry with the pork for 2-3 minutes",
+      "ingredientRefs": [
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "kimchi",
+            "quantity": {
+              "type": "exact",
+              "amount": 2.0,
+              "unit": "CUP"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 2.0,
+            "unit": "CUP"
+          }
+        }
+      ]
+    },
+    {
+      "stepNumber": 4,
+      "text": "Add gochujang, gochugaru, and garlic, stir to combine",
+      "ingredientRefs": [
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "gochujang",
+            "quantity": {
+              "type": "exact",
+              "amount": 1.0,
+              "unit": "TABLESPOON"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 1.0,
+            "unit": "TABLESPOON"
+          }
+        },
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "gochugaru",
+            "quantity": {
+              "type": "exact",
+              "amount": 1.0,
+              "unit": "TABLESPOON"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 1.0,
+            "unit": "TABLESPOON"
+          }
+        },
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "garlic",
+            "quantity": {
+              "type": "exact",
+              "amount": 3.0,
+              "unit": "WHOLE"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 3.0,
+            "unit": "WHOLE"
+          }
+        }
+      ]
+    },
+    {
+      "stepNumber": 5,
+      "text": "Pour in water and bring to a boil",
+      "ingredientRefs": [
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "water",
+            "quantity": {
+              "type": "exact",
+              "amount": 2.0,
+              "unit": "CUP"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 2.0,
+            "unit": "CUP"
+          }
+        }
+      ]
+    },
+    {
+      "stepNumber": 6,
+      "text": "Add tofu and soy sauce, reduce heat to medium-low and simmer for 15 minutes",
+      "ingredientRefs": [
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "firm tofu",
+            "quantity": {
+              "type": "exact",
+              "amount": 1.0,
+              "unit": "WHOLE"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 1.0,
+            "unit": "WHOLE"
+          }
+        },
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "soy sauce",
+            "quantity": {
+              "type": "exact",
+              "amount": 1.0,
+              "unit": "TABLESPOON"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 1.0,
+            "unit": "TABLESPOON"
+          }
+        }
+      ]
+    },
+    {
+      "stepNumber": 7,
+      "text": "Taste and adjust seasoning, garnish with green onions",
+      "ingredientRefs": [
+        {
+          "ingredient": {
+            "type": "measured",
+            "name": "green onion",
+            "quantity": {
+              "type": "exact",
+              "amount": 2.0,
+              "unit": "WHOLE"
+            },
+            "preparation": null,
+            "notes": null
+          },
+          "quantity": {
+            "type": "exact",
+            "amount": 2.0,
+            "unit": "WHOLE"
+          }
+        }
+      ]
+    },
+    {
+      "stepNumber": 8,
+      "text": "Serve hot with steamed rice",
+      "ingredientRefs": []
+    }
+  ],
+  "conversionRules": []
+}

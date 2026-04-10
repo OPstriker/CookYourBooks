@@ -1,0 +1,191 @@
+package app.cookyourbooks.gui.view;
+
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.layout.HBox;
+
+import app.cookyourbooks.gui.viewmodel.LibraryViewModel;
+import app.cookyourbooks.gui.viewmodel.RecipeCollectionSummary;
+import app.cookyourbooks.gui.viewmodel.RecipeSummary;
+
+/**
+ * Controller for the Library View feature ({@code LibraryView.fxml}).
+ *
+ * <p>Binds the FXML controls to the {@link LibraryViewModel} observable properties and forwards
+ * user actions (create, delete, undo, filter, select) to the ViewModel.
+ */
+@SuppressWarnings("NullAway.Init") // FXML fields are injected by FXMLLoader, not the constructor
+public class LibraryViewController {
+
+  // ── FXML-injected controls ──
+
+  @FXML private javafx.scene.control.TextField filterField;
+  @FXML private ProgressIndicator loadingIndicator;
+  @FXML private ListView<RecipeCollectionSummary> collectionListView;
+  @FXML private ListView<RecipeSummary> recipeListView;
+  @FXML private Button deleteButton;
+  @FXML private Button openRecipeButton;
+  @FXML private Button deleteRecipeButton;
+  @FXML private HBox undoBar;
+  @FXML private Label undoLabel;
+
+  // ── ViewModel ──
+
+  private final LibraryViewModel vm;
+
+  /**
+   * Constructs the controller with its ViewModel.
+   *
+   * @param vm the Library ViewModel
+   */
+  public LibraryViewController(LibraryViewModel vm) {
+    this.vm = vm;
+  }
+
+  // ── Initialization ──
+
+  /** Called by FXMLLoader after all @FXML fields are injected. Sets up all bindings. */
+  @SuppressWarnings("UnusedMethod") // called reflectively by FXMLLoader
+  @FXML
+  private void initialize() {
+    setupFilterBinding();
+    setupCollectionList();
+    setupRecipeList();
+    setupLoadingIndicator();
+    setupUndoBar();
+
+    vm.refresh();
+  }
+
+  // ── Private setup helpers ──
+
+  private void setupFilterBinding() {
+    // Bidirectional: typing in the field updates vm.filterTextProperty(), and vice versa
+    filterField.textProperty().bindBidirectional(vm.filterTextProperty());
+  }
+
+  @SuppressWarnings("unchecked")
+  private void setupCollectionList() {
+    // The interface returns ObservableList<?> for flexibility; we know the impl uses
+    // RecipeCollectionSummary.
+    collectionListView.setItems((ObservableList<RecipeCollectionSummary>) vm.collectionsProperty());
+
+    // Custom cell: show title + recipe count
+    collectionListView.setCellFactory(
+        lv ->
+            new ListCell<>() {
+              @Override
+              protected void updateItem(RecipeCollectionSummary item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                  setText(null);
+                } else {
+                  setText(item.title() + "  ·  " + item.recipeCount() + " recipes");
+                }
+              }
+            });
+
+    // Forward selection to ViewModel
+    collectionListView
+        .getSelectionModel()
+        .selectedItemProperty()
+        .addListener(
+            (obs, oldVal, newVal) -> {
+              if (newVal != null) {
+                vm.selectCollection(newVal.id());
+              }
+            });
+
+    // Delete button is only enabled when a collection is selected
+    deleteButton
+        .disableProperty()
+        .bind(collectionListView.getSelectionModel().selectedItemProperty().isNull());
+  }
+
+  @SuppressWarnings("unchecked")
+  private void setupRecipeList() {
+    // Same rationale: interface uses ObservableList<?>, impl uses RecipeSummary.
+    recipeListView.setItems((ObservableList<RecipeSummary>) vm.recipesProperty());
+
+    recipeListView.setCellFactory(
+        lv ->
+            new ListCell<>() {
+              @Override
+              protected void updateItem(RecipeSummary item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(empty || item == null ? null : item.title());
+              }
+            });
+
+    // Enable the Open Recipe and Delete Recipe buttons only when a recipe is selected
+    openRecipeButton
+        .disableProperty()
+        .bind(recipeListView.getSelectionModel().selectedItemProperty().isNull());
+    deleteRecipeButton
+        .disableProperty()
+        .bind(recipeListView.getSelectionModel().selectedItemProperty().isNull());
+  }
+
+  private void setupLoadingIndicator() {
+    loadingIndicator.visibleProperty().bind(vm.loadingProperty());
+    loadingIndicator.managedProperty().bind(vm.loadingProperty());
+  }
+
+  private void setupUndoBar() {
+    // managed=false when invisible so it doesn't take up space in the layout
+    undoBar.visibleProperty().bind(vm.undoAvailableProperty());
+    undoBar.managedProperty().bind(vm.undoAvailableProperty());
+    undoLabel.textProperty().bind(vm.undoMessageProperty());
+  }
+
+  // ── FXML event handlers ──
+
+  @SuppressWarnings("UnusedMethod") // called reflectively by FXMLLoader
+  @FXML
+  private void onCreateCollection() {
+    var dialog = new TextInputDialog();
+    dialog.setTitle("New Collection");
+    dialog.setHeaderText(null);
+    dialog.setContentText("Collection name:");
+    dialog.showAndWait().ifPresent(vm::createCollection);
+  }
+
+  @SuppressWarnings("UnusedMethod") // called reflectively by FXMLLoader
+  @FXML
+  private void onDeleteCollection() {
+    var selected = collectionListView.getSelectionModel().getSelectedItem();
+    if (selected != null) {
+      vm.deleteCollection(selected.id());
+    }
+  }
+
+  @SuppressWarnings("UnusedMethod") // called reflectively by FXMLLoader
+  @FXML
+  private void onUndo() {
+    vm.undoDelete();
+  }
+
+  @SuppressWarnings("UnusedMethod") // called reflectively by FXMLLoader
+  @FXML
+  private void onOpenRecipe() {
+    var selected = recipeListView.getSelectionModel().getSelectedItem();
+    if (selected != null) {
+      vm.selectRecipe(selected.id());
+    }
+  }
+
+  @SuppressWarnings("UnusedMethod") // called reflectively by FXMLLoader
+  @FXML
+  private void onDeleteRecipe() {
+    var selected = recipeListView.getSelectionModel().getSelectedItem();
+    if (selected != null) {
+      vm.deleteRecipe(selected.id());
+    }
+  }
+}

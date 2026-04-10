@@ -1,0 +1,75 @@
+### Xiaoyan Yang (Cory0906) — Library View
+
+#### User Persona
+
+**Name:** Jimmy Chu
+
+**Background:** 48 years old, a food critic, base in Boston. He uses email and basic apps daily, but avoids tools that require setup or steep learning curves. Prefers simple, visual interfaces over text-heavy ones
+
+Jimmy has been dining in restaurants and writing about food-related articles for 20 years. During this period, he has collected hundreds of recipes, some were obtained from interviews with chefs, some were cut out from magazines, and some were hastily typed after meals. He is not a programmer and has no intention of becoming one. He uses a laptop every day to handle emails and write, but he gives up using any new tools that take more than a few minutes to learn how to use
+
+**Tech Comfort:** 2 / 5
+
+**Goals**
+open the app and immediately see what recipes he has, without remembering file names or folder structures
+Before writing the review, he usually needs to quickly search for a specific recipe. Scanning through that long, unorganized list is not a feasible option.
+
+**Pain Points**
+Text lists are hard to scan. He wants to see recipe names, a category label, and ideally a thumbnail at a glance
+He once accidentally permanently deleted a file that he intended to keep. Since then, he has avoided using digital methods to manage files unless there is a clear way to correct the mistake.
+
+**Context**
+When: Primarily in the evenings before dinner
+Where: At his home desk or in a cafe shop
+How: Jimmy opens the app expecting to land directly on his full recipe library. He scans visually, occasionally uses a search bar, and clicks into a recipe to read it. He rarely types long inputs. He prefers clicking, scrolling, and tapping.
+
+
+### *Sanjith Sunil* (*@OPstriker*) — *Import Recipe*
+
+#### User Persona
+
+<!--
+Create a realistic persona (~1 page) for a user who primarily uses your feature.
+Include: name, background, technical comfort level, goals, pain points, context (when/where/how they use the app).
+-->
+| Name      | Background | technical comfort level (scale 1-5) |
+|-----------|------------|-------------------------------------|
+| *Micheal* | *Cook*     | *2*                                 |
+
+*Michael is a cook comfortable using technology for light browsing, reading recipes, and following tasks on screen. His main goal in using the app is to utilize the cook mode feature as he prepares his meal, which guides him through the process from gathering ingredients to the final meal. He also wants a simple way to import recipes from an old cookbook and even the web, so that he can use the cook mode feature to help him stay on track while he adds ingredients in the right order. Currently micheal finds it tedious to manually type all the recipes into the cookbook and wants a simpler way to import the recipes. He also doesn't like that he needs to type next or previous to get to the steps, as his hands are usually messy and occupied, and he wants a faster way. Michael will mostly use the app when cooking and importing recipes in the restaurant where he works. Michael would also need a way to scale the recipes if possible, since sometimes, when the restaurants get crowded, scaling the recipes would be required, and some recipes would also need to have custom instructions added to account for food allergies the customers may have.*
+
+*Michael also wants a minimal UI when cooking, as he doesn't want the cooking experience cluttered and wants it as straightforward as possible. He doesn’t like to change any settings and just wants the system to work as needed and have high reliability. He needs everything to be accessible quickly, as he tends to multitask a lot and doesn't want to memorize sequences of steps, and prefers automation when possible. In other words, he likes to have minimal interaction for the most desired outcome. He also needs the UI to be easily readable and organized for fast recipe tracking, as he often runs around the kitchen to find ingredients and the right utensils.*
+
+---
+### *Anjali Ahuja* (*ahujaanjali*) — *Recipe Editor*
+
+#### User Persona
+
+My persona is named Mary. Mary is a college student who is primarily focused on her studies, but is moving off campus in the Fall. For the first time, she will be living alone. Mary is a bit scared and frustrated because she does not know how to cook meals on her own. Since she is already balancing her college studies with her job outside of school, she does not have the time to dedicate to learning how to cook. Her technical comfort level is about a 3. She is a 3 because she has grown up with technology and software platforms, so she is overall pretty familiar with technologies. But, because her studies and her major in school do not focus on coding / technology architecture, her technical comfort is not more. Mary hopes to use CookYourBooks as a foundation to get into cooking. As I mentioned earlier, she struggles to put aside time to learn how to cook, so having a recipe manager in one place would help her tremendously. She wants to use it to easily convert and scale recipes to serve one person (since she is living alone). She also wants to use CookYourBooks to map out which ingredients she should get. With the current existing solutions, because it is mainly the code, she is frustrated that there is no UI graphics for CookYourBooks. Mary wants to use this app when she is coming home from class or work, or going to the grocery store. Having this app in both scenarios would make cooking easier because of the physical recipe, and the duration of the meal, as well as making shopping easier. 
+
+
+---
+
+### *Ryan Kim* (*Unknownboykim*) — *Search & Filter*
+
+#### User Persona
+
+<!--
+Create a realistic persona (~1 page) for a user who primarily uses your feature.
+Include: name, background, technical comfort level, goals, pain points, context (when/where/how they use the app).
+-->
+
+*Replace this with your persona.*
+User Persona
+Alex Williams is a 35-year-old marketing manager living in Cambridge, MA, who has spent years collecting recipes and now has over 200 of them spread across several cookbooks in CookYourBooks. The Technical Comfort is 4/5. He's a confident, high-comfort tech user the kind of person who lives in Gmail, Notion, and Spotify and he brings those same expectations to recipe software: results should appear as he types, filters should be right there when he needs them, and nothing should make him wait.
+
+Goals:
+What he wants most is a search experience that feels as snappy and smart as the tools he already uses every day one that remembers his recent searches so he doesn't have to retype the same queries, surfaces filters like cookbook, tag, prep time, and servings without sending him to a different screen, and shows enough in each result row (a thumbnail, the cookbook name, the time) that he can tell recipes apart at a glance. He wants filters like cookbook, tag, prep time, and servings to be right there on the search screen so he never has to navigate away mid-search. He wants each result to show like a thumbnail, the cookbook name, the prep time that he can pick the right one without opening everything.
+
+Pain Points:
+The frustrations he runs into everywhere else are painfully familiar: apps that return every recipe mentioning "lemon" in a step instead of ranking title matches first, filters hidden in settings menus that break his flow mid-search, no history of what he searched last week, and results stripped of context so he can't tell which cookbook something came from. He's usually searching on his phone with the stove already on, so every extra tap or slow load feels like a problem he needs the interface to stay out of his way and get him to the right recipe before anything burns.
+
+Context:
+When he opens the app, it's almost always to search. He doesn't browse the library grid and he types "chicken" or "korean food" and expects to see the right recipe in seconds, either because he's standing in front of the fridge figuring out dinner or because someone across the table just asked him for a recipe and he needs to pull it up fast. He needs results to show up as he types and he wants the ranking to be smart enough to put the most relevant results first and he needs the whole experience to be fast enough that nothing burns while he's looking.
+
+
