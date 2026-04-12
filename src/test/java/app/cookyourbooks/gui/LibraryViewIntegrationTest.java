@@ -7,6 +7,13 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -20,12 +27,6 @@ import app.cookyourbooks.model.Recipe;
 import app.cookyourbooks.model.RecipeCollection;
 import app.cookyourbooks.model.SourceType;
 import app.cookyourbooks.services.LibrarianService;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
 /**
  * Integration tests for the Library View, verifying that the FXML bindings, UI interactions, and
