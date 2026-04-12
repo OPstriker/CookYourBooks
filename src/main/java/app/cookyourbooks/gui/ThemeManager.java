@@ -12,9 +12,9 @@ import org.jspecify.annotations.Nullable;
  * Manages light/dark theme switching for the CookYourBooks application.
  *
  * <p>Swaps the dark CSS stylesheet in and out of the {@link Scene}'s stylesheet list. The light
- * theme is always present (loaded via FXML). Enabling dark mode adds {@code
- * cookyourbooks-dark.css} on top — its higher-specificity {@code .root}-prefixed selectors
- * override the light rules without any FXML changes.
+ * theme is always present (loaded via FXML). Enabling dark mode adds {@code cookyourbooks-dark.css}
+ * on top — its higher-specificity {@code .root}-prefixed selectors override the light rules without
+ * any FXML changes.
  *
  * <h2>Usage</h2>
  *
