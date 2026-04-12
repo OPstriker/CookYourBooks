@@ -1,0 +1,161 @@
+/*
+ * Dark theme overrides for CookYourBooks.
+ *
+ * All selectors are prefixed with .root to give them higher CSS specificity (020) than
+ * the node-level light stylesheet rules (010). This means these rules win without
+ * needing to modify any FXML files or clear existing stylesheets.
+ *
+ * Add this file to the Scene's stylesheet list to enable dark mode.
+ * Remove it to return to light mode.
+ */
+
+/* ── Global base colors (affects all default JavaFX controls) ── */
+.root {
+    -fx-base: #1e2433;
+    -fx-background: #1e2433;
+    -fx-control-inner-background: #252b3b;
+    -fx-text-base-color: #e0e0e5;
+    -fx-text-background-color: #e0e0e5;
+}
+
+/* ── Root pane ── */
+.root .root-pane {
+    -fx-background-color: #1e2433;
+}
+
+/* ── Top bar ── */
+.root .top-bar {
+    -fx-background-color: #1a2033;
+    -fx-border-color: #2d3748;
+    -fx-border-width: 0 0 1 0;
+}
+
+/* ── Content area ── */
+.root .content-area {
+    -fx-background-color: #1e2433;
+}
+
+/* ── Home / Landing screen ── */
+.root .home-root {
+    -fx-background-color: #1e2433;
+}
+
+.root .home-title {
+    -fx-text-fill: #e0e0e5;
+}
+
+.root .home-tagline {
+    -fx-text-fill: #8e9bb5;
+}
+
+/* ── Library View ── */
+.root .library-root {
+    -fx-background-color: #1e2433;
+}
+
+.root .library-toolbar {
+    -fx-background-color: #1a2033;
+    -fx-border-color: #2d3748;
+}
+
+.root .library-filter {
+    -fx-background-color: #252b3b;
+    -fx-text-fill: #e0e0e5;
+    -fx-prompt-text-fill: #6b7a99;
+}
+
+.root .library-filter:focused {
+    -fx-background-color: #2d3748;
+    -fx-effect: dropshadow(gaussian, rgba(52, 152, 219, 0.35), 6, 0, 0, 0);
+}
+
+.root .library-split {
+    -fx-background-color: #2d3748;
+}
+
+.root .library-pane {
+    -fx-background-color: #1e2433;
+}
+
+.root .library-pane-title {
+    -fx-text-fill: #8e9bb5;
+}
+
+.root .library-list {
+    -fx-background-color: transparent;
+    -fx-border-color: #2d3748;
+}
+
+.root .library-list .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #e0e0e5;
+}
+
+.root .library-list .list-cell:odd {
+    -fx-background-color: transparent;
+}
+
+.root .library-list .list-cell:filled:hover {
+    -fx-background-color: #252b3b;
+}
+
+.root .library-list .list-cell:filled:selected {
+    -fx-background-color: #3a5a8c;
+    -fx-text-fill: white;
+}
+
+/* ── Library buttons ── */
+.root .library-btn-secondary {
+    -fx-background-color: #2d3748;
+    -fx-text-fill: #e0e0e5;
+}
+
+.root .library-btn-secondary:hover {
+    -fx-background-color: #3a4a5c;
+}
+
+.root .library-btn-secondary:disabled {
+    -fx-opacity: 0.4;
+}
+
+.root .library-btn-danger:disabled {
+    -fx-background-color: #7a1e1a;
+    -fx-opacity: 0.5;
+}
+
+.root .library-undo-bar {
+    -fx-background-color: #0d1117;
+}
+
+/* ── Search section ── */
+.root .search-section {
+    -fx-background-color: #1e2433;
+    -fx-border-color: #2d3748;
+}
+
+/* ── Recipe Editor buttons ── */
+.root .editor-btn-secondary {
+    -fx-background-color: #2d3748;
+    -fx-text-fill: #e0e0e5;
+}
+
+.root .editor-btn-secondary:hover {
+    -fx-background-color: #3a4a5c;
+}
+
+.root .editor-btn-secondary:pressed {
+    -fx-background-color: #252b3b;
+}
+
+/* ── Labels and text ── */
+.root .page-heading {
+    -fx-text-fill: #e0e0e5;
+}
+
+.root .section-title {
+    -fx-text-fill: #e0e0e5;
+}
+
+.root .status-label {
+    -fx-text-fill: #8e9bb5;
+}
