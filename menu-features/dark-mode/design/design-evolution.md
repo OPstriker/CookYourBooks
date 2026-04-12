@@ -4,7 +4,7 @@
 
 **Screenshot:** `v1-dark-mode.png`
 
-[V1 Dark Mode](v1-dark-mode.png)
+![V1 Dark Mode](v1-dark-mode.png)
 
 Version 1 was our first attempt at applying a dark theme across the whole app. We replaced the white background with a dark navy color and updated the text to be light so it would still be readable. Here is what the first version looked like:
 
