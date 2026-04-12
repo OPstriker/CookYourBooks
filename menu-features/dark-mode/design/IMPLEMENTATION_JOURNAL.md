@@ -48,3 +48,26 @@ all stylesheets in Java code. This would also work, but it would mean changing a
 and rewriting how the app loads its CSS from the start. We decided against this because it was
 more work and harder to undo. The `.root` prefix approach only required changes to the dark CSS
 file itself.
+
+---
+
+## Accessibility Check (Version 1)
+
+The dark mode toggle button is reachable by keyboard. Pressing Tab moves focus to the button
+in the top bar, and pressing Space activates it. This means a user can switch between light and
+dark mode without using a mouse.
+
+The button does not have a tooltip or screen reader label yet. A user relying on a screen reader
+would hear the button text ("☀") but would not know what it does. This is fixed in Version 3,
+where we add a Tooltip that describes the button's action.
+
+---
+
+## Known Limitations (Version 1)
+
+- The button icon stays ☀ in both light and dark mode. There is no visual feedback to tell the
+  user which mode is currently active. This is fixed in Version 2.
+- There is no tooltip on the button. Users have to click it to find out what it does. This is
+  fixed in Version 3.
+- The theme resets every time the app is restarted. The preference is not saved anywhere, so
+  users have to toggle dark mode again on every launch. Persistence is not yet implemented.
