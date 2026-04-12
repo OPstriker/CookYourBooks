@@ -9,8 +9,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
+import org.jspecify.annotations.Nullable;
+
 import app.cookyourbooks.gui.NavigationService;
 import app.cookyourbooks.gui.NavigationService.View;
+import app.cookyourbooks.gui.ThemeManager;
 
 /**
  * Controller for the main application layout ({@code MainView.fxml}).
@@ -35,8 +38,10 @@ public class MainViewController {
   @FXML private StackPane contentArea;
   @FXML private Button homeButton; // navigates to Library; hidden on Home and Library views
   @FXML private Button shoppingListButton; // opens shopping list; TODO: wire later
-  @FXML private Button darkModeButton; // toggles dark mode; TODO: wire later
-  @FXML private Button topImportButton; // navigates to Import; visible only in Library view
+  @FXML private Button darkModeButton; // toggles dark mode
+  @FXML private Button topImportButton;
+
+  @Nullable private ThemeManager themeManager; // navigates to Import; visible only in Library view
   @FXML private Button searchButton; // navigates to Search; visible only in Library view
 
   private final NavigationService navigationService;
@@ -49,6 +54,15 @@ public class MainViewController {
    */
   public MainViewController(NavigationService navigationService) {
     this.navigationService = navigationService;
+  }
+
+  /**
+   * Provides the {@link ThemeManager} that handles dark/light mode switching.
+   *
+   * @param themeManager the shared theme manager
+   */
+  public void setThemeManager(ThemeManager themeManager) {
+    this.themeManager = themeManager;
   }
 
   /**
@@ -68,6 +82,14 @@ public class MainViewController {
   @SuppressWarnings("UnusedMethod") // Called reflectively by FXMLLoader
   @FXML
   private void initialize() {
+    // Dark mode toggle — adds or removes the dark CSS from the Scene's stylesheet list.
+    darkModeButton.setOnAction(
+        e -> {
+          if (themeManager != null) {
+            themeManager.toggle();
+          }
+        });
+
     // Back button navigates to Library from any inner view.
     homeButton.setOnAction(e -> navigationService.navigateTo(View.LIBRARY));
 
