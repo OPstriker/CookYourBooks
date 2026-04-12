@@ -18,7 +18,7 @@ These are the commits made for Version 1, in the order they were added.
 ## PR History
 
 ### Version 1 PR
-**Link:** *(to be added after the PR is merged)*
+**Link:** https://github.com/neu-cs3100/sp26-hw-cyb12-group-4633/pull/2
 
 **Review comment to expect:** The reviewer asked why we used `.root`-prefixed selectors in the dark CSS instead of just removing the light stylesheet and adding the dark one. The answer is in the Decision Log below.
 
