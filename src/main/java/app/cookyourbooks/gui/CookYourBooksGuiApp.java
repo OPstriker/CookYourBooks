@@ -88,7 +88,9 @@ public class CookYourBooksGuiApp extends Application {
     // MainViewController manages the sidebar navigation and the content area that hosts
     // each feature's view. It is constructed here so that ViewModels can be registered
     // before the FXML is loaded.
+    var themeManager = new ThemeManager();
     var mainController = new MainViewController(navigationService);
+    mainController.setThemeManager(themeManager);
 
     // ── 5. Wire your feature ViewModels and Views ──
     //
@@ -215,6 +217,7 @@ public class CookYourBooksGuiApp extends Application {
       Parent root = mainLoader.load();
 
       Scene scene = new Scene(root, 960, 640);
+      themeManager.setScene(scene);
       primaryStage.setTitle("CookYourBooks");
       primaryStage.setScene(scene);
       primaryStage.show();
