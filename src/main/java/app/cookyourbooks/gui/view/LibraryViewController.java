@@ -31,6 +31,7 @@ public class LibraryViewController {
   @FXML private ListView<RecipeSummary> recipeListView;
   @FXML private Button deleteButton;
   @FXML private Button openRecipeButton;
+  @FXML private Button exportButton;
   @FXML private Button deleteRecipeButton;
   @FXML private HBox undoBar;
   @FXML private Label undoLabel;
@@ -123,8 +124,11 @@ public class LibraryViewController {
               }
             });
 
-    // Enable the Open Recipe and Delete Recipe buttons only when a recipe is selected
+    // Enable the Open Recipe, Export, and Delete Recipe buttons only when a recipe is selected
     openRecipeButton
+        .disableProperty()
+        .bind(recipeListView.getSelectionModel().selectedItemProperty().isNull());
+    exportButton
         .disableProperty()
         .bind(recipeListView.getSelectionModel().selectedItemProperty().isNull());
     deleteRecipeButton
@@ -187,5 +191,11 @@ public class LibraryViewController {
     if (selected != null) {
       vm.deleteRecipe(selected.id());
     }
+  }
+
+  @SuppressWarnings("UnusedMethod") // called reflectively by FXMLLoader
+  @FXML
+  private void onExportRecipe() {
+    // TODO: wire export logic
   }
 }
