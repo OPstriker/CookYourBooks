@@ -32,6 +32,10 @@
                     <!-- Spacer pushes Import + Search to the right -->
                     <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
 
+                    <!-- Always visible -->
+                    <Button fx:id="shoppingListButton" text="🛒" styleClass="top-bar-icon-button"/>
+                    <Button fx:id="darkModeButton" text="☀" styleClass="top-bar-icon-button"/>
+
                     <!-- Only visible when in Library view -->
                     <Button fx:id="topImportButton" text="Import Recipe" styleClass="top-bar-button"/>
                     <Button fx:id="searchButton" text="Search" styleClass="top-bar-button"/>

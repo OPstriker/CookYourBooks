@@ -34,6 +34,8 @@ public class MainViewController {
 
   @FXML private StackPane contentArea;
   @FXML private Button homeButton; // navigates to Library; hidden on Home and Library views
+  @FXML private Button shoppingListButton; // opens shopping list; TODO: wire later
+  @FXML private Button darkModeButton; // toggles dark mode; TODO: wire later
   @FXML private Button topImportButton; // navigates to Import; visible only in Library view
   @FXML private Button searchButton; // navigates to Search; visible only in Library view
 

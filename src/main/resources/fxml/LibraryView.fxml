@@ -87,6 +87,11 @@
                         onAction="#onOpenRecipe"
                         HBox.hgrow="ALWAYS"
                         maxWidth="Infinity" />
+                    <Button fx:id="exportButton"
+                        id="exportButton"
+                        text="Export"
+                        styleClass="library-btn-primary"
+                        onAction="#onExportRecipe" />
                     <Button fx:id="deleteRecipeButton"
                         id="deleteRecipeButton"
                         text="Delete"

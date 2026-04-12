@@ -375,10 +375,10 @@ public class LibraryViewModelImpl implements LibraryViewModel {
     undoMessage.set("");
     undoTimer = null;
   }
-  
+
   /*
-  * Navigates to the Search & Filter view.
-  */
+   * Navigates to the Search & Filter view.
+   */
   @Override
   public void navigateToSearch() {
     navigationService.navigateTo(NavigationService.View.SEARCH);
@@ -404,5 +404,3 @@ public class LibraryViewModelImpl implements LibraryViewModel {
     }
   }
 }
-
- 
