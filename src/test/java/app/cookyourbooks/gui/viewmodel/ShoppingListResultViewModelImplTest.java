@@ -51,8 +51,8 @@ class ShoppingListResultViewModelImplTest extends ViewModelTestBase {
     Thread.sleep(200);
     waitForFxEvents();
 
-    assertThat(vm.getSectionTitles()).containsExactlyInAnyOrder(
-        "Garlic Butter Pasta", "Lemon Herb Chicken");
+    assertThat(vm.getSectionTitles())
+        .containsExactlyInAnyOrder("Garlic Butter Pasta", "Lemon Herb Chicken");
   }
 
   // SL2: load() with IDs that don't exist results in empty sections and a status message
@@ -141,8 +141,7 @@ class ShoppingListResultViewModelImplTest extends ViewModelTestBase {
     Platform.runLater(() -> vm.navigateBack());
     waitForFxEvents();
 
-    assertThat(navigationService.getCurrentView())
-        .isEqualTo(NavigationService.View.LIBRARY);
+    assertThat(navigationService.getCurrentView()).isEqualTo(NavigationService.View.LIBRARY);
   }
 
   // SL7: calling load() a second time clears sections from the first call

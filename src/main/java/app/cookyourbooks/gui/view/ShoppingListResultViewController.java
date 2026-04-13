@@ -15,22 +15,22 @@ import app.cookyourbooks.gui.viewmodel.ShoppingListResultViewModel;
 /**
  * FXML controller for {@code ShoppingListResultView.fxml}.
  *
- * <p>Binds the View to the {@link ShoppingListResultViewModel}: wires the loading spinner,
- * the Back button, and listens to the sections list so it can rebuild the ingredient display
- * whenever {@link ShoppingListResultViewModel#load(java.util.Set)} completes.
+ * <p>Binds the View to the {@link ShoppingListResultViewModel}: wires the loading spinner, the Back
+ * button, and listens to the sections list so it can rebuild the ingredient display whenever {@link
+ * ShoppingListResultViewModel#load(java.util.Set)} completes.
  *
  * <h2>Dynamic content</h2>
  *
- * <p>Because the number of recipe sections is not known at compile time, the section VBoxes
- * and ingredient CheckBoxes are created programmatically inside {@link #rebuildSections()}
- * rather than statically in FXML. This mirrors the pattern used in {@code SearchViewController}
- * for its filter chips.
+ * <p>Because the number of recipe sections is not known at compile time, the section VBoxes and
+ * ingredient CheckBoxes are created programmatically inside {@link #rebuildSections()} rather than
+ * statically in FXML. This mirrors the pattern used in {@code SearchViewController} for its filter
+ * chips.
  *
  * <h2>Strikethrough</h2>
  *
- * <p>JavaFX {@code CheckBox} does not automatically apply strikethrough when selected.
- * A listener on each {@link IngredientItem#checkedProperty()} applies an inline style that
- * grays out and strikes through the text when the item is checked.
+ * <p>JavaFX {@code CheckBox} does not automatically apply strikethrough when selected. A listener
+ * on each {@link IngredientItem#checkedProperty()} applies an inline style that grays out and
+ * strikes through the text when the item is checked.
  */
 @SuppressWarnings("NullAway.Init") // FXML fields are injected by FXMLLoader, not the constructor
 public class ShoppingListResultViewController {
@@ -91,8 +91,7 @@ public class ShoppingListResultViewController {
       header.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
 
       VBox ingredientBox = new VBox(2);
-      ingredientBox.setStyle(
-          "-fx-border-color: #cccccc; -fx-border-radius: 4; -fx-padding: 8;");
+      ingredientBox.setStyle("-fx-border-color: #cccccc; -fx-border-radius: 4; -fx-padding: 8;");
 
       for (IngredientItem item : section.getIngredients()) {
         CheckBox cb = new CheckBox(item.getDisplayText());
@@ -100,8 +99,7 @@ public class ShoppingListResultViewController {
         item.checkedProperty()
             .addListener(
                 (obs, wasChecked, isNow) ->
-                    cb.setStyle(
-                        isNow ? "-fx-text-fill: #999999; -fx-strikethrough: true;" : ""));
+                    cb.setStyle(isNow ? "-fx-text-fill: #999999; -fx-strikethrough: true;" : ""));
         ingredientBox.getChildren().add(cb);
       }
 

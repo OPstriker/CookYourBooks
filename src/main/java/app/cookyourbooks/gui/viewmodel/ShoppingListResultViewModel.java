@@ -10,8 +10,8 @@ import javafx.collections.ObservableList;
 /**
  * ViewModel contract for the Shopping List result screen.
  *
- * <p>Exposes the list of recipe sections (each with a title and checkable ingredient rows),
- * loading state, and navigation back to the Library.
+ * <p>Exposes the list of recipe sections (each with a title and checkable ingredient rows), loading
+ * state, and navigation back to the Library.
  *
  * <p>The {@link #load(Set)} method is called by {@code CookYourBooksGuiApp}'s {@code onConfirm}
  * callback with the set of recipe IDs the user selected. It triggers a background fetch that

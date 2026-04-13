@@ -23,8 +23,8 @@ import app.cookyourbooks.services.LibrarianService;
  *
  * <p>These tests verify that the full wiring between {@link ShoppingListViewModelImpl} (recipe
  * selection) and {@link ShoppingListResultViewModelImpl} (result display) works correctly without
- * requiring a visible UI stage — the same lightweight approach used by {@code LibraryViewIntegration
- * Test}.
+ * requiring a visible UI stage — the same lightweight approach used by {@code
+ * LibraryViewIntegration Test}.
  *
  * <p>IT-SL1: confirming a selection populates sections and navigates to SHOPPING_LIST.<br>
  * IT-SL2: pressing the cart button when a list exists navigates directly to SHOPPING_LIST.<br>
@@ -152,8 +152,7 @@ class ShoppingListResultIntegrationTest extends ViewModelTestBase {
         });
     waitForFxEvents();
 
-    assertThat(w.navigationService().getCurrentView())
-        .isEqualTo(NavigationService.View.LIBRARY);
+    assertThat(w.navigationService().getCurrentView()).isEqualTo(NavigationService.View.LIBRARY);
     assertThat(w.shoppingListVm().activeProperty().get()).isTrue();
   }
 }

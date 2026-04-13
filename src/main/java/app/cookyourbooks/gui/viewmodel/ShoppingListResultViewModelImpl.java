@@ -25,8 +25,8 @@ import app.cookyourbooks.services.LibrarianService;
  * <ol>
  *   <li>Fetches all recipes from the library via {@link LibrarianService#listAllRecipes()}
  *   <li>Filters to only the recipes whose IDs are in the provided set
- *   <li>Builds one {@link RecipeSection} per recipe, each containing one {@link IngredientItem}
- *       per ingredient (using {@code ingredient.toString()} as the display text)
+ *   <li>Builds one {@link RecipeSection} per recipe, each containing one {@link IngredientItem} per
+ *       ingredient (using {@code ingredient.toString()} as the display text)
  * </ol>
  *
  * <p>All updates to {@link #sectionsProperty()} and other observable properties happen on the FX
