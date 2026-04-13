@@ -41,7 +41,9 @@ Version 2 fixes the most confusing part of V1: the toggle button. In V1, the but
 
 This was a one-line code change in `MainViewController.java`. After calling `themeManager.toggle()`, the button text is updated immediately:
 
-java darkModeButton.setText(themeManager.isDarkMode() ? "☀" : "🌙");
+```java
+darkModeButton.setText(themeManager.isDarkMode() ? "☀" : "🌙");
+```
 
 ### What Prompted This Change
 
