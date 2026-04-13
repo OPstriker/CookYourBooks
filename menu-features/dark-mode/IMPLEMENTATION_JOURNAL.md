@@ -53,7 +53,6 @@ The button does not have a tooltip or screen reader label yet. A user relying on
 - There is no tooltip on the button. Users have to click it to find out what it does. This is fixed in Version 3.
 - The theme resets every time the app is restarted. The preference is not saved anywhere, so users have to toggle dark mode again on every launch. Persistence is not yet implemented.
 
-
 ## Git History (Version 2)
 
 These are the commits made for Version 2.
@@ -66,7 +65,6 @@ These are the commits made for Version 2.
 
 ### Version 2 PR
 **Link:** *https://github.com/neu-cs3100/sp26-hw-cyb12-group-4633/pull/2#issue-4248371441*
-
 
 ## Decision Log (Version 2)
 
