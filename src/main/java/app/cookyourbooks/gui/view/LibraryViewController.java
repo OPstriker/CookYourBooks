@@ -1,8 +1,11 @@
 package app.cookyourbooks.gui.view;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -13,6 +16,7 @@ import javafx.scene.layout.HBox;
 import app.cookyourbooks.gui.viewmodel.LibraryViewModel;
 import app.cookyourbooks.gui.viewmodel.RecipeCollectionSummary;
 import app.cookyourbooks.gui.viewmodel.RecipeSummary;
+import app.cookyourbooks.gui.viewmodel.ShoppingListViewModel;
 
 /**
  * Controller for the Library View feature ({@code LibraryView.fxml}).
@@ -33,20 +37,26 @@ public class LibraryViewController {
   @FXML private Button openRecipeButton;
   @FXML private Button exportButton;
   @FXML private Button deleteRecipeButton;
+  @FXML private Button confirmShoppingListButton;
+  @FXML private HBox normalRecipeButtons;
   @FXML private HBox undoBar;
+  @FXML private HBox shoppingListConfirmBar;
   @FXML private Label undoLabel;
+  @FXML private Label shoppingListHintLabel;
 
   // ── ViewModel ──
 
   private final LibraryViewModel vm;
+  private final ShoppingListViewModel shoppingListVm;
 
   /**
    * Constructs the controller with its ViewModel.
    *
    * @param vm the Library ViewModel
    */
-  public LibraryViewController(LibraryViewModel vm) {
+  public LibraryViewController(LibraryViewModel vm, ShoppingListViewModel shoppingListVm) {
     this.vm = vm;
+    this.shoppingListVm = shoppingListVm;
   }
 
   // ── Initialization ──
@@ -60,11 +70,81 @@ public class LibraryViewController {
     setupRecipeList();
     setupLoadingIndicator();
     setupUndoBar();
+    setupShoppingListMode();
 
     vm.refresh();
   }
 
   // ── Private setup helpers ──
+
+  private void setupShoppingListMode() {
+    BooleanProperty active = shoppingListVm.activeProperty();
+
+    // Show/hide the hint label and confirm bar
+    shoppingListHintLabel.visibleProperty().bind(active);
+    shoppingListHintLabel.managedProperty().bind(active);
+    shoppingListConfirmBar.visibleProperty().bind(active);
+    shoppingListConfirmBar.managedProperty().bind(active);
+
+    // Swap the recipe list cell factory when mode changes
+    normalRecipeButtons.visibleProperty().bind(active.not());
+    normalRecipeButtons.managedProperty().bind(active.not());
+    active.addListener((obs, wasActive, isActive) -> refreshRecipeCellFactory(isActive));
+  }
+
+  @SuppressWarnings("UnusedMethod")
+  @FXML
+  private void onCancelShoppingList() {
+    shoppingListVm.discard();
+  }
+
+  @SuppressWarnings("unchecked")
+  private void refreshRecipeCellFactory(boolean selectionMode) {
+    if (!selectionMode) {
+      // Normal mode: plain title cell (same as before)
+      recipeListView.setCellFactory(
+          lv ->
+              new ListCell<>() {
+                @Override
+                protected void updateItem(RecipeSummary item, boolean empty) {
+                  super.updateItem(item, empty);
+                  setText(empty || item == null ? null : item.title());
+                  setGraphic(null);
+                }
+              });
+    } else {
+      // Selection mode: checkbox cell
+      recipeListView.setCellFactory(
+          lv ->
+              new ListCell<>() {
+                private final javafx.scene.control.CheckBox checkBox =
+                    new javafx.scene.control.CheckBox();
+
+                @Override
+                protected void updateItem(RecipeSummary item, boolean empty) {
+                  super.updateItem(item, empty);
+                  if (empty || item == null) {
+                    setGraphic(null);
+                    setText(null);
+                    return;
+                  }
+                  checkBox.setText(item.title());
+                  // Sync checkbox state with the VM's selected set
+                  checkBox.setSelected(shoppingListVm.selectedRecipeIds().contains(item.id()));
+                  checkBox.setOnAction(
+                      e -> {
+                        if (checkBox.isSelected()) {
+                          shoppingListVm.selectedRecipeIds().add(item.id());
+                        } else {
+                          shoppingListVm.selectedRecipeIds().remove(item.id());
+                        }
+                      });
+                  setGraphic(checkBox);
+                  setText(null);
+                }
+              });
+    }
+  }
 
   private void setupFilterBinding() {
     // Bidirectional: typing in the field updates vm.filterTextProperty(), and vice versa
@@ -197,5 +277,41 @@ public class LibraryViewController {
   @FXML
   private void onExportRecipe() {
     // TODO: wire export logic
+  }
+
+  @FXML
+  private void onConfirmShoppingList() {
+    // Confirmation dialog with Discard option
+    Alert alert =
+        new Alert(
+            Alert.AlertType.CONFIRMATION,
+            "Add "
+                + shoppingListVm.selectedRecipeIds().size()
+                + " recipe(s) to your shopping list?",
+            ButtonType.OK,
+            ButtonType.CANCEL);
+    alert.setTitle("Confirm Shopping List");
+    alert.setHeaderText(null);
+
+    // Rename the Cancel button to "Discard" per your requirement
+    alert.getButtonTypes().stream()
+        .filter(bt -> bt == ButtonType.CANCEL)
+        .findFirst()
+        .ifPresent(
+            bt -> {
+              ((javafx.scene.control.Button) alert.getDialogPane().lookupButton(bt))
+                  .setText("Discard");
+            });
+
+    alert
+        .showAndWait()
+        .ifPresent(
+            result -> {
+              if (result == ButtonType.OK) {
+                shoppingListVm.confirm(); // hands IDs to partner's screen
+              } else {
+                shoppingListVm.discard(); // clears selection, exits mode
+              }
+            });
   }
 }

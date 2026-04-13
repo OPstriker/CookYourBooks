@@ -11,6 +11,7 @@ import javafx.scene.layout.StackPane;
 
 import app.cookyourbooks.gui.NavigationService;
 import app.cookyourbooks.gui.NavigationService.View;
+import app.cookyourbooks.gui.viewmodel.ShoppingListViewModel;
 
 /**
  * Controller for the main application layout ({@code MainView.fxml}).
@@ -40,15 +41,19 @@ public class MainViewController {
   @FXML private Button searchButton; // navigates to Search; visible only in Library view
 
   private final NavigationService navigationService;
+  private final ShoppingListViewModel shoppingListVm;
   private final Map<View, Node> viewNodes = new EnumMap<>(View.class);
 
   /**
    * Constructs the main view controller.
    *
    * @param navigationService the shared navigation service
+   * @param shoppingListVm the Shopping List ViewModel
    */
-  public MainViewController(NavigationService navigationService) {
+  public MainViewController(
+      NavigationService navigationService, ShoppingListViewModel shoppingListVm) {
     this.navigationService = navigationService;
+    this.shoppingListVm = shoppingListVm;
   }
 
   /**
@@ -74,6 +79,12 @@ public class MainViewController {
     // Import and Search are only visible/functional from the Library view.
     topImportButton.setOnAction(e -> navigationService.navigateTo(View.IMPORT));
     searchButton.setOnAction(e -> navigationService.navigateTo(View.SEARCH));
+
+    shoppingListButton.setOnAction(
+        e -> {
+          shoppingListVm.enter();
+          navigationService.navigateTo(View.LIBRARY);
+        });
 
     // Listen for navigation changes and swap the content area.
     navigationService

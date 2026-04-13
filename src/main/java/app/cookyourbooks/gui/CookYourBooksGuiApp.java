@@ -28,6 +28,7 @@ import app.cookyourbooks.gui.viewmodel.ImportViewModelImpl;
 import app.cookyourbooks.gui.viewmodel.LibraryViewModelImpl;
 import app.cookyourbooks.gui.viewmodel.RecipeEditorViewModelImpl;
 import app.cookyourbooks.gui.viewmodel.SearchViewModelImpl;
+import app.cookyourbooks.gui.viewmodel.ShoppingListViewModelImpl;
 import app.cookyourbooks.services.LibrarianServiceImpl;
 
 /**
@@ -84,11 +85,13 @@ public class CookYourBooksGuiApp extends Application {
     // away, so the ImportViewModel does not hold a reference to navigationService.
     var navigationService = new NavigationService();
 
+    var shoppingListVm = new ShoppingListViewModelImpl(null);
+
     // ── 4. Create the main layout ──
     // MainViewController manages the sidebar navigation and the content area that hosts
     // each feature's view. It is constructed here so that ViewModels can be registered
     // before the FXML is loaded.
-    var mainController = new MainViewController(navigationService);
+    var mainController = new MainViewController(navigationService, shoppingListVm);
 
     // ── 5. Wire your feature ViewModels and Views ──
     //
@@ -126,7 +129,7 @@ public class CookYourBooksGuiApp extends Application {
       FXMLLoader libraryLoader = new FXMLLoader(getClass().getResource("/fxml/LibraryView.fxml"));
       final LibraryViewModelImpl finalLibraryVmForLoader = libraryVm;
       libraryLoader.setControllerFactory(
-          clazz -> new LibraryViewController(finalLibraryVmForLoader));
+          clazz -> new LibraryViewController(finalLibraryVmForLoader, shoppingListVm));
       Parent libraryView = libraryLoader.load();
       mainController.setViewNode(NavigationService.View.LIBRARY, libraryView);
     } catch (IOException e) {
