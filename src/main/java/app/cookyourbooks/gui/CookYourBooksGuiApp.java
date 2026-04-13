@@ -105,7 +105,7 @@ public class CookYourBooksGuiApp extends Application {
     // MainViewController manages the sidebar navigation and the content area that hosts
     // each feature's view. It is constructed here so that ViewModels can be registered
     // before the FXML is loaded.
-    var mainController = new MainViewController(navigationService, shoppingListVm);
+    var mainController = new MainViewController(navigationService, shoppingListVm, resultVm);
 
     // ── 5. Wire your feature ViewModels and Views ──
     //
