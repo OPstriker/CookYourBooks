@@ -91,6 +91,9 @@ dependencies {
 
     // dotenv-java for loading .env files
     implementation libs.dotenv.java
+
+    // Apache PDFBox for PDF export
+    implementation libs.pdfbox
 }
 
 application {
