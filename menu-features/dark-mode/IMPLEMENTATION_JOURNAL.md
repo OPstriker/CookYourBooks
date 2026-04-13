@@ -52,3 +52,23 @@ The button does not have a tooltip or screen reader label yet. A user relying on
 - The button icon stays ☀ in both light and dark mode. There is no visual feedback to tell the user which mode is currently active. This is fixed in Version 2.
 - There is no tooltip on the button. Users have to click it to find out what it does. This is fixed in Version 3.
 - The theme resets every time the app is restarted. The preference is not saved anywhere, so users have to toggle dark mode again on every launch. Persistence is not yet implemented.
+
+
+## Git History (Version 2)
+
+These are the commits made for Version 2.
+
+| Commit | What it added |
+|---|---|
+| `8848c40` | Documented V2 design in `design-evolution.md` — icon switches between 🌙 and ☀ |
+| *(pending)* | Added `darkModeButton.setText(...)` line in `MainViewController` so the icon updates on toggle |
+
+
+### Version 2 PR
+**Link:** *(to be added after the PR is merged)*
+
+
+
+
+
+
