@@ -54,3 +54,43 @@ Problem 1 from V1 feedback: *"The sun icon alone does not tell the user what it 
 1. **No tooltip.** Hovering over the button shows nothing. A first-time user might still not know the button is there. This is fixed in V3.
 2. **The theme resets on relaunch.** The preference is still not saved between sessions.
 3. **Bottom buttons still look faint.** The contrast issue from V1 is not yet addressed.
+
+---
+
+## Version 3: Tooltip Added to Toggle Button
+
+**Screenshot:** `v3-dark-mode.png`
+
+![V3 Dark Mode](v3-dark-mode.png)
+
+Version 3 adds a Tooltip to the dark mode button. In V2, the switching icon made the button clearer, but a user hovering over it still got no explanation. Now when you hover over the button, a small label appears that tells you exactly what will happen if you click:
+
+- Hovering in **light mode** shows: *"Switch to dark mode"*
+- Hovering in **dark mode** shows: *"Switch to light mode"*
+
+The tooltip text updates on every click so it always matches the current state. This was done in two lines in `MainViewController.java` — one to create the tooltip on startup, and one to update its text after each toggle:
+
+```java
+darkModeButton.setTooltip(new Tooltip("Switch to dark mode"));
+```
+
+```java
+darkModeButton.getTooltip().setText(themeManager.isDarkMode() ? "Switch to light mode" : "Switch to dark mode");
+```
+
+### What Prompted This Change
+
+Problem 1 from V2 feedback: *"Hovering over the button shows nothing."* The icon switch helped, but a first-time user still had no confirmation of what the button does until they clicked it. A Tooltip gives that confirmation passively — no click required. This is especially helpful for a user like Mary who is new to the app and cautious about clicking buttons she does not fully understand.
+
+### What Changed From V2 to V3
+
+| | V2 | V3 |
+|---|---|---|
+| Button icon | Switches 🌙 ↔ ☀ | Same |
+| Hover tooltip | None | Shows current action |
+| Screen reader support | Reads icon character | Icon + tooltip text available |
+
+### Problems Still Remaining After Version 3
+
+1. **The theme resets on relaunch.** The preference is still not saved between sessions. Persistence would require writing to a local settings file and reading it on startup.
+2. **Bottom buttons still look faint.** The contrast on Delete, Open Recipe, and Export PDF has not been addressed.
