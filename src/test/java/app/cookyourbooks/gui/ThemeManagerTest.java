@@ -3,10 +3,22 @@ package app.cookyourbooks.gui;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
+import java.util.prefs.Preferences;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /** Unit tests for {@link ThemeManager}. */
 class ThemeManagerTest {
+
+  /**
+   * Reset the OS preference to {@code false} before every test so that earlier tests that call
+   * {@link ThemeManager#toggle()} cannot affect the starting state of later tests.
+   */
+  @BeforeEach
+  void resetSavedPreference() {
+    Preferences.userNodeForPackage(ThemeManager.class).putBoolean("darkMode", false);
+  }
 
   @Test
   void isDarkMode_startsFalse() {
