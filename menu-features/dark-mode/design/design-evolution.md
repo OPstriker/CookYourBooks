@@ -47,13 +47,16 @@ darkModeButton.setText(themeManager.isDarkMode() ? "☀" : "🌙");
 
 ### What Prompted This Change
 
-Problem 1 from V1 feedback: *"The sun icon alone does not tell the user what it does."* A user like Mary — who opens the app in a bright kitchen and wants to quickly reduce screen glare — should be able to see the button and immediately understand what it will do. Switching the icon makes the button self-explanatory without needing any extra label or tooltip.
+**(Problem 1) The toggle button is confusing.** The sun icon alone does not tell the user what it does. Making the icon switch between 🌙 and ☀ on every click directly fixes this — the button now shows its next action before the user clicks it. A user like Mary who opens the app for the first time can see 🌙 and immediately understand that clicking it will switch to dark mode.
+
+Problems 2, 3, and 4 (faint buttons, theme resetting, list item contrast) are documented as remaining limitations below. Each version focuses on one fix so each PR stays small and easy to review.
 
 ### Problems Still Remaining After Version 2
 
-1. **No tooltip.** Hovering over the button shows nothing. A first-time user might still not know the button is there. This is fixed in V3.
-2. **The theme resets on relaunch.** The preference is still not saved between sessions.
-3. **Bottom buttons still look faint.** The contrast issue from V1 is not yet addressed.
+- **(Problem 1 — partially)** No tooltip yet. Hovering over the button still shows nothing. Fixed in V3.
+- **(Problem 2)** Bottom buttons still look faint. The contrast issue has not been addressed.
+- **(Problem 3)** The theme resets on relaunch. The preference is still not saved between sessions.
+- **(Problem 4)** List items are still hard to tell apart. No card background has been added.
 
 ---
 
