@@ -108,6 +108,8 @@ These are the commits made for Version 3, in the order they were added.
 | `ad1aeba` | Documented V3 design in `design-evolution.md` — tooltip on toggle button |
 | `8a36b8d` | Added `setTooltip()` in `MainViewController` and V3 screenshot to the design folder |
 | `2d7d522` | Updated tooltip text to switch between "Switch to light mode" and "Switch to dark mode" on each click |
+| `ee32d1a` | Added white 3 px left border to selected list cells in `cookyourbooks-dark.css` — color blindness accessibility fix |
+| `ffd3048` | Added `Preferences` read/write to `ThemeManager` and startup sync in `MainViewController` — theme now persists between launches |
 
 ---
 
