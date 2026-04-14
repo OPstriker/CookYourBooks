@@ -1,0 +1,109 @@
+package app.cookyourbooks.gui.view;
+
+import javafx.collections.ListChangeListener;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.layout.VBox;
+
+import app.cookyourbooks.gui.viewmodel.IngredientItem;
+import app.cookyourbooks.gui.viewmodel.RecipeSection;
+import app.cookyourbooks.gui.viewmodel.ShoppingListResultViewModel;
+
+/**
+ * FXML controller for {@code ShoppingListResultView.fxml}.
+ *
+ * <p>Binds the View to the {@link ShoppingListResultViewModel}: wires the loading spinner, the Back
+ * button, and listens to the sections list so it can rebuild the ingredient display whenever {@link
+ * ShoppingListResultViewModel#load(java.util.Set)} completes.
+ *
+ * <h2>Dynamic content</h2>
+ *
+ * <p>Because the number of recipe sections is not known at compile time, the section VBoxes and
+ * ingredient CheckBoxes are created programmatically inside {@link #rebuildSections()} rather than
+ * statically in FXML. This mirrors the pattern used in {@code SearchViewController} for its filter
+ * chips.
+ *
+ * <h2>Strikethrough</h2>
+ *
+ * <p>JavaFX {@code CheckBox} does not automatically apply strikethrough when selected. A listener
+ * on each {@link IngredientItem#checkedProperty()} applies an inline style that grays out and
+ * strikes through the text when the item is checked.
+ */
+@SuppressWarnings("NullAway.Init") // FXML fields are injected by FXMLLoader, not the constructor
+public class ShoppingListResultViewController {
+
+  @FXML private ProgressIndicator loadingSpinner;
+  @FXML private VBox sectionsContainer;
+  @FXML private Button backButton;
+
+  private final ShoppingListResultViewModel vm;
+
+  /**
+   * Constructs the controller with its ViewModel. Supplied via {@code loader.setController()} in
+   * {@code CookYourBooksGuiApp}.
+   *
+   * @param vm the Shopping List result ViewModel
+   */
+  public ShoppingListResultViewController(ShoppingListResultViewModel vm) {
+    this.vm = vm;
+  }
+
+  /**
+   * Called by FXMLLoader after all {@code @FXML} fields are injected. Sets up property bindings,
+   * the Back button handler, and the listener that rebuilds sections when the VM's list changes.
+   */
+  @SuppressWarnings("UnusedMethod") // Called reflectively by FXMLLoader
+  @FXML
+  private void initialize() {
+    loadingSpinner.visibleProperty().bind(vm.loadingProperty());
+    loadingSpinner.managedProperty().bind(vm.loadingProperty());
+
+    backButton.setOnAction(e -> vm.navigateBack());
+
+    // Rebuild the ingredient display whenever load() finishes populating sections.
+    vm.sectionsProperty()
+        .addListener((ListChangeListener<RecipeSection>) change -> rebuildSections());
+  }
+
+  /**
+   * Clears and rebuilds the {@code sectionsContainer} VBox from the current sections in the VM.
+   *
+   * <p>For each {@link RecipeSection}:
+   *
+   * <ul>
+   *   <li>A bold {@link Label} is added as the recipe header.
+   *   <li>A bordered inner {@link VBox} holds one {@link CheckBox} per {@link IngredientItem}.
+   *   <li>Each checkbox is bidirectionally bound to {@link IngredientItem#checkedProperty()}.
+   *   <li>A listener applies a gray strikethrough style when an item is checked.
+   * </ul>
+   *
+   * <p>This method runs on the FX Application Thread (it is triggered by an ObservableList
+   * listener), so creating JavaFX nodes here is safe.
+   */
+  private void rebuildSections() {
+    sectionsContainer.getChildren().clear();
+
+    for (RecipeSection section : vm.sectionsProperty()) {
+      Label header = new Label(section.getRecipeName());
+      header.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
+
+      VBox ingredientBox = new VBox(2);
+      ingredientBox.setStyle("-fx-border-color: #cccccc; -fx-border-radius: 4; -fx-padding: 8;");
+
+      for (IngredientItem item : section.getIngredients()) {
+        CheckBox cb = new CheckBox(item.getDisplayText());
+        cb.selectedProperty().bindBidirectional(item.checkedProperty());
+        item.checkedProperty()
+            .addListener(
+                (obs, wasChecked, isNow) ->
+                    cb.setStyle(isNow ? "-fx-text-fill: #999999; -fx-strikethrough: true;" : ""));
+        ingredientBox.getChildren().add(cb);
+      }
+
+      sectionsContainer.getChildren().add(new VBox(6, header, ingredientBox));
+    }
+  }
+}

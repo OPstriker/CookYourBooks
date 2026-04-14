@@ -11,6 +11,7 @@ import javafx.scene.layout.StackPane;
 
 import app.cookyourbooks.gui.NavigationService;
 import app.cookyourbooks.gui.NavigationService.View;
+import app.cookyourbooks.gui.viewmodel.ShoppingListResultViewModel;
 import app.cookyourbooks.gui.viewmodel.ShoppingListViewModel;
 
 /**
@@ -42,18 +43,23 @@ public class MainViewController {
 
   private final NavigationService navigationService;
   private final ShoppingListViewModel shoppingListVm;
+  private final ShoppingListResultViewModel resultVm;
   private final Map<View, Node> viewNodes = new EnumMap<>(View.class);
 
   /**
    * Constructs the main view controller.
    *
    * @param navigationService the shared navigation service
-   * @param shoppingListVm the Shopping List ViewModel
+   * @param shoppingListVm the Shopping List selection ViewModel
+   * @param resultVm the Shopping List result ViewModel (used to check if a list already exists)
    */
   public MainViewController(
-      NavigationService navigationService, ShoppingListViewModel shoppingListVm) {
+      NavigationService navigationService,
+      ShoppingListViewModel shoppingListVm,
+      ShoppingListResultViewModel resultVm) {
     this.navigationService = navigationService;
     this.shoppingListVm = shoppingListVm;
+    this.resultVm = resultVm;
   }
 
   /**
@@ -80,10 +86,16 @@ public class MainViewController {
     topImportButton.setOnAction(e -> navigationService.navigateTo(View.IMPORT));
     searchButton.setOnAction(e -> navigationService.navigateTo(View.SEARCH));
 
+    // If a shopping list already exists, go straight to it.
+    // Otherwise, enter selection mode so the user can pick recipes.
     shoppingListButton.setOnAction(
         e -> {
-          shoppingListVm.enter();
-          navigationService.navigateTo(View.LIBRARY);
+          if (!resultVm.sectionsProperty().isEmpty()) {
+            navigationService.navigateTo(View.SHOPPING_LIST);
+          } else {
+            shoppingListVm.enter();
+            navigationService.navigateTo(View.LIBRARY);
+          }
         });
 
     // Listen for navigation changes and swap the content area.
