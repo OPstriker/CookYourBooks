@@ -130,5 +130,9 @@ public class MainViewController {
     topImportButton.setManaged(onLibrary);
     searchButton.setVisible(onLibrary);
     searchButton.setManaged(onLibrary);
+    shoppingListButton.setVisible(onLibrary);
+    shoppingListButton.setManaged(onLibrary);
+    darkModeButton.setVisible(onLibrary);
+    darkModeButton.setManaged(onLibrary);
   }
 }
