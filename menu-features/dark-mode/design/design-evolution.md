@@ -47,7 +47,7 @@ darkModeButton.setText(themeManager.isDarkMode() ? "☀" : "🌙");
 
 ### What Prompted This Change
 
-**(Problem 1) The toggle button is confusing.** The sun icon alone does not tell the user what it does. Making the icon switch between 🌙 and ☀ on every click directly fixes this — the button now shows its next action before the user clicks it. A user like Mary who opens the app for the first time can see 🌙 and immediately understand that clicking it will switch to dark mode.
+**(Problem 1) The toggle button is confusing.** The sun icon alone does not tell the user what it does. Making the icon switch between 🌙 and ☀ on every click directly fixes this and the button now shows its next action before the user clicks it. A user like Mary who opens the app for the first time can see 🌙 and immediately understand that clicking it will switch to dark mode.
 
 Problems 2, 3, and 4 (faint buttons, theme resetting, list item contrast) are documented as remaining limitations below. Each version focuses on one fix so each PR stays small and easy to review.
 
@@ -83,7 +83,7 @@ darkModeButton.getTooltip().setText(themeManager.isDarkMode() ? "Switch to light
 
 ### What Prompted This Change
 
-Problem 1 from V2 feedback: *"Hovering over the button shows nothing."* The icon switch helped, but a first-time user still had no confirmation of what the button does until they clicked it. A Tooltip gives that confirmation passively — no click required. This is especially helpful for a user like Mary who is new to the app and cautious about clicking buttons she does not fully understand.
+Problem 1 from V2 feedback: *"Hovering over the button shows nothing."* The icon switch helped, but a first-time user still had no confirmation of what the button does until they clicked it. A Tooltip gives that confirmation passively and no click required. This is especially helpful for a user like Mary who is new to the app and cautious about clicking buttons she does not fully understand.
 
 ### What Changed From V2 to V3
 

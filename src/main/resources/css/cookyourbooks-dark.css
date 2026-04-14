@@ -102,6 +102,8 @@
 .root .library-list .list-cell:filled:selected {
     -fx-background-color: #3a5a8c;
     -fx-text-fill: white;
+    -fx-border-color: white;
+    -fx-border-width: 0 0 0 3px;
 }
 
 /* ── Library buttons ── */
