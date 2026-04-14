@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -93,25 +94,28 @@ public class MainViewController {
     shoppingListButton.setOnAction(
         e -> {
           if (!resultVm.sectionsProperty().isEmpty()) {
-            Alert alert =
-                new Alert(
-                    Alert.AlertType.CONFIRMATION,
-                    "Clear your shopping list?",
-                    ButtonType.OK,
-                    ButtonType.CANCEL);
+            ButtonType goToPrevious = new ButtonType("Go to Previous Cart");
+            ButtonType clearAndNew = new ButtonType("Clear and Start New");
+            ButtonType returnButton = new ButtonType("Return", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Shopping List");
-            alert.setHeaderText("Clear Shopping List");
+            alert.setHeaderText("You have an existing shopping list");
+            alert.setContentText("What would you like to do?");
+            alert.getButtonTypes().setAll(goToPrevious, clearAndNew, returnButton);
+
             alert
                 .showAndWait()
                 .ifPresent(
                     result -> {
-                      if (result == ButtonType.OK) {
+                      if (result == goToPrevious) {
+                        navigationService.navigateTo(View.SHOPPING_LIST);
+                      } else if (result == clearAndNew) {
                         shoppingListVm.enter();
                         navigationService.navigateTo(View.LIBRARY);
                       }
                     });
           } else {
-            // No existing shopping list — go straight to selection mode
             shoppingListVm.enter();
             navigationService.navigateTo(View.LIBRARY);
           }
