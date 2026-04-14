@@ -18,13 +18,13 @@ Version 1 was our first attempt at applying a dark theme across the whole app. W
 
 After looking at V1 and clicking through the app, we found four issues:
 
-1. **The toggle button is confusing.** The sun icon alone does not tell the user what it does. Someone using the app for the first time would not know if clicking it turns dark mode on or off.
+1. The toggle button is confusing: The sun icon alone does not tell the user what it does. Someone using the app for the first time would not know if clicking it turns dark mode on or off.
 
-2. **The bottom buttons look disabled.** The Delete, Open Recipe, and Export PDF buttons are so faint that they look like they cannot be clicked. This would confuse a user like Michael who needs to act quickly in the kitchen.
+2. The bottom buttons look disabled: The Delete, Open Recipe, and Export PDF buttons are so faint that they look like they cannot be clicked. This would confuse a user like Michael who needs to act quickly in the kitchen.
 
-3. **The theme resets every time you reopen the app.** Version 1 switches the theme while the app is open, but does not save the preference. Every time you relaunch, it goes back to light mode.
+3. The theme resets every time you reopen the app: Version 1 switches the theme while the app is open, but does not save the preference. Every time you relaunch, it goes back to light mode.
 
-4. **List items are hard to tell apart.** The unselected items in the collections list blend into the background. There is barely any visual separation between items and the panel behind them.
+4. List items are hard to tell apart: The unselected items in the collections list blend into the background. There is barely any visual separation between items and the panel behind them.
 
 ---
 
