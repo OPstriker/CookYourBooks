@@ -110,6 +110,8 @@ These are the commits made for Version 3, in the order they were added.
 | `2d7d522` | Updated tooltip text to switch between "Switch to light mode" and "Switch to dark mode" on each click |
 | `ee32d1a` | Added white 3 px left border to selected list cells in `cookyourbooks-dark.css` — color blindness accessibility fix |
 | `ffd3048` | Added `Preferences` read/write to `ThemeManager` and startup sync in `MainViewController` — theme now persists between launches |
+| `51a3eba` | Updated V3 git history table to include color blindness and persistence commit hashes |
+| `10e20d9` | Added `@BeforeEach` to `ThemeManagerTest` to reset OS Preferences before each test — fixes flaky test caused by shared Preferences state |
 
 ---
 
