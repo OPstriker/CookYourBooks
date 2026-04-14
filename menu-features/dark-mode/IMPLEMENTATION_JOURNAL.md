@@ -114,7 +114,7 @@ These are the commits made for Version 3, in the order they were added.
 ## PR History
 
 ### Version 3 PR
-**Link:** *(to be added after the PR is merged)*
+**Link:** https://github.com/neu-cs3100/sp26-hw-cyb12-group-4633/pull/7
 
 ---
 
