@@ -65,8 +65,8 @@ Problem 1 from V1 feedback: *"The sun icon alone does not tell the user what it 
 
 Version 3 adds a Tooltip to the dark mode button. In V2, the switching icon made the button clearer, but a user hovering over it still got no explanation. Now when you hover over the button, a small label appears that tells you exactly what will happen if you click:
 
-- Hovering in **light mode** shows: *"Switch to dark mode"*
-- Hovering in **dark mode** shows: *"Switch to light mode"*
+- Hovering in light mode shows: "Switch to dark mode"
+- Hovering in dark mode shows: "Switch to light mode"
 
 The tooltip text updates on every click so it always matches the current state. This was done in two lines in `MainViewController.java` — one to create the tooltip on startup, and one to update its text after each toggle:
 
