@@ -34,8 +34,7 @@ public class ThemeManager {
               "cookyourbooks-dark.css not found on classpath")
           .toExternalForm();
 
-  private static final Preferences PREFS =
-      Preferences.userNodeForPackage(ThemeManager.class);
+  private static final Preferences PREFS = Preferences.userNodeForPackage(ThemeManager.class);
 
   private static final String DARK_MODE_KEY = "darkMode";
 

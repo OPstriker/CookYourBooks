@@ -144,5 +144,5 @@ The button is still fully keyboard accessible. Tab moves focus to the button and
 
 - The theme preference is now saved between launches using java.util.prefs. ThemeManager reads the saved value on construction and applies it when the Scene is set. The preference is written on every toggle.
 - The bottom action buttons (Delete, Open Recipe, Export PDF) still look faint in dark mode. The contrast issue from V1 and V2 has not been addressed.
-- The tooltip is not reachable by keyboard. Users who navigate entirely by keyboard cannot access the tooltip text without using a mouse to hover.
+- The tooltip is not reachable by keyboard. The users who navigate entirely by keyboard cannot access the tooltip text without using a mouse to hover.
 - The top menu bar and filter input have a slightly different background shade than the rest of the app. They pick up the default JavaFX control color instead of our custom dark CSS. Adding more specific `.root .top-bar` and `.root .filter-field` selectors to the dark CSS file would fix this.
