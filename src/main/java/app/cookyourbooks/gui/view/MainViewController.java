@@ -96,6 +96,11 @@ public class MainViewController {
                     themeManager.isDarkMode() ? "Switch to light mode" : "Switch to dark mode");
           }
         });
+    // Sync button icon and tooltip with the saved preference on startup.
+    if (themeManager != null && themeManager.isDarkMode()) {
+      darkModeButton.setText("☀");
+      darkModeButton.getTooltip().setText("Switch to light mode");
+    }
 
     // Back button navigates to Library from any inner view.
     homeButton.setOnAction(e -> navigationService.navigateTo(View.LIBRARY));

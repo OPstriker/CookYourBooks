@@ -43,4 +43,4 @@ The dark CSS applies to all panels at the same time — library view, recipe edi
 | Button icon switches 🌙 ↔ ☀ on toggle | ✅ Complete — fixed in V2 |
 | Tooltip on toggle button (updates on click) | ✅ Complete — fixed in V3 |
 | Color blindness — white left border on selected items | ✅ Complete |
-| Theme does not persist between launches | ⚠️ Known limitation — not yet implemented |
+| Theme persists between launches | ✅ Complete — saved via java.util.prefs |

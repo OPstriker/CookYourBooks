@@ -1,6 +1,7 @@
 package app.cookyourbooks.gui;
 
 import java.util.Objects;
+import java.util.prefs.Preferences;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -33,7 +34,13 @@ public class ThemeManager {
               "cookyourbooks-dark.css not found on classpath")
           .toExternalForm();
 
-  private final BooleanProperty isDarkMode = new SimpleBooleanProperty(false);
+  private static final Preferences PREFS =
+      Preferences.userNodeForPackage(ThemeManager.class);
+
+  private static final String DARK_MODE_KEY = "darkMode";
+
+  private final BooleanProperty isDarkMode =
+      new SimpleBooleanProperty(PREFS.getBoolean(DARK_MODE_KEY, false));
 
   @Nullable private Scene scene;
 
@@ -46,6 +53,9 @@ public class ThemeManager {
    */
   public void setScene(Scene scene) {
     this.scene = scene;
+    if (isDarkMode.get()) {
+      scene.getStylesheets().add(DARK_CSS);
+    }
   }
 
   /**
@@ -56,6 +66,7 @@ public class ThemeManager {
    */
   public void toggle() {
     isDarkMode.set(!isDarkMode.get());
+    PREFS.putBoolean(DARK_MODE_KEY, isDarkMode.get());
     if (scene == null) {
       return;
     }
