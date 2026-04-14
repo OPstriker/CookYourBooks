@@ -38,6 +38,8 @@ public class LibraryViewController {
   @FXML private Button exportButton;
   @FXML private Button deleteRecipeButton;
   @FXML private Button confirmShoppingListButton;
+  @FXML private Button backShoppingListButton;
+  @FXML private Button cancelShoppingListButton;
   @FXML private HBox normalRecipeButtons;
   @FXML private HBox undoBar;
   @FXML private HBox shoppingListConfirmBar;
@@ -277,6 +279,12 @@ public class LibraryViewController {
   @FXML
   private void onExportRecipe() {
     // TODO: wire export logic
+  }
+
+  @SuppressWarnings("UnusedMethod")
+  @FXML
+  private void onBackShoppingList() {
+    // TODO: implement in next commit
   }
 
   @FXML
