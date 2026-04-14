@@ -112,6 +112,7 @@ public class MainViewController {
                         navigationService.navigateTo(View.SHOPPING_LIST);
                       } else if (result == clear) {
                         shoppingListVm.discard();
+                        resultVm.load(java.util.Set.of());
                       }
                     });
           } else {
