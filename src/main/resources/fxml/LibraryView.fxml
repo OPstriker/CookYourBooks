@@ -110,10 +110,6 @@
                     spacing="8"
                     visible="false"
                     managed="false">
-                    <Button fx:id="backShoppingListButton"
-                        text="Back"
-                        styleClass="library-btn-danger"
-                        onAction="#onBackShoppingList" />
                     <Button fx:id="cancelShoppingListButton"
                         text="Cancel"
                         styleClass="library-btn-danger"
