@@ -5,7 +5,9 @@ import java.util.Map;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
@@ -91,8 +93,17 @@ public class MainViewController {
     shoppingListButton.setOnAction(
         e -> {
           if (!resultVm.sectionsProperty().isEmpty()) {
-            navigationService.navigateTo(View.SHOPPING_LIST);
+            Alert alert =
+                new Alert(
+                    Alert.AlertType.CONFIRMATION,
+                    "Clear your shopping list?",
+                    ButtonType.OK,
+                    ButtonType.CANCEL);
+            alert.setTitle("Shopping List");
+            alert.setHeaderText("Clear Shopping List");
+            alert.showAndWait();
           } else {
+            // No existing shopping list — go straight to selection mode
             shoppingListVm.enter();
             navigationService.navigateTo(View.LIBRARY);
           }
