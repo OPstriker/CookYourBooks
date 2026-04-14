@@ -95,14 +95,14 @@ public class MainViewController {
         e -> {
           if (!resultVm.sectionsProperty().isEmpty()) {
             ButtonType goToPrevious = new ButtonType("Go to Previous Cart");
-            ButtonType clearAndNew = new ButtonType("Clear and Start New");
+            ButtonType clear = new ButtonType("Clear");
             ButtonType returnButton = new ButtonType("Return", ButtonBar.ButtonData.CANCEL_CLOSE);
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Shopping List");
             alert.setHeaderText("You have an existing shopping list");
             alert.setContentText("What would you like to do?");
-            alert.getButtonTypes().setAll(goToPrevious, clearAndNew, returnButton);
+            alert.getButtonTypes().setAll(goToPrevious, clear, returnButton);
 
             alert
                 .showAndWait()
@@ -110,9 +110,8 @@ public class MainViewController {
                     result -> {
                       if (result == goToPrevious) {
                         navigationService.navigateTo(View.SHOPPING_LIST);
-                      } else if (result == clearAndNew) {
-                        shoppingListVm.enter();
-                        navigationService.navigateTo(View.LIBRARY);
+                      } else if (result == clear) {
+                        shoppingListVm.discard();
                       }
                     });
           } else {
