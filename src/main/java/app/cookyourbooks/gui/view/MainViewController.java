@@ -101,7 +101,15 @@ public class MainViewController {
                     ButtonType.CANCEL);
             alert.setTitle("Shopping List");
             alert.setHeaderText("Clear Shopping List");
-            alert.showAndWait();
+            alert
+                .showAndWait()
+                .ifPresent(
+                    result -> {
+                      if (result == ButtonType.OK) {
+                        shoppingListVm.enter();
+                        navigationService.navigateTo(View.LIBRARY);
+                      }
+                    });
           } else {
             // No existing shopping list — go straight to selection mode
             shoppingListVm.enter();
