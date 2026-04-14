@@ -130,6 +130,7 @@ public class MainViewController {
     topImportButton.setManaged(onLibrary);
     searchButton.setVisible(onLibrary);
     searchButton.setManaged(onLibrary);
+    // shopping list / dark mode is only available in Library view
     shoppingListButton.setVisible(onLibrary);
     shoppingListButton.setManaged(onLibrary);
     darkModeButton.setVisible(onLibrary);
