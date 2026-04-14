@@ -12,6 +12,11 @@ All implementation work is on the `exportPDF` branch. Commits are ordered from e
 | `37f12f8` | feat: wire Export PDF button in LibraryViewController and update FXML | `LibraryViewController.java`, `LibraryView.fxml` |
 | `dfb7335` | test: add unit tests for PdfExporter | `PdfExporterTest.java` (new) |
 | `c35ab8e` | feat: redesign PdfExporter V2 with formatted layout | `PdfExporter.java` (rewritten) |
+| `0af6994` | add v1 and v2 wireframes to design folder | `design/v1-wireframe.png`, `design/v2-wireframe.png` (new) |
+| `987cbca` | add RATIONALE.md | `RATIONALE.md` (new) |
+| `e752547` | add design-evolution.md | `design/design-evolution.md` (new) |
+| `586bc22` | add IMPLEMENTATION_JOURNAL.md | `IMPLEMENTATION_JOURNAL.md` (new) |
+| `1948fd8` | add FEATURE_SUMMARY.md | `FEATURE_SUMMARY.md` (new) |
 
 The commit order reflects a deliberate inside-out approach: dependency → adapter → ViewModel → View → tests → V2 redesign. Each layer was working before the next was added.
 
