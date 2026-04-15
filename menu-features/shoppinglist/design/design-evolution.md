@@ -72,3 +72,37 @@ After building and using V1, four problems were identified that prompted changes
   two buttons → final simplified version) and settled on keeping just the **Back** and
   **Clear** buttons. The duplicate back button introduced in one iteration was removed
   once it was clear it served the same purpose as the existing navigation.
+
+---
+
+## Version 3 — Contextual Information and Section Dismiss
+
+**Artifact:** ![v3-wireframe.png](v3-wireframe.png)
+
+After using V2, two gaps in the display were identified that prompted V3 changes:
+
+### Problems found in V2
+
+1. **No collection context on the result screen.** The shopping list showed recipe names
+   and ingredients but gave no indication of which collection each recipe came from. If
+   a user had recipes with similar names across multiple collections, there was no way to
+   distinguish them at a glance.
+
+2. **No fast way to cross off an entire recipe section.** Users had to check every single
+   ingredient checkbox individually to mark a recipe as "done." For recipes with many
+   ingredients this was slow and tedious — a single click on the recipe header should
+   be enough to dismiss the whole section at once.
+
+### Changes made in V3
+
+- *(Problem 1)* Added a **collection subtitle** ("From: [Collection Name]") beneath each
+  recipe header in muted gray. The subtitle is resolved at load time by iterating
+  `LibrarianService.listCollections()` once and building a `recipeId → collectionTitle`
+  lookup map — no new service methods were needed. Recipes not found in any collection
+  display "Unknown Collection" as a safe fallback.
+
+- *(Problem 2)* Made the recipe header **clickable**. Clicking it toggles a `dismissed`
+  boolean property on `RecipeSection` (mirroring the `checked` property on
+  `IngredientItem`). A listener on that property applies gray text and strikethrough to
+  the header, subtitle, and every ingredient checkbox in the section simultaneously.
+  Clicking the header again restores all styles — the action is fully reversible.
