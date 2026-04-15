@@ -90,7 +90,7 @@ Problem 1 from V2 feedback: *"Hovering over the button shows nothing."* The icon
 | | V2 | V3 |
 |---|---|---|
 | Button icon | Switches 🌙 ↔ ☀ | Same |
-| Hover tooltip | None | Shows current action |
+| Hover tooltip | None | Shows current the action |
 | Screen reader support | Reads icon character | Icon + tooltip text available |
 
 ### Problems Still Remaining After Version 3
