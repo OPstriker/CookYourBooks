@@ -32,9 +32,9 @@ After generating several real recipes with V1, we identified four issues:
 
 ## Version 2: Structured Single-Column Layout
 
-**Wireframe:** `v2-wireframe.svg`
+**Wireframe:** `v2-wireframe.png`
 
-![V2 Wireframe](v2-wireframe.svg)
+![V2 Wireframe](v2-wireframe.png)
 
 Based on the problems found in V1, Version 2 introduced a clear typographic structure without changing the single-column layout:
 

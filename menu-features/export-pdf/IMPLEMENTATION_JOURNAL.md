@@ -17,8 +17,11 @@ All implementation work is on the `exportPDF` branch. Commits are ordered from e
 | `e752547` | add design-evolution.md | `design/design-evolution.md` (new) |
 | `586bc22` | add IMPLEMENTATION_JOURNAL.md | `IMPLEMENTATION_JOURNAL.md` (new) |
 | `1948fd8` | add FEATURE_SUMMARY.md | `FEATURE_SUMMARY.md` (new) |
+| `78327d9` | update newest Journal and contain all the commit history | `IMPLEMENTATION_JOURNAL.md` (updated) |
+| `81c9a96` | refactor: update FEATURE_SUMMARY and IMPLEMENTATION_JOURNAL; rename design-evolution to design-artifacts; redesign V2 wireframe | `FEATURE_SUMMARY.md`, `IMPLEMENTATION_JOURNAL.md`, `design/design-artifacts.md` (new), `design/v2-wireframe.png` (updated) |
+| `43082cc` | add v3 wireframe design for PDF export feature | `design/v3-wireframe.png` (new) |
 
-The commit order reflects a deliberate inside-out approach: dependency → adapter → ViewModel → View → tests → V2 redesign. Each layer was working before the next was added.
+The commit order reflects a deliberate inside-out approach: dependency → adapter → ViewModel → View → tests → V3 redesign → documentation. Each layer was working before the next was added.
 
 ---
 
