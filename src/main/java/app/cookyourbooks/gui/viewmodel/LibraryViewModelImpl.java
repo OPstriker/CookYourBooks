@@ -1,5 +1,6 @@
 package app.cookyourbooks.gui.viewmodel;
 
+import java.nio.file.Path;
 import java.time.Duration;
 import java.util.List;
 
@@ -14,8 +15,10 @@ import javafx.collections.transformation.FilteredList;
 
 import org.jspecify.annotations.Nullable;
 
+import app.cookyourbooks.adapters.PdfExporter;
 import app.cookyourbooks.gui.BackgroundTaskRunner;
 import app.cookyourbooks.gui.NavigationService;
+import app.cookyourbooks.model.Recipe;
 import app.cookyourbooks.model.RecipeCollection;
 import app.cookyourbooks.services.LibrarianService;
 
@@ -374,6 +377,49 @@ public class LibraryViewModelImpl implements LibraryViewModel {
     undoAvailable.set(false);
     undoMessage.set("");
     undoTimer = null;
+  }
+
+  /*
+   * Finds the recipe by ID across all collections, then exports it to a PDF on a
+   * background thread so the JavaFX Application Thread is never blocked by IO.
+   * If the recipe cannot be found, or if PDFBox throws an IOException, the error
+   * is printed to stderr and the operation is silently abandoned — the UI remains
+   * stable in either case.
+   */
+  @Override
+  public void exportRecipe(String recipeId, Path outputPath) {
+    // Search all recipes for an exact ID match.
+    // We use listAllRecipes() because LibrarianService has no findRecipeById method;
+    // the stream filter gives us O(n) lookup which is acceptable for a local library.
+    Recipe recipe =
+        librarianService.listAllRecipes().stream()
+            .filter(r -> r.getId().equals(recipeId))
+            .findFirst()
+            .orElse(null);
+
+    if (recipe == null) {
+      return; // recipe was deleted between selection and button click — safe to ignore
+    }
+
+    // Capture recipe in a local effectively-final variable for the lambda.
+    Recipe finalRecipe = recipe;
+
+    @SuppressWarnings("FutureReturnValueIgnored") // export result is communicated via callbacks
+    var unused =
+        BackgroundTaskRunner.run(
+            () -> {
+              // This lambda runs on a worker thread — safe to do file IO here.
+              new PdfExporter().export(finalRecipe, outputPath);
+              return Boolean.TRUE;
+            },
+            ignored -> {
+              // Success callback runs on the FX thread (BackgroundTaskRunner guarantees this).
+              // No UI update needed — the file is now on disk.
+            },
+            error -> {
+              // Error callback also runs on the FX thread.
+              System.err.println("PDF export failed: " + error.getMessage());
+            });
   }
 
   /*
