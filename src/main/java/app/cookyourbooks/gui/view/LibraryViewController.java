@@ -74,6 +74,27 @@ public class LibraryViewController {
     setupShoppingListMode();
 
     vm.refresh();
+
+    // Command+S opens shopping list selection mode
+    filterField.getScene(); // scene not available yet in initialize
+    // Use a scene listener instead
+    filterField
+        .sceneProperty()
+        .addListener(
+            (obs, oldScene, newScene) -> {
+              if (newScene != null) {
+                newScene.setOnKeyPressed(
+                    event -> {
+                      if (event.getCode() == javafx.scene.input.KeyCode.S
+                          && event.isShortcutDown()) {
+                        if (!shoppingListVm.activeProperty().get()) {
+                          shoppingListVm.enter();
+                        }
+                        event.consume();
+                      }
+                    });
+              }
+            });
   }
 
   // ── Private setup helpers ──
