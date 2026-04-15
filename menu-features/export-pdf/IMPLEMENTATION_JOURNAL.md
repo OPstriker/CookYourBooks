@@ -2,7 +2,7 @@
 
 ## Git History
 
-All implementation work is on the `exportPDF` branch. Commits are ordered from earliest to latest:
+All implementation work is on the `exportPDF` and `exportPDF-v2` branches. Commits are ordered from earliest to latest:
 
 | Hash | Message | What changed |
 |------|---------|--------------|
@@ -20,6 +20,7 @@ All implementation work is on the `exportPDF` branch. Commits are ordered from e
 | `78327d9` | update newest Journal and contain all the commit history | `IMPLEMENTATION_JOURNAL.md` (updated) |
 | `81c9a96` | refactor: update FEATURE_SUMMARY and IMPLEMENTATION_JOURNAL; rename design-evolution to design-artifacts; redesign V2 wireframe | `FEATURE_SUMMARY.md`, `IMPLEMENTATION_JOURNAL.md`, `design/design-artifacts.md` (new), `design/v2-wireframe.png` (updated) |
 | `43082cc` | add v3 wireframe design for PDF export feature | `design/v3-wireframe.png` (new) |
+| `91b589c` | docs: fix broken SVG links and update git history to include latest commits | `FEATURE_SUMMARY.md`, `IMPLEMENTATION_JOURNAL.md`, `design/design-artifacts.md` (updated) |
 
 The commit order reflects a deliberate inside-out approach: dependency → adapter → ViewModel → View → tests → V3 redesign → documentation. Each layer was working before the next was added.
 
@@ -68,7 +69,7 @@ The commit order reflects a deliberate inside-out approach: dependency → adapt
 
 **V2** addressed the hierarchy and identity problems incrementally — bold title, bold uppercase section headings, horizontal divider lines between sections, and a simple `Page N of M` footer. This was a deliberate intermediate step: fixing the most visible readability issues before committing to a more complex two-column layout that would require significant refactoring of the rendering logic.
 
-**V3** then addressed the remaining V2 problems — still-wasted horizontal space and no app branding — by introducing the grey header block, two-column body layout with a vertical rule, and a branded footer (`CookYourBooks · Page N of M`). See `design/design-evolution.md` for the full breakdown of each version's problems and changes.
+**V3** then addressed the remaining V2 problems — still-wasted horizontal space and no app branding — by introducing the grey header block, two-column body layout with a vertical rule, and a branded footer (`CookYourBooks · Page N of M`). See `design/design-artifacts.md` for the full breakdown of each version's problems and changes.
 
 ---
 
