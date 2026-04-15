@@ -16,6 +16,7 @@ import app.cookyourbooks.gui.NavigationService;
 import app.cookyourbooks.gui.ViewModelTestBase;
 import app.cookyourbooks.model.Ingredient;
 import app.cookyourbooks.model.Recipe;
+import app.cookyourbooks.model.RecipeCollection;
 import app.cookyourbooks.services.LibrarianService;
 
 class ShoppingListResultViewModelImplTest extends ViewModelTestBase {
@@ -28,6 +29,9 @@ class ShoppingListResultViewModelImplTest extends ViewModelTestBase {
   void setUp() throws InterruptedException {
     mockService = mock(LibrarianService.class);
     navigationService = new NavigationService();
+
+    // Default: no collections — tests that care about collection names override this.
+    when(mockService.listCollections()).thenReturn(List.of());
 
     var latch = new java.util.concurrent.CountDownLatch(1);
     Platform.runLater(
@@ -167,6 +171,41 @@ class ShoppingListResultViewModelImplTest extends ViewModelTestBase {
     assertThat(vm.getSectionTitles()).containsExactly("Tomato Basil Soup");
   }
 
+  // SL8: load() resolves collection name from listCollections()
+
+  @Test
+  void SL8_collectionNameResolvedFromListCollections() throws InterruptedException {
+    Recipe pasta = mockRecipe("id-1", "Garlic Butter Pasta", List.of());
+    RecipeCollection col = mockCollection("My Favorites", List.of(pasta));
+    when(mockService.listAllRecipes()).thenReturn(List.of(pasta));
+    when(mockService.listCollections()).thenReturn(List.of(col));
+
+    Platform.runLater(() -> vm.load(Set.of("id-1")));
+    waitForFxEvents();
+    Thread.sleep(200);
+    waitForFxEvents();
+
+    assertThat(vm.sectionsProperty()).hasSize(1);
+    assertThat(vm.sectionsProperty().get(0).getCollectionName()).isEqualTo("My Favorites");
+  }
+
+  // SL9: recipe not in any collection falls back to "Unknown Collection"
+
+  @Test
+  void SL9_recipeNotInAnyCollectionFallsBackToUnknown() throws InterruptedException {
+    Recipe pasta = mockRecipe("id-1", "Garlic Butter Pasta", List.of());
+    // listCollections() returns empty (set in setUp) — pasta is in no collection
+    when(mockService.listAllRecipes()).thenReturn(List.of(pasta));
+
+    Platform.runLater(() -> vm.load(Set.of("id-1")));
+    waitForFxEvents();
+    Thread.sleep(200);
+    waitForFxEvents();
+
+    assertThat(vm.sectionsProperty()).hasSize(1);
+    assertThat(vm.sectionsProperty().get(0).getCollectionName()).isEqualTo("Unknown Collection");
+  }
+
   // ── Helpers ──────────────────────────────────────────────────────────────
 
   private static Recipe mockRecipe(String id, String title, List<Ingredient> ingredients) {
@@ -182,5 +221,12 @@ class ShoppingListResultViewModelImplTest extends ViewModelTestBase {
     when(ingredient.getName()).thenReturn(name);
     when(ingredient.toString()).thenReturn(name);
     return ingredient;
+  }
+
+  private static RecipeCollection mockCollection(String title, List<Recipe> recipes) {
+    RecipeCollection col = mock(RecipeCollection.class);
+    when(col.getTitle()).thenReturn(title);
+    when(col.getRecipes()).thenReturn(recipes);
+    return col;
   }
 }
