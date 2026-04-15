@@ -30,17 +30,17 @@ then tests, then the view layer, and finally the wiring and integration.
 V2 focused on usability improvements found after using V1: adding a clear button,
 fixing sidebar visibility, and simplifying the button layout through iteration.
 
-| Commit | Message | What it does |
-|--------|---------|--------------|
-| `5dca4bb` | fixed dark mode icon and shopping cart to appear only on library view and not in the home page | Hides cart and dark mode buttons when not on Library view |
-| `2fad0f6` | fixed homepage | Restores home page layout broken by sidebar visibility changes |
-| `3086ed2` | displaying message to clear shopping list or go back but with no actual implementation | UI scaffold for clear/back actions — placeholder only |
-| `a73b86a` | clear shopping list implementation | Wires the Clear button to actually reset `sections` and return to selection mode |
-| `94c9cc5` | adding cancel / back button to the shopping cart | Adds a Back button to the result screen |
-| `05e3237` | made three separate buttons, one to exit, one to clear, one to go into the previous made shopping list, implementation does not work correctly | Experimental three-button layout — later simplified |
-| `9e4a328` | changed functionality of buttons, seemed too complicated for users, but now clear is not working as intended | Simplifies button layout; uncovers clear regression |
-| `d6883a6` | fixed functionality of the clear button | Restores correct clear behaviour after refactor |
-| `5f85b29` | made a back button that served a duplicate purpose, got rid of it for simplicity for users | Removes redundant back button introduced in earlier iteration |
+| Commit    | Message                                                                                                                                        | What it does                                                                     |
+|-----------|------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| `5dca4bb` | fixed dark mode icon and shopping cart to appear only on library view and not in the home page                                                 | Hides cart and dark mode buttons when not on Library view                        |
+| `2fad0f6` | fixed homepage                                                                                                                                 | Restores home page layout broken by sidebar visibility changes                   |
+| `3086ed2` | displaying message to clear shopping list or go back but with no actual implementation                                                         | UI scaffold for clear/back actions — placeholder only                            |
+| `a73b86a` | clear shopping list implementation                                                                                                             | Wires the Clear button to actually reset `sections` and return to selection mode |
+| `94c9cc5` | adding cancel / back button to the shopping cart                                                                                               | Adds a Back button to the result screen                                          |
+| `05e3237` | made three separate buttons, one to exit, one to clear, one to go into the previous made shopping list, implementation does not work correctly | Experimental three-button layout — later simplified                              |
+| `9e4a328` | changed functionality of buttons, seemed too complicated for users, but now clear is not working as intended                                   | Simplifies button layout; uncovers clear regression                              |
+| `d6883a6` | fixed functionality of the clear button                                                                                                        | Restores correct clear behaviour after refactor                                  |
+| `5f85b29` | made a back button that served a duplicate purpose, got rid of it for simplicity for users                                                     | Removes redundant back button introduced in earlier iteration                    |
 
 ---
 
@@ -160,12 +160,15 @@ V3 added two usability improvements found after using V2: showing which collecti
 recipe belongs to, and allowing the user to cross off an entire recipe section with one
 click on the header.
 
-| Commit | Message | What it does |
-|--------|---------|--------------|
-| (pending) | feat(v3): add collectionName and dismissedProperty to RecipeSection | Adds `String collectionName` field, `BooleanProperty dismissed`, and matching getters to `RecipeSection`; updates constructor to accept collection name as second parameter |
-| (pending) | feat(v3): resolve collection name per recipe in ShoppingListResultViewModelImpl | Builds a `recipeId → collectionTitle` lookup map in `buildSections()` by iterating `listCollections()` once; passes resolved name (or "Unknown Collection" fallback) into each `RecipeSection` |
-| (pending) | feat(v3): add collection subtitle and click-to-dismiss section header in ShoppingListResultViewController | Adds subtitle label below header, click handler to toggle `dismissedProperty()`, and dismissed listener that grays out and strikes through header, subtitle, and all checkboxes |
-| (pending) | test(v3): stub listCollections in setUp, add SL8 and SL9 for collection name resolution | Stubs `listCollections()` as empty list by default; adds SL8 (collection name resolved correctly) and SL9 (unknown collection fallback) |
+| Commit    | Message                                                                                         | What it does                                                                                                                                                                                                                                                        |
+|-----------|-------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `24625bb` | add collectionName and dismissedProperty to RecipeSection                                       | Adds `String collectionName` field, `BooleanProperty dismissed`, and matching getters to `RecipeSection`; updates constructor to accept collection name as second parameter                                                                                         |
+| `5eea23b` | add collection subtitle and click-to-dismiss section header in ShoppingListResultViewController | Resolves collection name via `recipeId → collectionTitle` map in `buildSections()`; adds subtitle label below header, click handler to toggle `dismissedProperty()`, and dismissed listener that grays out and strikes through header, subtitle, and all checkboxes |
+| `07959be` | stub listCollections in setUp, add SL8 and SL9 for collection name resolution                   | Stubs `listCollections()` as empty list by default; adds SL8 (collection name resolved correctly) and SL9 (unknown collection fallback)                                                                                                                             |
+| `30a8406` | add design evolution for v3                                                                     | Appends V3 section to `design-evolution.md` covering collection subtitle and click-to-dismiss problems and design choices                                                                                                                                           |
+| `073d829` | add implementation journal for v3                                                               | Appends V3 git history table and Decision 6 (collection lookup) and Decision 7 (section dismiss) to `IMPLEMENTATION_JOURNAL.md`                                                                                                                                     |
+| `4e744f2` | add feature summary for v3                                                                      | Appends V3 screenshots, version history entry, and Complete (v3) status section to `FEATURE_SUMMARY.md`                                                                                                                                                             |
+| `ec0220a` | add stub screenshots for feature evolution                                                      | Creates `design/screenshots/v3/` directory with placeholder PNG stubs for v3 screenshots                                                                                                                                                                            |
 
 ---
 
