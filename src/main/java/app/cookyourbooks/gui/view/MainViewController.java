@@ -87,6 +87,7 @@ public class MainViewController {
         e -> {
           if (themeManager != null) {
             themeManager.toggle();
+            darkModeButton.setText(themeManager.isDarkMode() ? "☀" : "🌙");
           }
         });
 

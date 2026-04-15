@@ -28,13 +28,29 @@ After looking at V1 and clicking through the app, we found four issues:
 
 ---
 
-## Version 2: Planned Improvements
+## Version 2: Icon Switches on Toggle
 
-*(In progress — screenshot to be added)*
+**Screenshot:** `v2-dark-mode.png`
 
-Based on the problems found in Version 1, these are the changes we plan to make:
+![V2 Dark Mode](v2-dark-mode.png)
 
-- Add a tooltip to the toggle button so users know what it does before clicking
-- Increase the contrast on the bottom action buttons so they look clickable
-- Save the theme preference to a settings file so it persists between launches
-- Add a subtle card background to list items so they are easier to tell apart
+Version 2 fixes the most confusing part of V1: the toggle button. In V1, the button always showed ☀ whether the app was in light mode or dark mode. There was no way to tell at a glance which mode you were in. Version 2 makes the icon switch every time you click:
+
+- When the app is in **light mode**, the button shows **🌙** — it tells you "click here to go dark"
+- When the app is in **dark mode**, the button shows **☀** — it tells you "click here to go light"
+
+This was a one-line code change in `MainViewController.java`. After calling `themeManager.toggle()`, the button text is updated immediately:
+
+```java
+darkModeButton.setText(themeManager.isDarkMode() ? "☀" : "🌙");
+```
+
+### What Prompted This Change
+
+Problem 1 from V1 feedback: *"The sun icon alone does not tell the user what it does."* A user like Mary — who opens the app in a bright kitchen and wants to quickly reduce screen glare — should be able to see the button and immediately understand what it will do. Switching the icon makes the button self-explanatory without needing any extra label or tooltip.
+
+### Problems Still Remaining After Version 2
+
+1. **No tooltip.** Hovering over the button shows nothing. A first-time user might still not know the button is there. This is fixed in V3.
+2. **The theme resets on relaunch.** The preference is still not saved between sessions.
+3. **Bottom buttons still look faint.** The contrast issue from V1 is not yet addressed.

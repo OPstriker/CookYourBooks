@@ -10,6 +10,11 @@ The app starts in light mode. The top bar has a sun icon button (☀) that the u
 
 Clicking the ☀ button adds the dark CSS to the Scene's stylesheet list. The entire app switches to a dark navy/charcoal color scheme with light text. Clicking the button again removes the dark CSS and returns to light mode.
 
+### Dark Mode — V2
+![V2 Dark Mode](design/v2-dark-mode.png)
+
+Version 2 makes the toggle button icon switch on every click. When the app is in light mode the button shows 🌙, and when it is in dark mode the button shows ☀. This directly fixes the most confusing part of V1 — the button now tells the user what it will do before they click it.
+
 ## Integration Notes
 
 Dark mode is wired into the main application layout and applies to all views at once.
@@ -30,6 +35,6 @@ The dark CSS applies to all panels at the same time — library view, recipe edi
 | Light mode restored on second click | ✅ Complete |
 | Unit tests (ThemeManagerTest.java) | ✅ Complete — 4 tests passing |
 | Keyboard accessible (Tab + Space) | ✅ Complete |
-| Button icon stays ☀ in both modes | ⚠️ Known limitation — fixed in V2 |
+| Button icon switches 🌙 ↔ ☀ on toggle | ✅ Complete — fixed in V2 |
 | No tooltip on toggle button | ⚠️ Known limitation — fixed in V3 |
 | Theme does not persist between launches | ⚠️ Known limitation — not yet implemented |

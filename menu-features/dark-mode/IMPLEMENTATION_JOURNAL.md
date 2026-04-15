@@ -52,3 +52,43 @@ The button does not have a tooltip or screen reader label yet. A user relying on
 - The button icon stays ☀ in both light and dark mode. There is no visual feedback to tell the user which mode is currently active. This is fixed in Version 2.
 - There is no tooltip on the button. Users have to click it to find out what it does. This is fixed in Version 3.
 - The theme resets every time the app is restarted. The preference is not saved anywhere, so users have to toggle dark mode again on every launch. Persistence is not yet implemented.
+
+## Git History (Version 2)
+
+These are the commits made for Version 2.
+
+| Commit | What it added |
+|---|---|
+| `8848c40` | Documented V2 design in `design-evolution.md` — icon switches between 🌙 and ☀ |
+| *(pending)* | Added `darkModeButton.setText(...)` line in `MainViewController` so the icon updates on toggle |
+
+
+### Version 2 PR
+**Link:** *https://github.com/neu-cs3100/sp26-hw-cyb12-group-4633/pull/2#issue-4248371441*
+
+## Decision Log (Version 2)
+
+We considered two ways to make the icon switch on click...
+We chose to handle everything in Java. The button starts as 🌙 by default...
+
+---
+
+## Accessibility Check (Version 2)
+
+The icon change does not break keyboard accessibility. The button is still
+reachable by Tab and activated by Space. The icon itself (🌙 or ☀) is a
+Unicode character, so a screen reader will read it out loud. However, reading
+"sun" or "crescent moon" by itself still does not clearly explain what the
+button does. This is addressed in Version 3...
+
+---
+
+## Known Limitations (Version 2)
+
+- There is no tooltip on the button...
+- The theme still resets every time the app is restarted...
+- The bottom action buttons (Delete, Open Recipe, Export PDF) still look faint...
+
+
+
+
