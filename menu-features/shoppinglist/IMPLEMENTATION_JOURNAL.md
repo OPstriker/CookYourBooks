@@ -25,6 +25,25 @@ then tests, then the view layer, and finally the wiring and integration.
 
 ---
 
+## Version 2 — Git History
+
+V2 focused on usability improvements found after using V1: adding a clear button,
+fixing sidebar visibility, and simplifying the button layout through iteration.
+
+| Commit | Message | What it does |
+|--------|---------|--------------|
+| `5dca4bb` | fixed dark mode icon and shopping cart to appear only on library view and not in the home page | Hides cart and dark mode buttons when not on Library view |
+| `2fad0f6` | fixed homepage | Restores home page layout broken by sidebar visibility changes |
+| `3086ed2` | displaying message to clear shopping list or go back but with no actual implementation | UI scaffold for clear/back actions — placeholder only |
+| `a73b86a` | clear shopping list implementation | Wires the Clear button to actually reset `sections` and return to selection mode |
+| `94c9cc5` | adding cancel / back button to the shopping cart | Adds a Back button to the result screen |
+| `05e3237` | made three separate buttons, one to exit, one to clear, one to go into the previous made shopping list, implementation does not work correctly | Experimental three-button layout — later simplified |
+| `9e4a328` | changed functionality of buttons, seemed too complicated for users, but now clear is not working as intended | Simplifies button layout; uncovers clear regression |
+| `d6883a6` | fixed functionality of the clear button | Restores correct clear behaviour after refactor |
+| `5f85b29` | made a back button that served a duplicate purpose, got rid of it for simplicity for users | Removes redundant back button introduced in earlier iteration |
+
+---
+
 ## PR History
 
 ### PR #5 — [shopping list view on library view](https://github.com/neu-cs3100/sp26-hw-cyb12-group-4633/pull/5)
@@ -42,6 +61,14 @@ Implemented the result screen: `IngredientItem`, `RecipeSection`, `ShoppingListR
 `ShoppingListResultViewModelImpl`, `ShoppingListResultView.fxml`,
 `ShoppingListResultViewController`, and all wiring in `CookYourBooksGuiApp`. Also added
 the smart cart button behaviour and the full integration test suite (IT-SL1–IT-SL3).
+
+### PR #9 — [Shoppinglist v2](https://github.com/neu-cs3100/sp26-hw-cyb12-group-4633/pull/9)
+**Branch:** `shoppinglist-v2`
+
+Usability improvements based on V1 feedback: added a Clear button to reset the shopping
+list from the result screen, hid the cart and dark mode icons on the Home page, and
+simplified the button layout after iterating through several approaches. The final layout
+keeps only Back and Clear — the redundant back button introduced mid-iteration was removed.
 
 ---
 
@@ -87,7 +114,7 @@ inline style listener on `IngredientItem.checkedProperty()`.
 
 ---
 
-### Decision 3: One shopping list at a time
+### Decision 3: One shopping list at a time (v1)
 
 **Context:** Should pressing the cart button always start a fresh selection, or should it
 remember the current list?
@@ -103,3 +130,41 @@ the existing list** rather than re-entering selection mode.
 - *Single persistent list (chosen):* Matches the mental model of a physical shopping list.
   The user builds a list once and refers back to it. If they want a new list, they can
   navigate back to the Library and start a new selection from there.
+
+---
+
+### Decision 4: Clear button vs. no clear action (v2)
+
+**Context:** V1 had no way to clear the shopping list from the result screen — the user
+had to navigate back to Library and re-confirm a new selection to start over. After
+using V1, this felt like a missing escape hatch.
+
+**Decision:** Add a **Clear** button directly on the result screen that resets the
+sections and returns the user to selection mode.
+
+**Alternatives considered:**
+- *No clear action (v1 behaviour):* Simple but forces a multi-step workaround to start
+  over — navigate back, re-enter selection mode, pick new recipes, confirm again.
+- *Clear on Back button press (implicit):* Could clear the list whenever Back is pressed,
+  but this would be destructive and unexpected — users pressing Back to briefly check
+  something in the Library would lose their list.
+- *Dedicated Clear button (chosen):* Explicit and reversible in intent. The user must
+  consciously press Clear, which prevents accidental data loss while still giving them
+  a fast path to start over.
+
+### Decision 5: How many buttons on the result screen (v2)
+
+**Context:** V2 started with three buttons (Exit, Clear, View Existing List) but this
+was quickly found to be too complicated and overlapping in responsibility.
+
+**Decision:** Settle on **two buttons — Back and Clear** — after iterating through
+the three-button layout and a transitional two-button layout that still had a redundant
+back action.
+
+**Alternatives considered:**
+- *Three buttons (Exit / Clear / View Existing):* Too many choices for a simple screen.
+  "Exit" and "View Existing" were effectively the same action.
+- *Two buttons with redundant back (interim):* Reduced confusion but still had a
+  duplicate path for returning to the Library.
+- *Back + Clear (chosen):* Back handles navigation; Clear handles list management.
+  Each button has exactly one responsibility with no overlap.
