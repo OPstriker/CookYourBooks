@@ -21,8 +21,21 @@ All implementation work is on the `exportPDF`, `exportPDF-v2`, and `exportPDF-v3
 | `81c9a96` | refactor: update FEATURE_SUMMARY and IMPLEMENTATION_JOURNAL; rename design-evolution to design-artifacts; redesign V2 wireframe | `FEATURE_SUMMARY.md`, `IMPLEMENTATION_JOURNAL.md`, `design/design-artifacts.md` (new), `design/v2-wireframe.png` (updated) |
 | `43082cc` | add v3 wireframe design for PDF export feature | `design/v3-wireframe.png` (new) |
 | `91b589c` | docs: fix broken SVG links and update git history to include latest commits | `FEATURE_SUMMARY.md`, `IMPLEMENTATION_JOURNAL.md`, `design/design-artifacts.md` (updated) |
+| `9ebbd33` | fix the name details | `IMPLEMENTATION_JOURNAL.md`, `design/design-artifacts.md` (updated) |
+| `4cdf232` | feat: add accessibleText and Ctrl+Shift+E keyboard accelerator to Export PDF button | `LibraryViewController.java`, `LibraryView.fxml`, `IMPLEMENTATION_JOURNAL.md` |
 
 The commit order reflects a deliberate inside-out approach: dependency → adapter → ViewModel → View → tests → V3 redesign → documentation. Each layer was working before the next was added.
+
+---
+
+## Pull Request History
+
+| PR | Title | Status | Link |
+|----|-------|--------|------|
+| #4 | Add Apache PDFBox 3.0.3 dependency for PDF export | Closed (superseded by #6) | https://github.com/neu-cs3100/sp26-hw-cyb12-group-4633/pull/4 |
+| #6 | ExportPDF feature Implement | Merged — 2 approvals | https://github.com/neu-cs3100/sp26-hw-cyb12-group-4633/pull/6 |
+| #11 | redesign V2 wireframe | Merged — 1 approval | https://github.com/neu-cs3100/sp26-hw-cyb12-group-4633/pull/11 |
+| #12 | Add V3 wireframe screenshot for final branded two-column PDF layout | Open | https://github.com/neu-cs3100/sp26-hw-cyb12-group-4633/pull/12 |
 
 ---
 
