@@ -38,6 +38,7 @@ public class LibraryViewController {
   @FXML private Button exportButton;
   @FXML private Button deleteRecipeButton;
   @FXML private Button confirmShoppingListButton;
+  @FXML private Button cancelShoppingListButton;
   @FXML private HBox normalRecipeButtons;
   @FXML private HBox undoBar;
   @FXML private HBox shoppingListConfirmBar;

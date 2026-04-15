@@ -5,7 +5,10 @@ import java.util.Map;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
@@ -91,7 +94,27 @@ public class MainViewController {
     shoppingListButton.setOnAction(
         e -> {
           if (!resultVm.sectionsProperty().isEmpty()) {
-            navigationService.navigateTo(View.SHOPPING_LIST);
+            ButtonType goToPrevious = new ButtonType("Go to Previous Cart");
+            ButtonType clear = new ButtonType("Clear");
+            ButtonType returnButton = new ButtonType("Return", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Shopping List");
+            alert.setHeaderText("You have an existing shopping list");
+            alert.setContentText("What would you like to do?");
+            alert.getButtonTypes().setAll(goToPrevious, clear, returnButton);
+
+            alert
+                .showAndWait()
+                .ifPresent(
+                    result -> {
+                      if (result == goToPrevious) {
+                        navigationService.navigateTo(View.SHOPPING_LIST);
+                      } else if (result == clear) {
+                        shoppingListVm.discard();
+                        resultVm.load(java.util.Set.of());
+                      }
+                    });
           } else {
             shoppingListVm.enter();
             navigationService.navigateTo(View.LIBRARY);
@@ -130,6 +153,7 @@ public class MainViewController {
     topImportButton.setManaged(onLibrary);
     searchButton.setVisible(onLibrary);
     searchButton.setManaged(onLibrary);
+    // shopping list / dark mode is only available in Library view
     shoppingListButton.setVisible(onLibrary);
     shoppingListButton.setManaged(onLibrary);
     darkModeButton.setVisible(onLibrary);

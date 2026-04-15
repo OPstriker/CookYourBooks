@@ -1,24 +1,31 @@
-# Feature Summary: Shopping List Result Screen (v1)
+# Feature Summary: Shopping List Result Screen
 
 ---
 
 ## Screenshots
 
-### 1. Recipe Selection Mode
+### v1
 
+#### 1. Recipe Selection Mode
 ![Recipe Selection Mode](design/screenshots/v1/screenshot-selection-mode.png)
 
----
-
-### 2. Shopping List Result Screen
-
+#### 2. Shopping List Result Screen
 ![Shopping List Result Screen](design/screenshots/v1/screenshot-result-screen.png)
 
+#### 3. Checked Items (Strikethrough)
+![Checked Items](design/screenshots/v1/screenshot-checked-items.png)
+
 ---
 
-### 3. Checked Items (Strikethrough)
+### v2
 
-![Checked Items](design/screenshots/v1/screenshot-checked-items.png)
+#### 1. Shopping List Result Screen with Clear Button
+
+![v2 Result Screen with Clear](design/screenshots/v2/screenshot-clear-button.png)
+
+#### 2. Library View — Cart Icon Hidden on Home Page
+
+![v2 Home No Cart Icon](design/screenshots/v2/screenshot-home-no-cart.png)
 
 ---
 
@@ -56,9 +63,18 @@ directly to the result screen instead of entering selection mode. This required 
 
 ---
 
+## Version History
+
+| Version | Summary                                                                                   |
+|---------|-------------------------------------------------------------------------------------------|
+| v1      | Initial result screen — per-recipe grouping, checkboxes, strikethrough, smart cart button |
+| v2      | Clear button added, cart icon hidden on Home page, button layout simplified               |
+
+---
+
 ## Status
 
-### Complete
+### Complete (v1)
 - `IngredientItem` and `RecipeSection` data classes
 - `ShoppingListResultViewModel` interface and `ShoppingListResultViewModelImpl`
 - `ShoppingListResultView.fxml` layout (toolbar, scrollable sections, Back button)
@@ -68,14 +84,13 @@ directly to the result screen instead of entering selection mode. This required 
 - 7 unit tests (SL1–SL7) for `ShoppingListResultViewModelImpl`
 - 3 integration tests (IT-SL1–IT-SL3) for the full callback chain
 
-### In Progress
-- V2 design iteration (design-evolution.md — V2 section to be added)
+### Complete (v2)
+- Clear button on result screen wired to reset sections and return to selection mode
+- Cart icon and dark mode toggle hidden on Home page, visible only on Library view
+- Button layout simplified — redundant back button removed
 
 ### Known Limitations
 - Checked state is **in-memory only** — if the user navigates away and returns, all
   checkboxes reset to unchecked
-- There is no "clear list" or "start over" button — the only way to build a new list is
-  to navigate back to the Library, which implicitly clears the existing one when a new
-  selection is confirmed
 - The Back button always returns to the Library view, not to whichever screen the user
   came from
