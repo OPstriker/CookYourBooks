@@ -76,7 +76,10 @@ class LibraryViewIntegrationTest {
 
     javafx.fxml.FXMLLoader loader =
         new javafx.fxml.FXMLLoader(getClass().getResource("/fxml/LibraryView.fxml"));
-    loader.setControllerFactory(clazz -> new LibraryViewController(vm));
+    loader.setControllerFactory(
+        clazz ->
+            new LibraryViewController(
+                vm, new app.cookyourbooks.gui.viewmodel.ShoppingListViewModelImpl(null)));
     Parent root = loader.load();
 
     stage.setScene(new Scene(root, 900, 600));
