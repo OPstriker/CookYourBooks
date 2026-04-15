@@ -59,9 +59,13 @@ The commit order reflects a deliberate inside-out approach: dependency → adapt
 
 ---
 
-### Decision 5: V1 → V2 layout redesign
+### Decision 5: Three-stage layout evolution (V1 → V2 → V3)
 
-After generating real recipes with V1, we identified four problems: no visual hierarchy, wasted horizontal space, no page identity, and plain appearance inconsistent with "nicely formatted." V2 addressed all four with a grey header block, two-column body layout, divider lines, and a branded footer. See `design/design-evolution.md` for the full breakdown.
+**V1** exposed four problems: no visual hierarchy, wasted horizontal space, no page identity, and plain appearance inconsistent with "nicely formatted."
+
+**V2** addressed the hierarchy and identity problems incrementally — bold title, bold uppercase section headings, horizontal divider lines between sections, and a simple `Page N of M` footer. This was a deliberate intermediate step: fixing the most visible readability issues before committing to a more complex two-column layout that would require significant refactoring of the rendering logic.
+
+**V3** then addressed the remaining V2 problems — still-wasted horizontal space and no app branding — by introducing the grey header block, two-column body layout with a vertical rule, and a branded footer (`CookYourBooks · Page N of M`). See `design/design-evolution.md` for the full breakdown of each version's problems and changes.
 
 ---
 
