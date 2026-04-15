@@ -152,6 +152,23 @@ sections and returns the user to selection mode.
   consciously press Clear, which prevents accidental data loss while still giving them
   a fast path to start over.
 
+---
+
+## Version 3 — Git History
+
+V3 added two usability improvements found after using V2: showing which collection each
+recipe belongs to, and allowing the user to cross off an entire recipe section with one
+click on the header.
+
+| Commit | Message | What it does |
+|--------|---------|--------------|
+| (pending) | feat(v3): add collectionName and dismissedProperty to RecipeSection | Adds `String collectionName` field, `BooleanProperty dismissed`, and matching getters to `RecipeSection`; updates constructor to accept collection name as second parameter |
+| (pending) | feat(v3): resolve collection name per recipe in ShoppingListResultViewModelImpl | Builds a `recipeId → collectionTitle` lookup map in `buildSections()` by iterating `listCollections()` once; passes resolved name (or "Unknown Collection" fallback) into each `RecipeSection` |
+| (pending) | feat(v3): add collection subtitle and click-to-dismiss section header in ShoppingListResultViewController | Adds subtitle label below header, click handler to toggle `dismissedProperty()`, and dismissed listener that grays out and strikes through header, subtitle, and all checkboxes |
+| (pending) | test(v3): stub listCollections in setUp, add SL8 and SL9 for collection name resolution | Stubs `listCollections()` as empty list by default; adds SL8 (collection name resolved correctly) and SL9 (unknown collection fallback) |
+
+---
+
 ### Decision 5: How many buttons on the result screen (v2)
 
 **Context:** V2 started with three buttons (Exit, Clear, View Existing List) but this
@@ -168,3 +185,44 @@ back action.
   duplicate path for returning to the Library.
 - *Back + Clear (chosen):* Back handles navigation; Clear handles list management.
   Each button has exactly one responsibility with no overlap.
+
+---
+
+### Decision 6: Collection lookup strategy — one pass vs. per-recipe call (v3)
+
+**Context:** `LibrarianService` has no `findCollectionByRecipeId()` method. To show
+a collection name under each recipe header, the collection must be resolved manually.
+
+**Decision:** Iterate `listCollections()` **once** in the background thread and build a
+`Map<String, String>` keyed by recipe ID before building any sections.
+
+**Alternatives considered:**
+- *Call `listCollections()` per recipe:* Simple to read but calls the service N times
+  for N recipes — unnecessary repeated work and harder to reason about in tests.
+- *Add a new service method:* Would mean modifying `LibrarianService` and its
+  implementation for a pure display concern — violates the principle that the UI
+  layer should adapt to the service layer, not the other way around.
+- *One-pass map (chosen):* Single service call, O(1) lookup per recipe, and the
+  lookup map is fully local to `buildSections()` — no state leaks into the ViewModel.
+
+---
+
+### Decision 7: Section-level dismiss via property vs. removing items (v3)
+
+**Context:** Clicking a recipe header should mark the whole section as "done." The
+question was how to represent and apply that state.
+
+**Decision:** Add a `BooleanProperty dismissed` to `RecipeSection` and apply inline
+styles via a listener — mirroring the existing `IngredientItem.checkedProperty()` pattern.
+
+**Alternatives considered:**
+- *Remove the section from the list on click:* Irreversible — user cannot undo without
+  clearing and rebuilding the whole list.
+- *Iterate and check every ingredient checkbox:* Modifies individual item state, making
+  it ambiguous whether an ingredient was checked individually or as part of a dismiss.
+  Also harder to undo cleanly.
+- *`dismissedProperty()` + style listener (chosen):* Reversible, keeps individual
+  checkbox state untouched (items are disabled but not checked), and follows the same
+  observable-property pattern already established by `IngredientItem`. The controller
+  applies the visual change; the ViewModel data class holds only the boolean — clean
+  separation.
