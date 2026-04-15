@@ -115,6 +115,43 @@ public class LibraryViewController {
             event.consume();
           }
         });
+    recipeListView.setOnKeyPressed(
+        event -> {
+          if (event.getCode() == javafx.scene.input.KeyCode.ENTER && event.isShortcutDown()) {
+            // Command+Enter — confirm shopping list
+            if (shoppingListVm.activeProperty().get()) {
+              onConfirmShoppingList();
+            }
+            event.consume();
+          } else if ((event.getCode() == javafx.scene.input.KeyCode.DELETE
+                  || event.getCode() == javafx.scene.input.KeyCode.BACK_SPACE)
+              && event.isShortcutDown()) {
+            // Command+Delete — cancel shopping list
+            if (shoppingListVm.activeProperty().get()) {
+              shoppingListVm.discard();
+            }
+            event.consume();
+          } else if (event.getCode() == javafx.scene.input.KeyCode.ENTER) {
+            RecipeSummary selected = recipeListView.getSelectionModel().getSelectedItem();
+            if (selected != null && shoppingListVm.activeProperty().get()) {
+              if (shoppingListVm.selectedRecipeIds().contains(selected.id())) {
+                shoppingListVm.selectedRecipeIds().remove(selected.id());
+              } else {
+                shoppingListVm.selectedRecipeIds().add(selected.id());
+              }
+              recipeListView.refresh();
+            }
+            event.consume();
+          } else if (event.getCode() == javafx.scene.input.KeyCode.DELETE
+              || event.getCode() == javafx.scene.input.KeyCode.BACK_SPACE) {
+            RecipeSummary selected = recipeListView.getSelectionModel().getSelectedItem();
+            if (selected != null && shoppingListVm.activeProperty().get()) {
+              shoppingListVm.selectedRecipeIds().remove(selected.id());
+              recipeListView.refresh();
+            }
+            event.consume();
+          }
+        });
   }
 
   @SuppressWarnings("UnusedMethod")
