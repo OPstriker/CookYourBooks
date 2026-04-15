@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.StackPane;
 
 import org.jspecify.annotations.Nullable;
@@ -83,13 +84,23 @@ public class MainViewController {
   @FXML
   private void initialize() {
     // Dark mode toggle — adds or removes the dark CSS from the Scene's stylesheet list.
+    darkModeButton.setTooltip(new Tooltip("Switch to dark mode"));
     darkModeButton.setOnAction(
         e -> {
           if (themeManager != null) {
             themeManager.toggle();
             darkModeButton.setText(themeManager.isDarkMode() ? "☀" : "🌙");
+            darkModeButton
+                .getTooltip()
+                .setText(
+                    themeManager.isDarkMode() ? "Switch to light mode" : "Switch to dark mode");
           }
         });
+    // Sync button icon and tooltip with the saved preference on startup.
+    if (themeManager != null && themeManager.isDarkMode()) {
+      darkModeButton.setText("☀");
+      darkModeButton.getTooltip().setText("Switch to light mode");
+    }
 
     // Back button navigates to Library from any inner view.
     homeButton.setOnAction(e -> navigationService.navigateTo(View.LIBRARY));
