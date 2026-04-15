@@ -1,7 +1,9 @@
 package app.cookyourbooks.gui.viewmodel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javafx.beans.property.BooleanProperty;
@@ -14,6 +16,7 @@ import javafx.collections.ObservableList;
 import app.cookyourbooks.gui.BackgroundTaskRunner;
 import app.cookyourbooks.gui.NavigationService;
 import app.cookyourbooks.model.Recipe;
+import app.cookyourbooks.model.RecipeCollection;
 import app.cookyourbooks.services.LibrarianService;
 
 /**
@@ -90,12 +93,24 @@ public class ShoppingListResultViewModelImpl implements ShoppingListResultViewMo
   }
 
   /**
-   * Runs on the background thread: fetches all recipes, filters by ID, and builds sections.
+   * Runs on the background thread: fetches all recipes, resolves their collection names, filters by
+   * ID, and builds sections.
+   *
+   * <p>The collection lookup iterates {@link LibrarianService#listCollections()} once and builds a
+   * {@code recipeId → collectionTitle} map, avoiding repeated service calls per recipe.
    *
    * @param recipeIds the set of recipe IDs to include
    * @return one {@link RecipeSection} per matched recipe, preserving encounter order
    */
   private List<RecipeSection> buildSections(Set<String> recipeIds) {
+    // Build recipeId → collectionTitle map in one pass over all collections.
+    Map<String, String> recipeIdToCollection = new HashMap<>();
+    for (RecipeCollection col : librarianService.listCollections()) {
+      for (Recipe r : col.getRecipes()) {
+        recipeIdToCollection.put(r.getId(), col.getTitle());
+      }
+    }
+
     List<RecipeSection> result = new ArrayList<>();
     for (Recipe recipe : librarianService.listAllRecipes()) {
       if (!recipeIds.contains(recipe.getId())) {
@@ -105,7 +120,9 @@ public class ShoppingListResultViewModelImpl implements ShoppingListResultViewMo
       for (var ingredient : recipe.getIngredients()) {
         items.add(new IngredientItem(ingredient.toString()));
       }
-      result.add(new RecipeSection(recipe.getTitle(), items));
+      String collectionName =
+          recipeIdToCollection.getOrDefault(recipe.getId(), "Unknown Collection");
+      result.add(new RecipeSection(recipe.getTitle(), collectionName, items));
     }
     return result;
   }

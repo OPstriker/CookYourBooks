@@ -80,14 +80,14 @@ public class ShoppingListResultViewController {
    * <p>For each {@link RecipeSection}:
    *
    * <ul>
-   *   <li>A bold, clickable {@link Label} is added as the recipe header. Clicking it toggles
-   *       {@link RecipeSection#dismissedProperty()}.
+   *   <li>A bold, clickable {@link Label} is added as the recipe header. Clicking it toggles {@link
+   *       RecipeSection#dismissedProperty()}.
    *   <li>A subtitle {@link Label} shows "From: [collectionName]" in a muted style.
    *   <li>A bordered inner {@link VBox} holds one {@link CheckBox} per {@link IngredientItem}.
    *   <li>Each checkbox is bidirectionally bound to {@link IngredientItem#checkedProperty()}.
    *   <li>A listener on {@code checkedProperty()} applies a gray strikethrough style when checked.
-   *   <li>A listener on {@link RecipeSection#dismissedProperty()} grays out and strikes through
-   *       the header, subtitle, and every checkbox when the section is dismissed.
+   *   <li>A listener on {@link RecipeSection#dismissedProperty()} grays out and strikes through the
+   *       header, subtitle, and every checkbox when the section is dismissed.
    * </ul>
    *
    * <p>This method runs on the FX Application Thread (it is triggered by an ObservableList
@@ -99,8 +99,7 @@ public class ShoppingListResultViewController {
     for (RecipeSection section : vm.sectionsProperty()) {
       // Bold, hand-cursor header — clicking toggles the dismissed state for the whole section.
       Label header = new Label(section.getRecipeName());
-      header.setStyle(
-          "-fx-font-weight: bold; -fx-font-size: 14px; -fx-cursor: hand;");
+      header.setStyle("-fx-font-weight: bold; -fx-font-size: 14px; -fx-cursor: hand;");
       header.setOnMouseClicked(
           e -> section.dismissedProperty().set(!section.dismissedProperty().get()));
 
@@ -138,8 +137,7 @@ public class ShoppingListResultViewController {
                 for (var node : ingredientBox.getChildren()) {
                   if (node instanceof CheckBox cb) {
                     cb.setDisable(isNow);
-                    cb.setStyle(
-                        isNow ? "-fx-text-fill: #999999; -fx-strikethrough: true;" : "");
+                    cb.setStyle(isNow ? "-fx-text-fill: #999999; -fx-strikethrough: true;" : "");
                   }
                 }
               });
