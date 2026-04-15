@@ -2,7 +2,7 @@
 
 ## Git History
 
-All implementation work is on the `exportPDF` and `exportPDF-v2` and `exportPDF-v3`branches. Commits are ordered from earliest to latest:
+All implementation work is on the `exportPDF`, `exportPDF-v2`, and `exportPDF-v3` branches. Commits are ordered from earliest to latest:
 
 | Hash | Message | What changed |
 |------|---------|--------------|
@@ -80,7 +80,11 @@ The "Export PDF" button in `LibraryView.fxml` is a standard JavaFX `Button` node
 - **Tab** moves focus to the button
 - **Enter** or **Space** triggers the button action
 
-The button's `disableProperty` is bound to the recipe list selection — it is only enabled when a recipe is selected, which means keyboard users navigating with Tab will naturally skip it when nothing is selected. No additional accessibility work was required.
+The button's `disableProperty` is bound to the recipe list selection — it is only enabled when a recipe is selected, which means keyboard users navigating with Tab will naturally skip it when nothing is selected.
+
+An `accessibleText` attribute (`"Export selected recipe as PDF file"`) is set on the button in FXML to provide a descriptive label for assistive technologies such as screen readers. The button's visible label (`"Export PDF"`) is intentionally short for UI compactness; the `accessibleText` gives the full action description to users who cannot see the button's context.
+
+A keyboard accelerator **Ctrl+Shift+E** is registered in `LibraryViewController.setupExportShortcut()`. It listens for the scene to become available via `sceneProperty()`, then adds the key combination to `scene.getAccelerators()`. The accelerator only fires if the button is not disabled — so it is automatically inactive when no recipe is selected, consistent with the mouse behaviour.
 
 ---
 

@@ -90,6 +90,7 @@
                     <Button fx:id="exportButton"
                         id="exportButton"
                         text="Export PDF"
+                        accessibleText="Export selected recipe as PDF file"
                         styleClass="library-btn-primary"
                         onAction="#onExportRecipe" />
                     <Button fx:id="deleteRecipeButton"
