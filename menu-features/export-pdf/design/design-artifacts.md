@@ -1,4 +1,4 @@
-# Export to PDF — Design Evolution
+# Export to PDF — Design Artifacts
 
 ## Version 1: Plain Text Layout
 

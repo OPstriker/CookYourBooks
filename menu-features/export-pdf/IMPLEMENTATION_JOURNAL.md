@@ -2,7 +2,7 @@
 
 ## Git History
 
-All implementation work is on the `exportPDF` and `exportPDF-v2` branches. Commits are ordered from earliest to latest:
+All implementation work is on the `exportPDF` and `exportPDF-v2` and `exportPDF-v3`branches. Commits are ordered from earliest to latest:
 
 | Hash | Message | What changed |
 |------|---------|--------------|
