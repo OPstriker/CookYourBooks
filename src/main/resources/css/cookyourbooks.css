@@ -108,6 +108,8 @@
     -fx-border-width: 0;
     -fx-padding: 6 10;
     -fx-font-size: 13;
+    -fx-text-fill: #1c1c1e;
+    -fx-prompt-text-fill: #8e8e93;
 }
 
 .library-filter:focused {
