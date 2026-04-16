@@ -10,12 +10,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.StackPane;
+
+import org.jspecify.annotations.Nullable;
 
 import app.cookyourbooks.gui.NavigationService;
 import app.cookyourbooks.gui.NavigationService.View;
 import app.cookyourbooks.gui.viewmodel.ShoppingListResultViewModel;
 import app.cookyourbooks.gui.viewmodel.ShoppingListViewModel;
+import app.cookyourbooks.gui.ThemeManager;
 
 /**
  * Controller for the main application layout ({@code MainView.fxml}).
@@ -40,9 +44,11 @@ public class MainViewController {
   @FXML private StackPane contentArea;
   @FXML private Button homeButton; // navigates to Library; hidden on Home and Library views
   @FXML private Button shoppingListButton; // opens shopping list; TODO: wire later
-  @FXML private Button darkModeButton; // toggles dark mode; TODO: wire later
+  @FXML private Button darkModeButton; // toggles dark mode
   @FXML private Button topImportButton; // navigates to Import; visible only in Library view
   @FXML private Button searchButton; // navigates to Search; visible only in Library view
+
+  @Nullable private ThemeManager themeManager;
 
   private final NavigationService navigationService;
   private final ShoppingListViewModel shoppingListVm;
@@ -66,6 +72,15 @@ public class MainViewController {
   }
 
   /**
+   * Provides the {@link ThemeManager} that handles dark/light mode switching.
+   *
+   * @param themeManager the shared theme manager
+   */
+  public void setThemeManager(ThemeManager themeManager) {
+    this.themeManager = themeManager;
+  }
+
+  /**
    * Registers a feature view's root node for a given navigation view.
    *
    * <p>Call this during app startup for each feature that has been implemented. Views that are not
@@ -82,6 +97,25 @@ public class MainViewController {
   @SuppressWarnings("UnusedMethod") // Called reflectively by FXMLLoader
   @FXML
   private void initialize() {
+    // Dark mode toggle — adds or removes the dark CSS from the Scene's stylesheet list.
+    darkModeButton.setTooltip(new Tooltip("Switch to dark mode"));
+    darkModeButton.setOnAction(
+        e -> {
+          if (themeManager != null) {
+            themeManager.toggle();
+            darkModeButton.setText(themeManager.isDarkMode() ? "☀" : "🌙");
+            darkModeButton
+                .getTooltip()
+                .setText(
+                    themeManager.isDarkMode() ? "Switch to light mode" : "Switch to dark mode");
+          }
+        });
+    // Sync button icon and tooltip with the saved preference on startup.
+    if (themeManager != null && themeManager.isDarkMode()) {
+      darkModeButton.setText("☀");
+      darkModeButton.getTooltip().setText("Switch to light mode");
+    }
+
     // Back button navigates to Library from any inner view.
     homeButton.setOnAction(e -> navigationService.navigateTo(View.LIBRARY));
 
