@@ -9,6 +9,9 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 
@@ -62,6 +65,7 @@ public class LibraryViewController {
     setupRecipeList();
     setupLoadingIndicator();
     setupUndoBar();
+    setupExportShortcut();
 
     vm.refresh();
   }
@@ -136,6 +140,28 @@ public class LibraryViewController {
     deleteRecipeButton
         .disableProperty()
         .bind(recipeListView.getSelectionModel().selectedItemProperty().isNull());
+  }
+
+  private void setupExportShortcut() {
+    // Register Ctrl+Shift+E as a keyboard accelerator for the Export PDF button.
+    // The scene is not yet available at initialize() time, so we listen for it to be set.
+    exportButton
+        .sceneProperty()
+        .addListener(
+            (obs, oldScene, newScene) -> {
+              if (newScene != null) {
+                newScene
+                    .getAccelerators()
+                    .put(
+                        new KeyCodeCombination(
+                            KeyCode.E, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN),
+                        () -> {
+                          if (!exportButton.isDisabled()) {
+                            exportButton.fire();
+                          }
+                        });
+              }
+            });
   }
 
   private void setupLoadingIndicator() {

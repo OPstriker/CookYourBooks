@@ -2,7 +2,7 @@
 
 ## Git History
 
-All implementation work is on the `exportPDF` branch. Commits are ordered from earliest to latest:
+All implementation work is on the `exportPDF`, `exportPDF-v2`, and `exportPDF-v3` branches. Commits are ordered from earliest to latest:
 
 | Hash | Message | What changed |
 |------|---------|--------------|
@@ -17,8 +17,25 @@ All implementation work is on the `exportPDF` branch. Commits are ordered from e
 | `e752547` | add design-evolution.md | `design/design-evolution.md` (new) |
 | `586bc22` | add IMPLEMENTATION_JOURNAL.md | `IMPLEMENTATION_JOURNAL.md` (new) |
 | `1948fd8` | add FEATURE_SUMMARY.md | `FEATURE_SUMMARY.md` (new) |
+| `78327d9` | update newest Journal and contain all the commit history | `IMPLEMENTATION_JOURNAL.md` (updated) |
+| `81c9a96` | refactor: update FEATURE_SUMMARY and IMPLEMENTATION_JOURNAL; rename design-evolution to design-artifacts; redesign V2 wireframe | `FEATURE_SUMMARY.md`, `IMPLEMENTATION_JOURNAL.md`, `design/design-artifacts.md` (new), `design/v2-wireframe.png` (updated) |
+| `43082cc` | add v3 wireframe design for PDF export feature | `design/v3-wireframe.png` (new) |
+| `91b589c` | docs: fix broken SVG links and update git history to include latest commits | `FEATURE_SUMMARY.md`, `IMPLEMENTATION_JOURNAL.md`, `design/design-artifacts.md` (updated) |
+| `9ebbd33` | fix the name details | `IMPLEMENTATION_JOURNAL.md`, `design/design-artifacts.md` (updated) |
+| `4cdf232` | feat: add accessibleText and Ctrl+Shift+E keyboard accelerator to Export PDF button | `LibraryViewController.java`, `LibraryView.fxml`, `IMPLEMENTATION_JOURNAL.md` |
 
-The commit order reflects a deliberate inside-out approach: dependency → adapter → ViewModel → View → tests → V2 redesign. Each layer was working before the next was added.
+The commit order reflects a deliberate inside-out approach: dependency → adapter → ViewModel → View → tests → V3 redesign → documentation. Each layer was working before the next was added.
+
+---
+
+## Pull Request History
+
+| PR | Title | Status | Link |
+|----|-------|--------|------|
+| #4 | Add Apache PDFBox 3.0.3 dependency for PDF export | Closed (superseded by #6) | https://github.com/neu-cs3100/sp26-hw-cyb12-group-4633/pull/4 |
+| #6 | ExportPDF feature Implement | Merged — 2 approvals | https://github.com/neu-cs3100/sp26-hw-cyb12-group-4633/pull/6 |
+| #11 | redesign V2 wireframe | Merged — 1 approval | https://github.com/neu-cs3100/sp26-hw-cyb12-group-4633/pull/11 |
+| #12 | Add V3 wireframe screenshot for final branded two-column PDF layout | Open | https://github.com/neu-cs3100/sp26-hw-cyb12-group-4633/pull/12 |
 
 ---
 
@@ -65,7 +82,7 @@ The commit order reflects a deliberate inside-out approach: dependency → adapt
 
 **V2** addressed the hierarchy and identity problems incrementally — bold title, bold uppercase section headings, horizontal divider lines between sections, and a simple `Page N of M` footer. This was a deliberate intermediate step: fixing the most visible readability issues before committing to a more complex two-column layout that would require significant refactoring of the rendering logic.
 
-**V3** then addressed the remaining V2 problems — still-wasted horizontal space and no app branding — by introducing the grey header block, two-column body layout with a vertical rule, and a branded footer (`CookYourBooks · Page N of M`). See `design/design-evolution.md` for the full breakdown of each version's problems and changes.
+**V3** then addressed the remaining V2 problems — still-wasted horizontal space and no app branding — by introducing the grey header block, two-column body layout with a vertical rule, and a branded footer (`CookYourBooks · Page N of M`). See `design/design-artifacts.md` for the full breakdown of each version's problems and changes.
 
 ---
 
@@ -76,7 +93,11 @@ The "Export PDF" button in `LibraryView.fxml` is a standard JavaFX `Button` node
 - **Tab** moves focus to the button
 - **Enter** or **Space** triggers the button action
 
-The button's `disableProperty` is bound to the recipe list selection — it is only enabled when a recipe is selected, which means keyboard users navigating with Tab will naturally skip it when nothing is selected. No additional accessibility work was required.
+The button's `disableProperty` is bound to the recipe list selection — it is only enabled when a recipe is selected, which means keyboard users navigating with Tab will naturally skip it when nothing is selected.
+
+An `accessibleText` attribute (`"Export selected recipe as PDF file"`) is set on the button in FXML to provide a descriptive label for assistive technologies such as screen readers. The button's visible label (`"Export PDF"`) is intentionally short for UI compactness; the `accessibleText` gives the full action description to users who cannot see the button's context.
+
+A keyboard accelerator **Ctrl+Shift+E** is registered in `LibraryViewController.setupExportShortcut()`. It listens for the scene to become available via `sceneProperty()`, then adds the key combination to `scene.getAccelerators()`. The accelerator only fires if the button is not disabled — so it is automatically inactive when no recipe is selected, consistent with the mouse behaviour.
 
 ---
 

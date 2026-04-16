@@ -8,7 +8,7 @@
 Version 1 output: single-column plain text, no visual hierarchy, no page number.
 
 ### V2 — Structured Single-Column Layout (Wireframe)
-![V2 Wireframe](design/v2-wireframe.svg)
+![V2 Wireframe](design/v2-wireframe.png)
 
 Version 2 wireframe: bold title, uppercase section headings, horizontal dividers between sections, and a simple right-aligned page number footer. Still single-column — no branded header block yet.
 
