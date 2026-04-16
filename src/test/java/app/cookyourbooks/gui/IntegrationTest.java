@@ -95,7 +95,10 @@ class IntegrationTest {
 
     javafx.fxml.FXMLLoader loader =
         new javafx.fxml.FXMLLoader(getClass().getResource("/fxml/LibraryView.fxml"));
-    loader.setControllerFactory(clazz -> new LibraryViewController(vm));
+    loader.setControllerFactory(
+        clazz ->
+            new LibraryViewController(
+                vm, new app.cookyourbooks.gui.viewmodel.ShoppingListViewModelImpl(null)));
     Parent root = loader.load();
 
     stage.setScene(new Scene(root, 900, 600));
@@ -222,15 +225,22 @@ class IntegrationTest {
         new LibrarianServiceImpl(
             library.getRecipeRepository(), library.getCollectionRepository(), library);
 
-    fullNavService = new NavigationService();
-    var mainController = new MainViewController(fullNavService);
+    var shoppingListVm = new app.cookyourbooks.gui.viewmodel.ShoppingListViewModelImpl(null);
+    var resultVm =
+        new app.cookyourbooks.gui.viewmodel.ShoppingListResultViewModelImpl(
+            librarianService, fullNavService);
+    var mainController = new MainViewController(fullNavService, shoppingListVm, resultVm);
 
     // Library View
     fullLibraryVm =
         new LibraryViewModelImpl(librarianService, fullNavService, Duration.ofSeconds(5));
     javafx.fxml.FXMLLoader libraryLoader =
         new javafx.fxml.FXMLLoader(getClass().getResource("/fxml/LibraryView.fxml"));
-    libraryLoader.setControllerFactory(clazz -> new LibraryViewController(fullLibraryVm));
+    libraryLoader.setControllerFactory(
+        clazz ->
+            new LibraryViewController(
+                fullLibraryVm,
+                new app.cookyourbooks.gui.viewmodel.ShoppingListViewModelImpl(null)));
     Parent libraryView = libraryLoader.load();
     mainController.setViewNode(NavigationService.View.LIBRARY, libraryView);
 

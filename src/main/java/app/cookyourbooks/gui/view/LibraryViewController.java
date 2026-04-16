@@ -74,6 +74,27 @@ public class LibraryViewController {
     setupShoppingListMode();
 
     vm.refresh();
+
+    // Command+S opens shopping list selection mode
+    filterField.getScene(); // scene not available yet in initialize
+    // Use a scene listener instead
+    filterField
+        .sceneProperty()
+        .addListener(
+            (obs, oldScene, newScene) -> {
+              if (newScene != null) {
+                newScene.setOnKeyPressed(
+                    event -> {
+                      if (event.getCode() == javafx.scene.input.KeyCode.S
+                          && event.isShortcutDown()) {
+                        if (!shoppingListVm.activeProperty().get()) {
+                          shoppingListVm.enter();
+                        }
+                        event.consume();
+                      }
+                    });
+              }
+            });
   }
 
   // ── Private setup helpers ──
@@ -91,6 +112,67 @@ public class LibraryViewController {
     normalRecipeButtons.visibleProperty().bind(active.not());
     normalRecipeButtons.managedProperty().bind(active.not());
     active.addListener((obs, wasActive, isActive) -> refreshRecipeCellFactory(isActive));
+
+    recipeListView.setOnKeyPressed(
+        event -> {
+          if (event.getCode() == javafx.scene.input.KeyCode.ENTER) {
+            RecipeSummary selected = recipeListView.getSelectionModel().getSelectedItem();
+            if (selected != null && shoppingListVm.activeProperty().get()) {
+              if (shoppingListVm.selectedRecipeIds().contains(selected.id())) {
+                shoppingListVm.selectedRecipeIds().remove(selected.id());
+              } else {
+                shoppingListVm.selectedRecipeIds().add(selected.id());
+              }
+              recipeListView.refresh();
+            }
+            event.consume();
+          } else if (event.getCode() == javafx.scene.input.KeyCode.DELETE
+              || event.getCode() == javafx.scene.input.KeyCode.BACK_SPACE) {
+            RecipeSummary selected = recipeListView.getSelectionModel().getSelectedItem();
+            if (selected != null && shoppingListVm.activeProperty().get()) {
+              shoppingListVm.selectedRecipeIds().remove(selected.id());
+              recipeListView.refresh();
+            }
+            event.consume();
+          }
+        });
+    recipeListView.setOnKeyPressed(
+        event -> {
+          if (event.getCode() == javafx.scene.input.KeyCode.ENTER && event.isShortcutDown()) {
+            // Command+Enter — confirm shopping list
+            if (shoppingListVm.activeProperty().get()) {
+              onConfirmShoppingList();
+            }
+            event.consume();
+          } else if ((event.getCode() == javafx.scene.input.KeyCode.DELETE
+                  || event.getCode() == javafx.scene.input.KeyCode.BACK_SPACE)
+              && event.isShortcutDown()) {
+            // Command+Delete — cancel shopping list
+            if (shoppingListVm.activeProperty().get()) {
+              shoppingListVm.discard();
+            }
+            event.consume();
+          } else if (event.getCode() == javafx.scene.input.KeyCode.ENTER) {
+            RecipeSummary selected = recipeListView.getSelectionModel().getSelectedItem();
+            if (selected != null && shoppingListVm.activeProperty().get()) {
+              if (shoppingListVm.selectedRecipeIds().contains(selected.id())) {
+                shoppingListVm.selectedRecipeIds().remove(selected.id());
+              } else {
+                shoppingListVm.selectedRecipeIds().add(selected.id());
+              }
+              recipeListView.refresh();
+            }
+            event.consume();
+          } else if (event.getCode() == javafx.scene.input.KeyCode.DELETE
+              || event.getCode() == javafx.scene.input.KeyCode.BACK_SPACE) {
+            RecipeSummary selected = recipeListView.getSelectionModel().getSelectedItem();
+            if (selected != null && shoppingListVm.activeProperty().get()) {
+              shoppingListVm.selectedRecipeIds().remove(selected.id());
+              recipeListView.refresh();
+            }
+            event.consume();
+          }
+        });
   }
 
   @SuppressWarnings("UnusedMethod")

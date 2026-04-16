@@ -72,6 +72,40 @@ public class ShoppingListResultViewController {
     // Rebuild the ingredient display whenever load() finishes populating sections.
     vm.sectionsProperty()
         .addListener((ListChangeListener<RecipeSection>) change -> rebuildSections());
+
+    // Keyboard shortcuts for the shopping list result view
+    sectionsContainer
+        .sceneProperty()
+        .addListener(
+            (obs, oldScene, newScene) -> {
+              if (newScene != null) {
+                newScene.setOnKeyPressed(
+                    event -> {
+                      switch (event.getCode()) {
+                        case ENTER -> {
+                          // Toggle the focused checkbox
+                          if (newScene.getFocusOwner() instanceof CheckBox cb) {
+                            cb.setSelected(!cb.isSelected());
+                          }
+                          event.consume();
+                        }
+                        case DELETE, BACK_SPACE -> {
+                          // Uncheck the focused checkbox
+                          if (newScene.getFocusOwner() instanceof CheckBox cb) {
+                            cb.setSelected(false);
+                          }
+                          event.consume();
+                        }
+                        case ESCAPE -> {
+                          // Go back to library
+                          vm.navigateBack();
+                          event.consume();
+                        }
+                        default -> {}
+                      }
+                    });
+              }
+            });
   }
 
   /**
