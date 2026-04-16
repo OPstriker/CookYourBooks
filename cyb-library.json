@@ -719,6 +719,14 @@
     "description" : null,
     "notes" : null,
     "sourceType" : "PERSONAL"
+  }, {
+    "type" : "personal",
+    "id" : "e471c76d-27c6-4ed8-a19b-b81da7da131c",
+    "title" : "collection 2",
+    "recipes" : [ ],
+    "description" : null,
+    "notes" : null,
+    "sourceType" : "PERSONAL"
   } ],
   "houseConversions" : [ ]
 }

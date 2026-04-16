@@ -5,7 +5,10 @@ import java.util.Map;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.StackPane;
@@ -14,6 +17,8 @@ import org.jspecify.annotations.Nullable;
 
 import app.cookyourbooks.gui.NavigationService;
 import app.cookyourbooks.gui.NavigationService.View;
+import app.cookyourbooks.gui.viewmodel.ShoppingListResultViewModel;
+import app.cookyourbooks.gui.viewmodel.ShoppingListViewModel;
 import app.cookyourbooks.gui.ThemeManager;
 
 /**
@@ -46,15 +51,24 @@ public class MainViewController {
   @Nullable private ThemeManager themeManager;
 
   private final NavigationService navigationService;
+  private final ShoppingListViewModel shoppingListVm;
+  private final ShoppingListResultViewModel resultVm;
   private final Map<View, Node> viewNodes = new EnumMap<>(View.class);
 
   /**
    * Constructs the main view controller.
    *
    * @param navigationService the shared navigation service
+   * @param shoppingListVm the Shopping List selection ViewModel
+   * @param resultVm the Shopping List result ViewModel (used to check if a list already exists)
    */
-  public MainViewController(NavigationService navigationService) {
+  public MainViewController(
+      NavigationService navigationService,
+      ShoppingListViewModel shoppingListVm,
+      ShoppingListResultViewModel resultVm) {
     this.navigationService = navigationService;
+    this.shoppingListVm = shoppingListVm;
+    this.resultVm = resultVm;
   }
 
   /**
@@ -109,6 +123,38 @@ public class MainViewController {
     topImportButton.setOnAction(e -> navigationService.navigateTo(View.IMPORT));
     searchButton.setOnAction(e -> navigationService.navigateTo(View.SEARCH));
 
+    // If a shopping list already exists, go straight to it.
+    // Otherwise, enter selection mode so the user can pick recipes.
+    shoppingListButton.setOnAction(
+        e -> {
+          if (!resultVm.sectionsProperty().isEmpty()) {
+            ButtonType goToPrevious = new ButtonType("Go to Previous Cart");
+            ButtonType clear = new ButtonType("Clear");
+            ButtonType returnButton = new ButtonType("Return", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Shopping List");
+            alert.setHeaderText("You have an existing shopping list");
+            alert.setContentText("What would you like to do?");
+            alert.getButtonTypes().setAll(goToPrevious, clear, returnButton);
+
+            alert
+                .showAndWait()
+                .ifPresent(
+                    result -> {
+                      if (result == goToPrevious) {
+                        navigationService.navigateTo(View.SHOPPING_LIST);
+                      } else if (result == clear) {
+                        shoppingListVm.discard();
+                        resultVm.load(java.util.Set.of());
+                      }
+                    });
+          } else {
+            shoppingListVm.enter();
+            navigationService.navigateTo(View.LIBRARY);
+          }
+        });
+
     // Listen for navigation changes and swap the content area.
     navigationService
         .currentViewProperty()
@@ -141,5 +187,10 @@ public class MainViewController {
     topImportButton.setManaged(onLibrary);
     searchButton.setVisible(onLibrary);
     searchButton.setManaged(onLibrary);
+    // shopping list / dark mode is only available in Library view
+    shoppingListButton.setVisible(onLibrary);
+    shoppingListButton.setManaged(onLibrary);
+    darkModeButton.setVisible(onLibrary);
+    darkModeButton.setManaged(onLibrary);
   }
 }
