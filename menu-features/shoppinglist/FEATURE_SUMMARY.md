@@ -29,6 +29,18 @@
 
 ---
 
+### v3
+
+#### 1. Collection Subtitle Under Each Recipe Header
+
+![v3 Collection Subtitle](design/screenshots/v3/screenshot-collection-subtitle.png)
+
+#### 2. Dismissed Section (Header + All Ingredients Grayed Out)
+
+![v3 Dismissed Section](design/screenshots/v3/screenshot-dismissed-section.png)
+
+---
+
 ## Integration Notes
 
 The Shopping List feature connects to the rest of the app at three points:
@@ -69,6 +81,7 @@ directly to the result screen instead of entering selection mode. This required 
 |---------|-------------------------------------------------------------------------------------------|
 | v1      | Initial result screen — per-recipe grouping, checkboxes, strikethrough, smart cart button |
 | v2      | Clear button added, cart icon hidden on Home page, button layout simplified               |
+| v3      | Collection subtitle under each recipe header; click header to cross off entire section    |
 
 ---
 
@@ -88,6 +101,14 @@ directly to the result screen instead of entering selection mode. This required 
 - Clear button on result screen wired to reset sections and return to selection mode
 - Cart icon and dark mode toggle hidden on Home page, visible only on Library view
 - Button layout simplified — redundant back button removed
+
+### Complete (v3)
+- `RecipeSection` gains `collectionName` field and `dismissedProperty()`
+- `ShoppingListResultViewModelImpl.buildSections()` resolves collection name via a
+  single `listCollections()` call and a `recipeId → collectionTitle` lookup map
+- `ShoppingListResultViewController` renders a "From: [Collection]" subtitle under
+  each header and wires click-to-dismiss with section-wide gray + strikethrough
+- Unit tests updated: `listCollections()` stubbed in setUp; SL8 and SL9 added
 
 ### Known Limitations
 - Checked state is **in-memory only** — if the user navigates away and returns, all
