@@ -1,6 +1,5 @@
 package app.cookyourbooks.gui.viewmodel;
 
-import java.nio.file.Path;
 import java.util.List;
 
 import javafx.beans.property.BooleanProperty;
@@ -159,16 +158,4 @@ public interface LibraryViewModel {
 
   /** Navigates to the Search & Filter view. */
   void navigateToSearch();
-
-  /**
-   * Exports the recipe identified by {@code recipeId} to a PDF file at {@code outputPath}.
-   *
-   * <p>The export runs on a background thread so the UI remains responsive. If the recipe is not
-   * found or the file cannot be written, the error is logged and the operation is silently
-   * abandoned.
-   *
-   * @param recipeId the ID of the recipe to export
-   * @param outputPath the destination path for the PDF file
-   */
-  void exportRecipe(String recipeId, Path outputPath);
 }

@@ -3,7 +3,6 @@
 
 [versions]
 assertj = "3.24.2"
-pdfbox = "3.0.3"
 guava = "33.3.1-jre"
 junit-jupiter = "5.10.2"
 jackson = "2.18.2"
@@ -24,7 +23,6 @@ monocle = "21.0.2"
 
 [libraries]
 assertj-core = { module = "org.assertj:assertj-core", version.ref = "assertj" }
-pdfbox = { module = "org.apache.pdfbox:pdfbox", version.ref = "pdfbox" }
 guava = { module = "com.google.guava:guava", version.ref = "guava" }
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit-jupiter" }
 junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit-jupiter" }
