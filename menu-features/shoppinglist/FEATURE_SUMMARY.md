@@ -81,7 +81,7 @@ directly to the result screen instead of entering selection mode. This required 
 |---------|-------------------------------------------------------------------------------------------|
 | v1      | Initial result screen — per-recipe grouping, checkboxes, strikethrough, smart cart button |
 | v2      | Clear button added, cart icon hidden on Home page, button layout simplified               |
-| v3      | Collection subtitle under each recipe header; click header to cross off entire section   |
+| v3      | Collection subtitle under each recipe header; click header to cross off entire section    |
 
 ---
 
