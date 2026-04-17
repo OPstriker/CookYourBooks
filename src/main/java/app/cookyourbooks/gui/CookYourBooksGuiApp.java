@@ -108,7 +108,6 @@ public class CookYourBooksGuiApp extends Application {
     var themeManager = new ThemeManager();
     var mainController = new MainViewController(navigationService, shoppingListVm, resultVm);
     mainController.setThemeManager(themeManager);
-    
 
     // ── 5. Wire your feature ViewModels and Views ──
     //

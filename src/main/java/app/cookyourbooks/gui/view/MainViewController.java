@@ -17,9 +17,9 @@ import org.jspecify.annotations.Nullable;
 
 import app.cookyourbooks.gui.NavigationService;
 import app.cookyourbooks.gui.NavigationService.View;
+import app.cookyourbooks.gui.ThemeManager;
 import app.cookyourbooks.gui.viewmodel.ShoppingListResultViewModel;
 import app.cookyourbooks.gui.viewmodel.ShoppingListViewModel;
-import app.cookyourbooks.gui.ThemeManager;
 
 /**
  * Controller for the main application layout ({@code MainView.fxml}).

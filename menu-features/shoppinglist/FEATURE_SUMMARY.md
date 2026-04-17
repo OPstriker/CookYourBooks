@@ -77,11 +77,12 @@ directly to the result screen instead of entering selection mode. This required 
 
 ## Version History
 
-| Version | Summary                                                                                   |
-|---------|-------------------------------------------------------------------------------------------|
-| v1      | Initial result screen — per-recipe grouping, checkboxes, strikethrough, smart cart button |
-| v2      | Clear button added, cart icon hidden on Home page, button layout simplified               |
-| v3      | Collection subtitle under each recipe header; click header to cross off entire section    |
+| Version           | Summary                                                                                   |
+|-------------------|-------------------------------------------------------------------------------------------|
+| v1                | Initial result screen — per-recipe grouping, checkboxes, strikethrough, smart cart button |
+| v2                | Clear button added, cart icon hidden on Home page, button layout simplified               |
+| v3                | Collection subtitle under each recipe header; click header to cross off entire section    |
+| Keyboard Nav      | Enter/Delete to select recipes, Cmd+Enter to confirm, Cmd+Delete to cancel, arrow keys   |
 
 ---
 
@@ -109,6 +110,17 @@ directly to the result screen instead of entering selection mode. This required 
 - `ShoppingListResultViewController` renders a "From: [Collection]" subtitle under
   each header and wires click-to-dismiss with section-wide gray + strikethrough
 - Unit tests updated: `listCollections()` stubbed in setUp; SL8 and SL9 added
+
+### Complete (Keyboard Navigation)
+- `Enter` / `Delete` selects and deselects recipes in both the Library view (selection
+  mode) and the Shopping List result view
+- `Command + Enter` in the Library view confirms the selection and navigates to the
+  Shopping List; `Enter` alone advances to the Shopping List from the confirm step
+- `Command + Delete` cancels the shopping list and returns to the Library
+- `Command + S` opens the shopping cart from anywhere in the Library view
+- Arrow keys (`↑` / `↓`) move focus up and down through the recipe list
+- Fixed several Library view integration tests whose constructors changed as a result
+  of the keyboard navigation wiring
 
 ### Known Limitations
 - Checked state is **in-memory only** — if the user navigates away and returns, all
