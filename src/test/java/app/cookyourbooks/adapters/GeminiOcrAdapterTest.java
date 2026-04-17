@@ -95,7 +95,7 @@ class GeminiOcrAdapterTest {
     Recipe recipe = adapter.extractRecipe(Path.of("test-image.jpg"));
 
     // Verify title
-    assertThat(recipe.getTitle()).isEqualTo("Simple Scrambled Eggs");
+    assertThat(recipe.getTitle()).isEqualTo("SIMPLE SCRAMBLED EGGS");
 
     // Verify servings (transformed from yield)
     assertThat(recipe.getServings()).isNotNull();
@@ -131,7 +131,7 @@ class GeminiOcrAdapterTest {
         """
         {
           "recipes": [{
-            "title": "Simple Scrambled Eggs",
+            "title": "SIMPLE SCRAMBLED EGGS",
             "yield": { "type": "exact", "value": 2 },
             "ingredients": [
               { "type": "measured", "name": "eggs", "quantity": { "type": "exact", "value": 3.0, "unit": "WHOLE" } },
@@ -169,9 +169,8 @@ class GeminiOcrAdapterTest {
 
     Recipe actual = adapter.extractRecipe(Path.of("test-image.jpg"));
 
-    // Verify key fields match the expected sample recipe.
-    // The adapter normalises titles to Title Case, so compare case-insensitively.
-    assertThat(actual.getTitle()).isEqualToIgnoringCase(expected.getTitle());
+    // Verify key fields match the expected sample recipe
+    assertThat(actual.getTitle()).isEqualTo(expected.getTitle());
     assertThat(actual.getServings()).isNotNull();
     assertThat(Objects.requireNonNull(actual.getServings()).getAmount())
         .isEqualTo(Objects.requireNonNull(expected.getServings()).getAmount());

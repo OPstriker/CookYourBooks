@@ -71,6 +71,7 @@ class ImportViewModelImplTest extends ViewModelTestBase {
   private static final class StubLibrarianService implements LibrarianService {
 
     private @Nullable Recipe savedRecipe;
+    private @Nullable String savedCollectionId;
     private final List<RecipeCollection> collections;
 
     StubLibrarianService(List<RecipeCollection> collections) {
@@ -81,6 +82,10 @@ class ImportViewModelImplTest extends ViewModelTestBase {
       return savedRecipe;
     }
 
+    @Nullable String getSavedCollectionId() {
+      return savedCollectionId;
+    }
+
     @Override
     public List<RecipeCollection> listCollections() {
       return collections;
@@ -89,6 +94,7 @@ class ImportViewModelImplTest extends ViewModelTestBase {
     @Override
     public void saveRecipe(Recipe recipe, String collectionId) {
       this.savedRecipe = recipe;
+      this.savedCollectionId = collectionId;
     }
 
     // ── Unused interface methods ──────────────────────────────────────────
