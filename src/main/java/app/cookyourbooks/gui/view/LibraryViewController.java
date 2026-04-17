@@ -3,6 +3,7 @@ package app.cookyourbooks.gui.view;
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -309,6 +310,11 @@ public class LibraryViewController {
     undoBar.visibleProperty().bind(vm.undoAvailableProperty());
     undoBar.managedProperty().bind(vm.undoAvailableProperty());
     undoLabel.textProperty().bind(vm.undoMessageProperty());
+  }
+
+  /** Placeholder for export keyboard shortcut setup — wired by the Export PDF feature. */
+  private void setupExportShortcut() {
+    // Export shortcut wiring is handled by the Export PDF feature integration.
   }
 
   // ── FXML event handlers ──
