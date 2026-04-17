@@ -95,10 +95,7 @@ class IntegrationTest {
 
     javafx.fxml.FXMLLoader loader =
         new javafx.fxml.FXMLLoader(getClass().getResource("/fxml/LibraryView.fxml"));
-    loader.setControllerFactory(
-        clazz ->
-            new LibraryViewController(
-                vm, new app.cookyourbooks.gui.viewmodel.ShoppingListViewModelImpl(null)));
+    loader.setControllerFactory(clazz -> new LibraryViewController(vm));
     Parent root = loader.load();
 
     stage.setScene(new Scene(root, 900, 600));
@@ -220,28 +217,20 @@ class IntegrationTest {
    * Stage. Called by IT6 and IT7 before their assertions.
    */
   private Stage buildFullApp() throws Exception {
-    fullNavService = new NavigationService();
     CybLibrary library = CybLibrary.load(Path.of("cyb-library.json"));
     var librarianService =
         new LibrarianServiceImpl(
             library.getRecipeRepository(), library.getCollectionRepository(), library);
 
-    var shoppingListVm = new app.cookyourbooks.gui.viewmodel.ShoppingListViewModelImpl(null);
-    var resultVm =
-        new app.cookyourbooks.gui.viewmodel.ShoppingListResultViewModelImpl(
-            librarianService, fullNavService);
-    var mainController = new MainViewController(fullNavService, shoppingListVm, resultVm);
+    fullNavService = new NavigationService();
+    var mainController = new MainViewController(fullNavService);
 
     // Library View
     fullLibraryVm =
         new LibraryViewModelImpl(librarianService, fullNavService, Duration.ofSeconds(5));
     javafx.fxml.FXMLLoader libraryLoader =
         new javafx.fxml.FXMLLoader(getClass().getResource("/fxml/LibraryView.fxml"));
-    libraryLoader.setControllerFactory(
-        clazz ->
-            new LibraryViewController(
-                fullLibraryVm,
-                new app.cookyourbooks.gui.viewmodel.ShoppingListViewModelImpl(null)));
+    libraryLoader.setControllerFactory(clazz -> new LibraryViewController(fullLibraryVm));
     Parent libraryView = libraryLoader.load();
     mainController.setViewNode(NavigationService.View.LIBRARY, libraryView);
 

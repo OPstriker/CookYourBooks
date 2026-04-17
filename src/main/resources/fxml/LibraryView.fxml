@@ -74,19 +74,12 @@
                 <padding>
                     <Insets top="12" right="12" bottom="12" left="12" />
                 </padding>
-                <Label fx:id="shoppingListHintLabel"
-                    text="Select recipes to add to your shopping list"
-                    styleClass="library-pane-title"
-                    visible="false"
-                    managed="false" />
-
                 <Label text="RECIPES" styleClass="library-pane-title" />
-
                 <ListView fx:id="recipeListView"
                     id="recipeListView"
                     styleClass="library-list"
                     VBox.vgrow="ALWAYS" />
-                <HBox fx:id="normalRecipeButtons" spacing="8">
+                <HBox spacing="8">
                     <Button fx:id="openRecipeButton"
                         id="openRecipeButton"
                         text="Open Recipe"
@@ -96,7 +89,8 @@
                         maxWidth="Infinity" />
                     <Button fx:id="exportButton"
                         id="exportButton"
-                        text="Export"
+                        text="Export PDF"
+                        accessibleText="Export selected recipe as PDF file"
                         styleClass="library-btn-primary"
                         onAction="#onExportRecipe" />
                     <Button fx:id="deleteRecipeButton"
@@ -104,22 +98,6 @@
                         text="Delete"
                         styleClass="library-btn-danger"
                         onAction="#onDeleteRecipe" />
-                </HBox>
-
-                <HBox fx:id="shoppingListConfirmBar"
-                    spacing="8"
-                    visible="false"
-                    managed="false">
-                    <Button fx:id="cancelShoppingListButton"
-                        text="Cancel"
-                        styleClass="library-btn-danger"
-                        onAction="#onCancelShoppingList" />
-                    <Button fx:id="confirmShoppingListButton"
-                        text="Confirm"
-                        styleClass="library-btn-primary"
-                        onAction="#onConfirmShoppingList"
-                        HBox.hgrow="ALWAYS"
-                        maxWidth="Infinity" />
                 </HBox>
             </VBox>
 
