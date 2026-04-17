@@ -96,8 +96,7 @@
                         maxWidth="Infinity" />
                     <Button fx:id="exportButton"
                         id="exportButton"
-                        text="Export PDF"
-                        accessibleText="Export selected recipe as PDF file"
+                        text="Export"
                         styleClass="library-btn-primary"
                         onAction="#onExportRecipe" />
                     <Button fx:id="deleteRecipeButton"
