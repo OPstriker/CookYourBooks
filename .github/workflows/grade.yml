@@ -40,11 +40,13 @@ jobs:
         with:
           path: submission
       # The base image does NOT have Java, Python etc. So install what you need here, e.g.:
-      #- name: Install Java
-      #  uses: actions/setup-java@v4
-      #  with:
-      #    distribution: 'temurin' 
-      #    java-version: '21'
+      - name: Install Java
+        uses: actions/setup-java@v4
+        id: java
+        with:
+          distribution: 'temurin' 
+          java-version: '21'
+          cache: 'gradle'
       # - name: Install Python
       #   uses: actions/setup-python@v4
       #   with:
@@ -53,7 +55,7 @@ jobs:
       #- name: Install dependencies
       #  run: pip install -r requirements.txt
       - name: Collect Submission and Run Grader
-        uses: pawtograder/assignment-action@v3 # Update version here
+        uses: pawtograder/assignment-action@improve-mutant-hints # Update version here
         with:
           grading_server: 'https://api.pawtograder.com'
           action_ref: '${{ github.action_ref }}'
