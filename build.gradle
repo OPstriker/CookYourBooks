@@ -48,6 +48,9 @@ configurations {
 
 dependencies {
     // Use JUnit Jupiter (JUnit 5) test framework
+
+    implementation 'org.apache.pdfbox:pdfbox:3.0.1'
+
     testImplementation libs.junit.jupiter.api
     testRuntimeOnly libs.junit.jupiter.engine
     testImplementation libs.junit.jupiter.params

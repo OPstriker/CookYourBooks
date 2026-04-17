@@ -338,11 +338,6 @@ public class LibraryViewController {
     undoLabel.textProperty().bind(vm.undoMessageProperty());
   }
 
-  /** Placeholder for export keyboard shortcut setup — wired by the Export PDF feature. */
-  private void setupExportShortcut() {
-    // Export shortcut wiring is handled by the Export PDF feature integration.
-  }
-
   // ── FXML event handlers ──
 
   @SuppressWarnings("UnusedMethod") // called reflectively by FXMLLoader
