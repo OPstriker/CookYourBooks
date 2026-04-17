@@ -220,6 +220,7 @@ class IntegrationTest {
    * Stage. Called by IT6 and IT7 before their assertions.
    */
   private Stage buildFullApp() throws Exception {
+    fullNavService = new NavigationService();
     CybLibrary library = CybLibrary.load(Path.of("cyb-library.json"));
     var librarianService =
         new LibrarianServiceImpl(

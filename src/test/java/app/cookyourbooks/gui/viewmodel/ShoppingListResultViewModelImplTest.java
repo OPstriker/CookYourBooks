@@ -19,6 +19,8 @@ import app.cookyourbooks.model.Recipe;
 import app.cookyourbooks.model.RecipeCollection;
 import app.cookyourbooks.services.LibrarianService;
 
+@SuppressWarnings(
+    "NullAway.Init") // vm is set in @BeforeEach via Platform.runLater, not the constructor
 class ShoppingListResultViewModelImplTest extends ViewModelTestBase {
 
   private LibrarianService mockService;
