@@ -37,8 +37,7 @@ public class NavigationService {
     LIBRARY,
     RECIPE_EDITOR,
     IMPORT,
-    SEARCH,
-    SHOPPING_LIST
+    SEARCH
   }
 
   private final ObjectProperty<View> currentView = new SimpleObjectProperty<>(View.HOME);
