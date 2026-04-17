@@ -11,7 +11,11 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
 
 import app.cookyourbooks.gui.viewmodel.LibraryViewModel;
 import app.cookyourbooks.gui.viewmodel.RecipeCollectionSummary;
@@ -300,6 +304,28 @@ public class LibraryViewController {
         .bind(recipeListView.getSelectionModel().selectedItemProperty().isNull());
   }
 
+  private void setupExportShortcut() {
+    // Register Ctrl+Shift+E as a keyboard accelerator for the Export PDF button.
+    // The scene is not yet available at initialize() time, so we listen for it to be set.
+    exportButton
+        .sceneProperty()
+        .addListener(
+            (obs, oldScene, newScene) -> {
+              if (newScene != null) {
+                newScene
+                    .getAccelerators()
+                    .put(
+                        new KeyCodeCombination(
+                            KeyCode.E, KeyCombination.CONTROL_DOWN, KeyCombination.SHIFT_DOWN),
+                        () -> {
+                          if (!exportButton.isDisabled()) {
+                            exportButton.fire();
+                          }
+                        });
+              }
+            });
+  }
+
   private void setupLoadingIndicator() {
     loadingIndicator.visibleProperty().bind(vm.loadingProperty());
     loadingIndicator.managedProperty().bind(vm.loadingProperty());
@@ -365,7 +391,32 @@ public class LibraryViewController {
   @SuppressWarnings("UnusedMethod") // called reflectively by FXMLLoader
   @FXML
   private void onExportRecipe() {
-    // TODO: wire export logic
+    RecipeSummary selected = recipeListView.getSelectionModel().getSelectedItem();
+    if (selected == null) {
+      return; // button should already be disabled, but guard defensively
+    }
+
+    // FileChooser must run on the JavaFX Application Thread — onExportRecipe is always
+    // called from a button click, so we are already on the right thread here.
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Export Recipe as PDF");
+    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
+    fileChooser.setInitialFileName(selected.title() + ".pdf");
+
+    // showSaveDialog returns null if the user cancels
+    java.io.File file = fileChooser.showSaveDialog(exportButton.getScene().getWindow());
+    if (file == null) {
+      return; // user cancelled — nothing to do
+    }
+
+    vm.exportRecipe(selected.id(), file.toPath());
+
+    // Confirm to the user that the export was started (the actual write is async)
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("Export PDF");
+    alert.setHeaderText(null);
+    alert.setContentText("\"" + selected.title() + "\" is being exported to:\n" + file.getPath());
+    alert.showAndWait();
   }
 
   @FXML
