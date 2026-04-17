@@ -5,12 +5,21 @@ import java.util.Map;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.StackPane;
+
+import org.jspecify.annotations.Nullable;
 
 import app.cookyourbooks.gui.NavigationService;
 import app.cookyourbooks.gui.NavigationService.View;
+import app.cookyourbooks.gui.ThemeManager;
+import app.cookyourbooks.gui.viewmodel.ShoppingListResultViewModel;
+import app.cookyourbooks.gui.viewmodel.ShoppingListViewModel;
 
 /**
  * Controller for the main application layout ({@code MainView.fxml}).
@@ -35,20 +44,40 @@ public class MainViewController {
   @FXML private StackPane contentArea;
   @FXML private Button homeButton; // navigates to Library; hidden on Home and Library views
   @FXML private Button shoppingListButton; // opens shopping list; TODO: wire later
-  @FXML private Button darkModeButton; // toggles dark mode; TODO: wire later
+  @FXML private Button darkModeButton; // toggles dark mode
   @FXML private Button topImportButton; // navigates to Import; visible only in Library view
   @FXML private Button searchButton; // navigates to Search; visible only in Library view
 
+  @Nullable private ThemeManager themeManager;
+
   private final NavigationService navigationService;
+  private final ShoppingListViewModel shoppingListVm;
+  private final ShoppingListResultViewModel resultVm;
   private final Map<View, Node> viewNodes = new EnumMap<>(View.class);
 
   /**
    * Constructs the main view controller.
    *
    * @param navigationService the shared navigation service
+   * @param shoppingListVm the Shopping List selection ViewModel
+   * @param resultVm the Shopping List result ViewModel (used to check if a list already exists)
    */
-  public MainViewController(NavigationService navigationService) {
+  public MainViewController(
+      NavigationService navigationService,
+      ShoppingListViewModel shoppingListVm,
+      ShoppingListResultViewModel resultVm) {
     this.navigationService = navigationService;
+    this.shoppingListVm = shoppingListVm;
+    this.resultVm = resultVm;
+  }
+
+  /**
+   * Provides the {@link ThemeManager} that handles dark/light mode switching.
+   *
+   * @param themeManager the shared theme manager
+   */
+  public void setThemeManager(ThemeManager themeManager) {
+    this.themeManager = themeManager;
   }
 
   /**
@@ -68,12 +97,63 @@ public class MainViewController {
   @SuppressWarnings("UnusedMethod") // Called reflectively by FXMLLoader
   @FXML
   private void initialize() {
+    // Dark mode toggle — adds or removes the dark CSS from the Scene's stylesheet list.
+    darkModeButton.setTooltip(new Tooltip("Switch to dark mode"));
+    darkModeButton.setOnAction(
+        e -> {
+          if (themeManager != null) {
+            themeManager.toggle();
+            darkModeButton.setText(themeManager.isDarkMode() ? "☀" : "🌙");
+            darkModeButton
+                .getTooltip()
+                .setText(
+                    themeManager.isDarkMode() ? "Switch to light mode" : "Switch to dark mode");
+          }
+        });
+    // Sync button icon and tooltip with the saved preference on startup.
+    if (themeManager != null && themeManager.isDarkMode()) {
+      darkModeButton.setText("☀");
+      darkModeButton.getTooltip().setText("Switch to light mode");
+    }
+
     // Back button navigates to Library from any inner view.
     homeButton.setOnAction(e -> navigationService.navigateTo(View.LIBRARY));
 
     // Import and Search are only visible/functional from the Library view.
     topImportButton.setOnAction(e -> navigationService.navigateTo(View.IMPORT));
     searchButton.setOnAction(e -> navigationService.navigateTo(View.SEARCH));
+
+    // If a shopping list already exists, go straight to it.
+    // Otherwise, enter selection mode so the user can pick recipes.
+    shoppingListButton.setOnAction(
+        e -> {
+          if (!resultVm.sectionsProperty().isEmpty()) {
+            ButtonType goToPrevious = new ButtonType("Go to Previous Cart");
+            ButtonType clear = new ButtonType("Clear");
+            ButtonType returnButton = new ButtonType("Return", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Shopping List");
+            alert.setHeaderText("You have an existing shopping list");
+            alert.setContentText("What would you like to do?");
+            alert.getButtonTypes().setAll(goToPrevious, clear, returnButton);
+
+            alert
+                .showAndWait()
+                .ifPresent(
+                    result -> {
+                      if (result == goToPrevious) {
+                        navigationService.navigateTo(View.SHOPPING_LIST);
+                      } else if (result == clear) {
+                        shoppingListVm.discard();
+                        resultVm.load(java.util.Set.of());
+                      }
+                    });
+          } else {
+            shoppingListVm.enter();
+            navigationService.navigateTo(View.LIBRARY);
+          }
+        });
 
     // Listen for navigation changes and swap the content area.
     navigationService
@@ -107,5 +187,10 @@ public class MainViewController {
     topImportButton.setManaged(onLibrary);
     searchButton.setVisible(onLibrary);
     searchButton.setManaged(onLibrary);
+    // shopping list / dark mode is only available in Library view
+    shoppingListButton.setVisible(onLibrary);
+    shoppingListButton.setManaged(onLibrary);
+    darkModeButton.setVisible(onLibrary);
+    darkModeButton.setManaged(onLibrary);
   }
 }

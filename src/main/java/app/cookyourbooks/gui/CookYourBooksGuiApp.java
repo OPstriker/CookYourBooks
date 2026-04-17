@@ -3,6 +3,7 @@ package app.cookyourbooks.gui;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.time.Duration;
+import java.util.HashSet;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -24,10 +25,13 @@ import app.cookyourbooks.gui.view.LibraryViewController;
 import app.cookyourbooks.gui.view.MainViewController;
 import app.cookyourbooks.gui.view.RecipeEditorViewController;
 import app.cookyourbooks.gui.view.SearchViewController;
+import app.cookyourbooks.gui.view.ShoppingListResultViewController;
 import app.cookyourbooks.gui.viewmodel.ImportViewModelImpl;
 import app.cookyourbooks.gui.viewmodel.LibraryViewModelImpl;
 import app.cookyourbooks.gui.viewmodel.RecipeEditorViewModelImpl;
 import app.cookyourbooks.gui.viewmodel.SearchViewModelImpl;
+import app.cookyourbooks.gui.viewmodel.ShoppingListResultViewModelImpl;
+import app.cookyourbooks.gui.viewmodel.ShoppingListViewModelImpl;
 import app.cookyourbooks.services.LibrarianServiceImpl;
 
 /**
@@ -84,11 +88,26 @@ public class CookYourBooksGuiApp extends Application {
     // away, so the ImportViewModel does not hold a reference to navigationService.
     var navigationService = new NavigationService();
 
+    // resultVm must be created before shoppingListVm so the onConfirm lambda can capture it.
+    var resultVm = new ShoppingListResultViewModelImpl(librarianService, navigationService);
+
+    // When the user confirms recipe selection, resolve the IDs to recipes, populate the result
+    // screen, and navigate to it. The lambda runs on the FX thread (button click handler), so
+    // BackgroundTaskRunner inside load() safely spawns the background fetch from there.
+    var shoppingListVm =
+        new ShoppingListViewModelImpl(
+            selectedIds -> {
+              resultVm.load(new HashSet<>(selectedIds));
+              navigationService.navigateTo(NavigationService.View.SHOPPING_LIST);
+            });
+
     // ── 4. Create the main layout ──
     // MainViewController manages the sidebar navigation and the content area that hosts
     // each feature's view. It is constructed here so that ViewModels can be registered
     // before the FXML is loaded.
-    var mainController = new MainViewController(navigationService);
+    var themeManager = new ThemeManager();
+    var mainController = new MainViewController(navigationService, shoppingListVm, resultVm);
+    mainController.setThemeManager(themeManager);
 
     // ── 5. Wire your feature ViewModels and Views ──
     //
@@ -126,7 +145,7 @@ public class CookYourBooksGuiApp extends Application {
       FXMLLoader libraryLoader = new FXMLLoader(getClass().getResource("/fxml/LibraryView.fxml"));
       final LibraryViewModelImpl finalLibraryVmForLoader = libraryVm;
       libraryLoader.setControllerFactory(
-          clazz -> new LibraryViewController(finalLibraryVmForLoader));
+          clazz -> new LibraryViewController(finalLibraryVmForLoader, shoppingListVm));
       Parent libraryView = libraryLoader.load();
       mainController.setViewNode(NavigationService.View.LIBRARY, libraryView);
     } catch (IOException e) {
@@ -138,6 +157,9 @@ public class CookYourBooksGuiApp extends Application {
 
     // ── Wire Import Interface ──
     wireImportInterface(mainController, navigationService, library, librarianService);
+
+    // ── Wire Shopping List Result ──
+    wireShoppingListResult(mainController, resultVm);
 
     // TODO: Wire Search & Filter (teams of 4 only)
     // TODO: Wire Import Interface
@@ -215,11 +237,36 @@ public class CookYourBooksGuiApp extends Application {
       Parent root = mainLoader.load();
 
       Scene scene = new Scene(root, 960, 640);
+      themeManager.setScene(scene);
       primaryStage.setTitle("CookYourBooks");
       primaryStage.setScene(scene);
       primaryStage.show();
     } catch (IOException e) {
       throw new RuntimeException("Failed to load MainView.fxml", e);
+    }
+  }
+
+  /**
+   * Wires the Shopping List result screen: loads the FXML, injects the ViewModel into the
+   * controller, and registers the view with the main controller.
+   *
+   * <p>Extracted from {@link #start} to keep that method under the 150-line Checkstyle limit.
+   *
+   * @param mainController the main layout controller to register the view with
+   * @param resultVm the Shopping List result ViewModel (already constructed in {@link #start})
+   */
+  private void wireShoppingListResult(
+      MainViewController mainController, ShoppingListResultViewModelImpl resultVm) {
+    try {
+      FXMLLoader loader =
+          new FXMLLoader(getClass().getResource("/fxml/ShoppingListResultView.fxml"));
+      // setController() — not setControllerFactory() — because ShoppingListResultView.fxml
+      // has no fx:controller attribute (same reason as SearchView.fxml and MainView.fxml).
+      loader.setController(new ShoppingListResultViewController(resultVm));
+      Parent view = loader.load();
+      mainController.setViewNode(NavigationService.View.SHOPPING_LIST, view);
+    } catch (IOException e) {
+      throw new RuntimeException("Failed to load ShoppingListResultView.fxml", e);
     }
   }
 

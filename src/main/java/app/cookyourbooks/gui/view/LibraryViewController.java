@@ -1,9 +1,11 @@
 package app.cookyourbooks.gui.view;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -18,6 +20,7 @@ import javafx.stage.FileChooser;
 import app.cookyourbooks.gui.viewmodel.LibraryViewModel;
 import app.cookyourbooks.gui.viewmodel.RecipeCollectionSummary;
 import app.cookyourbooks.gui.viewmodel.RecipeSummary;
+import app.cookyourbooks.gui.viewmodel.ShoppingListViewModel;
 
 /**
  * Controller for the Library View feature ({@code LibraryView.fxml}).
@@ -38,20 +41,27 @@ public class LibraryViewController {
   @FXML private Button openRecipeButton;
   @FXML private Button exportButton;
   @FXML private Button deleteRecipeButton;
+  @FXML private Button confirmShoppingListButton;
+  @FXML private Button cancelShoppingListButton;
+  @FXML private HBox normalRecipeButtons;
   @FXML private HBox undoBar;
+  @FXML private HBox shoppingListConfirmBar;
   @FXML private Label undoLabel;
+  @FXML private Label shoppingListHintLabel;
 
   // ── ViewModel ──
 
   private final LibraryViewModel vm;
+  private final ShoppingListViewModel shoppingListVm;
 
   /**
    * Constructs the controller with its ViewModel.
    *
    * @param vm the Library ViewModel
    */
-  public LibraryViewController(LibraryViewModel vm) {
+  public LibraryViewController(LibraryViewModel vm, ShoppingListViewModel shoppingListVm) {
     this.vm = vm;
+    this.shoppingListVm = shoppingListVm;
   }
 
   // ── Initialization ──
@@ -65,12 +75,164 @@ public class LibraryViewController {
     setupRecipeList();
     setupLoadingIndicator();
     setupUndoBar();
+    setupShoppingListMode();
     setupExportShortcut();
 
     vm.refresh();
+
+    // Command+S opens shopping list selection mode
+    filterField.getScene(); // scene not available yet in initialize
+    // Use a scene listener instead
+    filterField
+        .sceneProperty()
+        .addListener(
+            (obs, oldScene, newScene) -> {
+              if (newScene != null) {
+                newScene.setOnKeyPressed(
+                    event -> {
+                      if (event.getCode() == javafx.scene.input.KeyCode.S
+                          && event.isShortcutDown()) {
+                        if (!shoppingListVm.activeProperty().get()) {
+                          shoppingListVm.enter();
+                        }
+                        event.consume();
+                      }
+                    });
+              }
+            });
   }
 
   // ── Private setup helpers ──
+
+  private void setupShoppingListMode() {
+    BooleanProperty active = shoppingListVm.activeProperty();
+
+    // Show/hide the hint label and confirm bar
+    shoppingListHintLabel.visibleProperty().bind(active);
+    shoppingListHintLabel.managedProperty().bind(active);
+    shoppingListConfirmBar.visibleProperty().bind(active);
+    shoppingListConfirmBar.managedProperty().bind(active);
+
+    // Swap the recipe list cell factory when mode changes
+    normalRecipeButtons.visibleProperty().bind(active.not());
+    normalRecipeButtons.managedProperty().bind(active.not());
+    active.addListener((obs, wasActive, isActive) -> refreshRecipeCellFactory(isActive));
+
+    recipeListView.setOnKeyPressed(
+        event -> {
+          if (event.getCode() == javafx.scene.input.KeyCode.ENTER) {
+            RecipeSummary selected = recipeListView.getSelectionModel().getSelectedItem();
+            if (selected != null && shoppingListVm.activeProperty().get()) {
+              if (shoppingListVm.selectedRecipeIds().contains(selected.id())) {
+                shoppingListVm.selectedRecipeIds().remove(selected.id());
+              } else {
+                shoppingListVm.selectedRecipeIds().add(selected.id());
+              }
+              recipeListView.refresh();
+            }
+            event.consume();
+          } else if (event.getCode() == javafx.scene.input.KeyCode.DELETE
+              || event.getCode() == javafx.scene.input.KeyCode.BACK_SPACE) {
+            RecipeSummary selected = recipeListView.getSelectionModel().getSelectedItem();
+            if (selected != null && shoppingListVm.activeProperty().get()) {
+              shoppingListVm.selectedRecipeIds().remove(selected.id());
+              recipeListView.refresh();
+            }
+            event.consume();
+          }
+        });
+    recipeListView.setOnKeyPressed(
+        event -> {
+          if (event.getCode() == javafx.scene.input.KeyCode.ENTER && event.isShortcutDown()) {
+            // Command+Enter — confirm shopping list
+            if (shoppingListVm.activeProperty().get()) {
+              onConfirmShoppingList();
+            }
+            event.consume();
+          } else if ((event.getCode() == javafx.scene.input.KeyCode.DELETE
+                  || event.getCode() == javafx.scene.input.KeyCode.BACK_SPACE)
+              && event.isShortcutDown()) {
+            // Command+Delete — cancel shopping list
+            if (shoppingListVm.activeProperty().get()) {
+              shoppingListVm.discard();
+            }
+            event.consume();
+          } else if (event.getCode() == javafx.scene.input.KeyCode.ENTER) {
+            RecipeSummary selected = recipeListView.getSelectionModel().getSelectedItem();
+            if (selected != null && shoppingListVm.activeProperty().get()) {
+              if (shoppingListVm.selectedRecipeIds().contains(selected.id())) {
+                shoppingListVm.selectedRecipeIds().remove(selected.id());
+              } else {
+                shoppingListVm.selectedRecipeIds().add(selected.id());
+              }
+              recipeListView.refresh();
+            }
+            event.consume();
+          } else if (event.getCode() == javafx.scene.input.KeyCode.DELETE
+              || event.getCode() == javafx.scene.input.KeyCode.BACK_SPACE) {
+            RecipeSummary selected = recipeListView.getSelectionModel().getSelectedItem();
+            if (selected != null && shoppingListVm.activeProperty().get()) {
+              shoppingListVm.selectedRecipeIds().remove(selected.id());
+              recipeListView.refresh();
+            }
+            event.consume();
+          }
+        });
+  }
+
+  @SuppressWarnings("UnusedMethod")
+  @FXML
+  private void onCancelShoppingList() {
+    shoppingListVm.discard();
+  }
+
+  @SuppressWarnings("unchecked")
+  private void refreshRecipeCellFactory(boolean selectionMode) {
+    if (!selectionMode) {
+      // Normal mode: plain title cell (same as before)
+      recipeListView.setCellFactory(
+          lv ->
+              new ListCell<>() {
+                @Override
+                protected void updateItem(RecipeSummary item, boolean empty) {
+                  super.updateItem(item, empty);
+                  setText(empty || item == null ? null : item.title());
+                  setGraphic(null);
+                }
+              });
+    } else {
+      // Selection mode: checkbox cell
+      recipeListView.setCellFactory(
+          lv ->
+              new ListCell<>() {
+                private final javafx.scene.control.CheckBox checkBox =
+                    new javafx.scene.control.CheckBox();
+
+                @Override
+                protected void updateItem(RecipeSummary item, boolean empty) {
+                  super.updateItem(item, empty);
+                  if (empty || item == null) {
+                    setGraphic(null);
+                    setText(null);
+                    return;
+                  }
+                  checkBox.setText(item.title());
+                  // Sync checkbox state with the VM's selected set
+                  checkBox.setSelected(shoppingListVm.selectedRecipeIds().contains(item.id()));
+                  checkBox.setOnAction(
+                      e -> {
+                        if (checkBox.isSelected()) {
+                          shoppingListVm.selectedRecipeIds().add(item.id());
+                        } else {
+                          shoppingListVm.selectedRecipeIds().remove(item.id());
+                        }
+                      });
+                  setGraphic(checkBox);
+                  setText(null);
+                }
+              });
+    }
+  }
 
   private void setupFilterBinding() {
     // Bidirectional: typing in the field updates vm.filterTextProperty(), and vice versa
@@ -228,7 +390,6 @@ public class LibraryViewController {
     if (selected == null) {
       return; // button should already be disabled, but guard defensively
     }
-<<<<<<< merge-v3
 
     // FileChooser must run on the JavaFX Application Thread — onExportRecipe is always
     // called from a button click, so we are already on the right thread here.
@@ -252,29 +413,40 @@ public class LibraryViewController {
     alert.setContentText("\"" + selected.title() + "\" is being exported to:\n" + file.getPath());
     alert.showAndWait();
   }
-=======
->>>>>>> main
 
-    // FileChooser must run on the JavaFX Application Thread — onExportRecipe is always
-    // called from a button click, so we are already on the right thread here.
-    FileChooser fileChooser = new FileChooser();
-    fileChooser.setTitle("Export Recipe as PDF");
-    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
-    fileChooser.setInitialFileName(selected.title() + ".pdf");
-
-    // showSaveDialog returns null if the user cancels
-    java.io.File file = fileChooser.showSaveDialog(exportButton.getScene().getWindow());
-    if (file == null) {
-      return; // user cancelled — nothing to do
-    }
-
-    vm.exportRecipe(selected.id(), file.toPath());
-
-    // Confirm to the user that the export was started (the actual write is async)
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    alert.setTitle("Export PDF");
+  @FXML
+  private void onConfirmShoppingList() {
+    // Confirmation dialog with Discard option
+    Alert alert =
+        new Alert(
+            Alert.AlertType.CONFIRMATION,
+            "Add "
+                + shoppingListVm.selectedRecipeIds().size()
+                + " recipe(s) to your shopping list?",
+            ButtonType.OK,
+            ButtonType.CANCEL);
+    alert.setTitle("Confirm Shopping List");
     alert.setHeaderText(null);
-    alert.setContentText("\"" + selected.title() + "\" is being exported to:\n" + file.getPath());
-    alert.showAndWait();
+
+    // Rename the Cancel button to "Discard" per your requirement
+    alert.getButtonTypes().stream()
+        .filter(bt -> bt == ButtonType.CANCEL)
+        .findFirst()
+        .ifPresent(
+            bt -> {
+              ((javafx.scene.control.Button) alert.getDialogPane().lookupButton(bt))
+                  .setText("Discard");
+            });
+
+    alert
+        .showAndWait()
+        .ifPresent(
+            result -> {
+              if (result == ButtonType.OK) {
+                shoppingListVm.confirm(); // hands IDs to partner's screen
+              } else {
+                shoppingListVm.discard(); // clears selection, exits mode
+              }
+            });
   }
 }
