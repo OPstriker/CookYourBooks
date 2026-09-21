@@ -31,7 +31,7 @@ CookYourBooks centralizes recipe management for home cooks: import a recipe by p
 ```
 This launches `CookYourBooksGuiApp`, which loads `cyb-library.json` from the project root.
 
-**Run the CLI app (A5 reference implementation):**
+**Run the CLI app:**
 ```bash
 ./gradlew shadowJar && java -jar build/libs/cookyourbooks-all.jar
 ```
